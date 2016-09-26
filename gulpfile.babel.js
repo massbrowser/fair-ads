@@ -98,7 +98,9 @@ gulp.task('watch', ['lint', 'babel'], () => {
     'app/images/**/*',
     'app/styles/**/*',
     'app/_locales/**/*.json'
-  ]).on('change', $.livereload.reload);
+  ]).on('change', function(options) {
+    $.livereload.reload(options);
+  });
 
   gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
   gulp.watch('bower.json', ['wiredep']);
