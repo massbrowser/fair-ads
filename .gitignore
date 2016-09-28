@@ -9,3 +9,4 @@ package
 app/scripts
 .idea
 .DS_Store
+app/manifest.json

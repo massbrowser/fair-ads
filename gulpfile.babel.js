@@ -1,10 +1,21 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
 import del from 'del';
+import {argv as argv} from 'yargs';
 import runSequence from 'run-sequence';
 import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
+
+var platformName = 'chromium';
+
+if (argv.firefox) {
+  platformName = 'firefox';
+} else if (argv.opera) {
+  platformName = 'opera';
+} else if (argv.safari) {
+  platformName = 'safari';
+}
 
 gulp.task('extras', () => {
   return gulp.src([
@@ -16,7 +27,7 @@ gulp.task('extras', () => {
   ], {
     base: 'app',
     dot: true
-  }).pipe(gulp.dest('dist'));
+  }).pipe(gulp.dest(`dist/${platformName}`));
 });
 
 function lint(files, options) {
@@ -27,7 +38,7 @@ function lint(files, options) {
   };
 }
 
-gulp.task('lint', lint('app/scripts.babel/**/*.js', {
+gulp.task('lint', lint(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], {
   env: {
     es6: true
   }
@@ -46,7 +57,7 @@ gulp.task('images', () => {
       console.log(err);
       this.end();
     })))
-    .pipe(gulp.dest('dist/images'));
+    .pipe(gulp.dest(`dist/${platformName}/images`));
 });
 
 gulp.task('html',  () => {
@@ -57,11 +68,17 @@ gulp.task('html',  () => {
     .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
     .pipe($.sourcemaps.write())
     .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest(`dist/${platformName}`));
+});
+
+gulp.task('makeManifest', () => {
+  return gulp.src(`app/manifest.${platformName}.json`)
+    .pipe($.rename('manifest.json'))
+    .pipe(gulp.dest('app'));
 });
 
 gulp.task('chromeManifest', () => {
-  return gulp.src('app/manifest.json')
+  return gulp.src('app/manifest.chromium.json')
     .pipe($.chromeManifest({
       buildnumber: true,
       background: {
@@ -71,16 +88,16 @@ gulp.task('chromeManifest', () => {
         ]
       }
   }))
+  .pipe($.rename('manifest.json'))
   .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
   .pipe($.if('*.js', $.sourcemaps.init()))
   .pipe($.if('*.js', $.uglify()))
   .pipe($.if('*.js', $.sourcemaps.write('.')))
-  .pipe(gulp.dest('dist'));
+  .pipe(gulp.dest(`dist/${platformName}`));
 });
 
 gulp.task('babel', () => {
-  console.log('babel');
-  return gulp.src('app/scripts.babel/**/*.js')
+  return gulp.src(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`])
       .pipe($.babel({
         presets: ['es2015']
       }))
@@ -89,7 +106,7 @@ gulp.task('babel', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('watch', ['lint', 'babel'], () => {
+gulp.task('watch', ['lint', 'babel', 'makeManifest'], () => {
   $.livereload.listen();
 
   gulp.watch([
@@ -102,7 +119,8 @@ gulp.task('watch', ['lint', 'babel'], () => {
     $.livereload.reload(options);
   });
 
-  gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], ['lint', 'babel']);
+  gulp.watch('app/manifest.*.json', ['makeManifest']);
   gulp.watch('bower.json', ['wiredep']);
 });
 
@@ -119,9 +137,9 @@ gulp.task('wiredep', () => {
 });
 
 gulp.task('package', function () {
-  var manifest = require('./dist/manifest.json');
+  var manifest = require(`./dist/${platformName}/manifest.json`);
   return gulp.src('dist/**')
-      .pipe($.zip('mass ad block-' + manifest.version + '.zip'))
+      .pipe($.zip(`mass ad block-${manifest.version}.zip`))
       .pipe(gulp.dest('package'));
 });
 
