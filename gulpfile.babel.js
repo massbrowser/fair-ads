@@ -104,6 +104,12 @@ gulp.task('babel', () => {
       .pipe(gulp.dest('app/scripts'));
 });
 
+gulp.task('less', () => {
+  return gulp.src(['app/styles.less/*.less'])
+    .pipe($.less())
+    .pipe(gulp.dest('app/styles'));
+});
+
 gulp.task('ublock', () => {
   return gulp.src(['app/scripts.ublock/**/*.js'])
     // .pipe($.babel({
@@ -114,14 +120,14 @@ gulp.task('ublock', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('watch', ['lint', 'babel', 'ublock', 'makeManifest'], () => {
+gulp.task('watch', ['lint', 'babel', 'ublock', 'less', 'makeManifest'], () => {
   $.livereload.listen();
 
   gulp.watch([
     'app/*.html',
     'app/scripts/**/*.js',
     'app/images/**/*',
-    'app/styles/**/*',
+    'app/styles/**/*.css',
     'app/_locales/**/*.json'
   ]).on('change', function(options) {
     $.livereload.reload(options);
@@ -129,6 +135,7 @@ gulp.task('watch', ['lint', 'babel', 'ublock', 'makeManifest'], () => {
 
   gulp.watch(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], ['lint', 'babel']);
   gulp.watch('app/scripts.ublock/**/*.js', ['ublock']);
+  gulp.watch('app/styles.less/*.less', ['less']);
   gulp.watch('app/manifest.*.json', ['makeManifest']);
   gulp.watch('bower.json', ['wiredep']);
 });
