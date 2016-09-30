@@ -11,7 +11,34 @@
   "background": {
     "scripts": [
       "scripts/chromereload.js",
-      "scripts/background.js"
+      "scripts/ublock/polyfill.js",
+      "scripts/ublock/lib/punycode.js",
+      "scripts/ublock/lib/publicsuffixlist.js",
+      "scripts/ublock/lib/yamd5.js",
+      "scripts/ublock/vapi-common.js",
+      "scripts/ublock/vapi-background.js",
+      "scripts/ublock/background.js",
+      "scripts/ublock/utils.js",
+      "scripts/ublock/uritools.js",
+      "scripts/ublock/assets.js",
+      "scripts/ublock/redirect-engine.js",
+      "scripts/ublock/dynamic-net-filtering.js",
+      "scripts/ublock/static-net-filtering.js",
+      "scripts/ublock/url-net-filtering.js",
+      "scripts/ublock/cosmetic-filtering.js",
+      "scripts/ublock/hnswitches.js",
+      "scripts/ublock/ublock.js",
+      "scripts/ublock/messaging.js",
+      "scripts/ublock/profiler.js",
+      "scripts/ublock/storage.js",
+      "scripts/ublock/logger.js",
+      "scripts/ublock/pagestore.js",
+      "scripts/ublock/tab.js",
+      "scripts/ublock/traffic.js",
+      "scripts/ublock/contextmenu.js",
+      "scripts/ublock/reverselookup.js",
+      "scripts/ublock/rpcreceiver.js",
+      "scripts/ublock/start.js"
     ]
   },
   "permissions": [

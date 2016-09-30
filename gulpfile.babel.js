@@ -104,9 +104,17 @@ gulp.task('babel', () => {
       .pipe(gulp.dest('app/scripts'));
 });
 
+gulp.task('ublock', () => {
+  return gulp.src(['app/scripts.ublock/**/*.js'])
+    // .pipe($.babel({
+    //   presets: ['es2015']
+    // }))
+    .pipe(gulp.dest('app/scripts/ublock'));
+});
+
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('watch', ['lint', 'babel', 'makeManifest'], () => {
+gulp.task('watch', ['lint', 'babel', 'ublock', 'makeManifest'], () => {
   $.livereload.listen();
 
   gulp.watch([
@@ -120,6 +128,7 @@ gulp.task('watch', ['lint', 'babel', 'makeManifest'], () => {
   });
 
   gulp.watch(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], ['lint', 'babel']);
+  gulp.watch('app/scripts.ublock/**/*.js', ['ublock']);
   gulp.watch('app/manifest.*.json', ['makeManifest']);
   gulp.watch('bower.json', ['wiredep']);
 });
@@ -145,7 +154,7 @@ gulp.task('package', function () {
 
 gulp.task('build', (cb) => {
   runSequence(
-    'lint', 'babel', 'chromeManifest',
+    'lint', 'babel', 'ublock', 'chromeManifest',
     ['html', 'images', 'extras'],
     'size', cb);
 });
