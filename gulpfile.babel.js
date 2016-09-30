@@ -122,7 +122,7 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('compile', ['lint', 'babel', 'ublock', 'less', 'makeManifest']);
 
-gulp.task('watch', ['lint', 'babel', 'ublock', 'less', 'makeManifest'], () => {
+gulp.task('watch', ['compile'], () => {
   $.livereload.listen();
 
   gulp.watch([
