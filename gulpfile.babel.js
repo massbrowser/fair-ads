@@ -135,7 +135,7 @@ gulp.task('watch', ['lint', 'babel', 'ublock', 'less', 'makeManifest'], () => {
 
   gulp.watch(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], ['lint', 'babel']);
   gulp.watch('app/scripts.ublock/**/*.js', ['ublock']);
-  gulp.watch('app/styles.less/*.less', ['less']);
+  gulp.watch('app/styles.less/**/*.less', ['less']);
   gulp.watch('app/manifest.*.json', ['makeManifest']);
   gulp.watch('bower.json', ['wiredep']);
 });
