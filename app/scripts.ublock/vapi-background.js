@@ -577,14 +577,14 @@ vAPI.setIcon = function(tabId, iconStatus, badge) {
         if ( badge !== '' ) {
             chrome.browserAction.setBadgeBackgroundColor({
                 tabId: tabId,
-                color: '#666'
+                color: '#c55'
             });
         }
     };
 
     var iconPaths = iconStatus === 'on' ?
-        { '19': 'img/browsericons/icon19.png',     '38': 'img/browsericons/icon38.png' } :
-        { '19': 'img/browsericons/icon19-off.png', '38': 'img/browsericons/icon38-off.png' };
+        { '19': 'images/icon-19.png',     '38': 'images/icon-38.png' } :
+        { '19': 'images/icon-19-off.png', '38': 'images/icon-38-off.png' };
 
     chrome.browserAction.setIcon({ tabId: tabId, path: iconPaths }, onIconReady);
     vAPI.contextMenu.onMustUpdate(tabId);
