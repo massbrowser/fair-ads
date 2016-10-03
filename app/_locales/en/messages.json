@@ -6,5 +6,9 @@
   "appDescription": {
     "message": "Mass is awesome ad-blocking that pleases both industry and users",
     "description": "The description of the application"
+  },
+  "advertisement": {
+    "message": "Advertisement",
+    "description": "Advertisement word"
   }
 }

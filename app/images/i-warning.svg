@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="18px" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_colorize_black_24px copy 3</title>
+    <desc>Created with sketchtool.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="2-Ads-off" transform="translate(-280.000000, -332.000000)">
+            <g id="Group-87-Copy" transform="translate(200.000000, 111.000000)">
+                <g id="Group-76-Copy-47" transform="translate(78.000000, 218.000000)">
+                    <g id="ic_colorize_black_24px-copy-3">
+                        <polygon id="Shape" points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M13.7364863,4.00772212 L21.7364863,18.0077221 C22.4983797,19.3410357 21.5356453,21 20,21 L4,21 C2.46435466,21 1.50162027,19.3410357 2.26351372,18.0077221 L10.2635137,4.00772212 C11.031302,2.66409263 12.968698,2.66409263 13.7364863,4.00772212 Z M12,5 L4,19 L20,19 L12,5 Z M12,18 C12.5522847,18 13,17.5522847 13,17 C13,16.4477153 12.5522847,16 12,16 C11.4477153,16 11,16.4477153 11,17 C11,17.5522847 11.4477153,18 12,18 Z M11,9 L13,9 L13,15 L11,15 L11,9 Z" id="Combined-Shape" fill="#909096"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

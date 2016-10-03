@@ -1,0 +1,68 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 180px;
+  height: 40px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ff455f;
+  -webkit-transition: .6s;
+  transition: .6s;
+
+  &:before {
+    position: absolute;
+    content: "__MSG_advertisement__";
+    height: 36px;
+    line-height: 36px;
+    //font-family: PTSans;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    //font-weight: bold;
+    letter-spacing: 1px;
+    color: #909096;
+    width: 130px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .6s;
+    transition: .6s;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  &.round {
+    border-radius: 20px;
+
+    &:before {
+      border-radius: 18px;
+    }
+  }
+}
+
+input {
+  &:checked {
+    + .slider {
+      background-color: #068ffc;
+      &:before {
+        -webkit-transform: translateX(46px);
+        -ms-transform: translateX(46px);
+        transform: translateX(46px);
+      }
+    }
+  }
+  &:focus {
+    + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+  }
+}
+
