@@ -60,14 +60,15 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ],
-      "js": [
-        "scripts/contentscript.js"
-      ],
-      "run_at": "document_end",
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["scripts/ublock/vapi-client.js", "scripts/ublock/contentscript.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["scripts/ublock/scriptlets/subscriber.js"],
+      "run_at": "document_idle",
       "all_frames": false
     }
   ],
