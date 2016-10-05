@@ -26,7 +26,6 @@
 /******************************************************************************/
 
 (function() {
-
   /******************************************************************************/
 
 // Ensure the popup is properly sized as soon as possible. It is assume the DOM
@@ -239,7 +238,7 @@
       cell.toggleClass(action + 'Rule', true);
     }
 
-    // Use dark shade visual cue if the rule is specific to the cell.
+    // Use dark shade visual cue if the filter is specific to the cell.
     var ownRule = false;
     var matches = reSrcHostnameFromRule.exec(rule);
     if ( matches !== null ) {
@@ -477,7 +476,7 @@
 
     // Report remote font count on badge
     total = popupData.remoteFontCount;
-    uDom.nodeFromSelector('#no-remote-fonts span.badge')
+    uDom.nodeFromSelector('#no-remote-fonts > span.badge')
       .textContent = total ? total.toLocaleString() : '';
 
     // https://github.com/chrisaljoudi/uBlock/issues/470
@@ -517,7 +516,7 @@
     switch ( data.what ) {
       case 'cosmeticallyFilteredElementCountChanged':
         var v = data.count || '';
-        uDom.nodeFromSelector('#no-cosmetic-filtering span.badge')
+        uDom.nodeFromSelector('#no-cosmetic-filtering > span.badge')
           .textContent = typeof v === 'number' ? v.toLocaleString() : v;
         break;
     }
@@ -957,10 +956,6 @@
 
     uDom('body').on('mouseenter', '[data-tip]', onShowTooltip)
       .on('mouseleave', '[data-tip]', onHideTooltip);
-    uDom('span.js-settings').on('click', function (e) {
-      e.preventDefault();
-      uDom('.js-show-sources').toggleClass('ab-sources-hidden');
-    });
   })();
 
   /******************************************************************************/

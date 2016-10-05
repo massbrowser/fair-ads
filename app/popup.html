@@ -3,16 +3,62 @@
   <head>
     <meta charset="utf-8">
     <link href="styles/popup.css" rel="stylesheet">
+    <title>Mass Ad Block</title>
   </head>
   <body>
+    <div style="display: none !important;">
+      <a href="dashboard.html" target="_blank" id="gotoPrefs" data-i18n-tip="popupTipDashboard" data-tip-position="under"><span id="appname"> </span> <span id="version"> </span><span class="fa">&#xf013;</span></a>
+      <div id="panes">
+        <div class="tooltipContainer">
+          <p id="switch" data-i18n-tip="popupPowerSwitchInfo" data-tip-position="under"><span class="fa">&#xf011;</span></p>
+          <h2 id="dfToggler" data-i18n="popupBlockedRequestPrompt">&nbsp;</h2>
+          <p class="statName">
+            <span data-i18n="popupBlockedOnThisPagePrompt">&nbsp;</span>&ensp;
+            <!--<span id="gotoPick" class="fa tool" data-i18n-tip="popupTipPicker">&#xf1fb;</span>&ensp;-->
+            <a href="logger-ui.html" class="fa tool enabled" data-i18n-tip="popupTipLog">&#xf022;</a>
+          </p>
+          <p class="statValue" id="page-blocked">?</p>
+          <div id="refresh" class="fa">&#xf021;</div>
+          <p class="statName" data-i18n="popupBlockedSinceInstallPrompt">&nbsp;</p>
+          <p class="statValue" id="total-blocked">?</p>
+          <h2 data-i18n="popupHitDomainCountPrompt">&nbsp;</h2>
+          <p class="statValue" id="popupHitDomainCount">&nbsp;</p>
+          <!--<div id="extraTools">-->
+            <!--<span id="no-popups" class="hnSwitch fa" data-i18n-tip="popupTipNoPopups">&#xf0c5;<span class="badge"></span><span></span></span>-->
+            <!--<span id="no-large-media" class="hnSwitch fa" data-i18n-tip="popupTipNoLargeMedia">&#xf008;<span class="badge"></span><span></span></span>-->
+            <!--<span id="no-cosmetic-filtering" class="hnSwitch fa" data-i18n-tip="popupTipNoCosmeticFiltering">&#xf070;<span class="badge"></span><span></span></span>-->
+            <!--<span id="no-remote-fonts" class="hnSwitch fa" data-i18n-tip="popupTipNoRemoteFonts">&#xf031;<span class="badge"></span><span></span></span>-->
+          <!--</div>-->
+        </div><!-- DO NOT REMOVE --><div class="tooltipContainer">
+        <div id="firewallContainer" class="minimized">
+          <div><span data-i18n="popupAnyRulePrompt"></span><span data-src="/" data-des="*" data-type="*" data-i18n-tip="popupTipGlobalRules" data-tip-position="under"> </span><span data-src="." data-des="*" data-type="*" data-i18n-tip="popupTipLocalRules" data-tip-position="under"> </span></div>
+          <div><span data-i18n="popupImageRulePrompt"></span><span data-src="/" data-des="*" data-type="image"> </span><span data-src="." data-des="*" data-type="image"> </span></div>
+          <div><span data-i18n="popup3pAnyRulePrompt"></span><span data-src="/" data-des="*" data-type="3p"> </span><span data-src="." data-des="*" data-type="3p"> </span></div>
+          <div><span data-i18n="popupInlineScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="inline-script"> </span><span data-src="." data-des="*" data-type="inline-script"> </span></div>
+          <div><span data-i18n="popup1pScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="1p-script"> </span><span data-src="." data-des="*" data-type="1p-script"> </span></div>
+          <div><span data-i18n="popup3pScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="3p-script"> </span><span data-src="." data-des="*" data-type="3p-script"> </span></div>
+          <div><span data-i18n="popup3pFrameRulePrompt"></span><span data-src="/" data-des="*" data-type="3p-frame"> </span><span data-src="." data-des="*" data-type="3p-frame"> </span></div>
+        </div><div id="rulesetTools"><span id="saveRules" class="fa" data-i18n-tip="popupTipSaveRules" data-tip-position="under">&#xf023;</span><span id="revertRules" class="fa" data-i18n-tip="popupTipRevertRules" data-tip-position="under">&#xf12d;</span></div>
+      </div>
+      </div>
+
+      <div id="templates" style="display: none">
+        <div><span></span><span data-src="/" data-des="" data-type="*"> </span><span data-src="." data-des="" data-type="*"> </span><span data-src="." data-des="" data-type="*"> </span></div>
+        <div id="actionSelector"><span id="dynaAllow"></span><span id="dynaNoop"></span><span id="dynaBlock"></span></div>
+        <div id="hotspotTip"></div>
+        <div id="tooltip"></div>
+      </div>
+    </div>
+
+
     <div class="ab-popup-wrapper">
       <div class="ab-top-panel">
         <div class="ab-icon-class">
           <img src="images/i-class-a.svg" alt="Class">
         </div>
-        <a href="#" class="ab-icon-cog js-settings">
+        <span class="ab-icon-cog js-settings">
           <img src="images/i-cog.svg" alt="Cog">
-        </a>
+        </span>
       </div>
       <div class="ab-ad-toggle-wrap">
         <label class="switch toggle">
@@ -21,7 +67,7 @@
         </label>
       </div>
       <div class="ab-popup-menu">
-        <div class="ab-popup-menu-item">
+        <div class="ab-popup-menu-item" id="gotoPick">
           <div class="ab-icon-picker">
             <img src="images/i-picker.svg" alt="Picker mode">
           </div>
@@ -36,28 +82,28 @@
       </div>
 
       <div class="ab-bottom-icons">
-        <a href="#" class="ab-bottom-one-icon">
+        <a href="#" class="ab-bottom-one-icon" id="no-popups">
           <div class="ab-bottom-icon-wrap">
             <img src="images/i-popups-on.svg" alt="Popups">
-            <span>1</span>
+            <span class="badge"></span>
           </div>
         </a>
-        <a href="#" class="ab-bottom-one-icon">
+        <a href="#" class="ab-bottom-one-icon" id="no-large-media">
           <div class="ab-bottom-icon-wrap">
             <img src="images/i-heavy-on.svg" alt="Heavy media content">
-            <span>2</span>
+            <span class="badge"></span>
           </div>
         </a>
-        <a href="#" class="ab-bottom-one-icon">
+        <a href="#" class="ab-bottom-one-icon" id="no-cosmetic-filtering">
           <div class="ab-bottom-icon-wrap">
             <img src="images/i-cosmetic-on.svg" alt="Cosmetic">
-            <span>3</span>
+            <span class="badge"></span>
           </div>
         </a>
-        <a href="#" class="ab-bottom-one-icon">
+        <a href="#" class="ab-bottom-one-icon" id="no-remote-fonts">
           <div class="ab-bottom-icon-wrap">
             <img src="images/i-fonts-on.svg" alt="Fonts">
-            <span>4</span>
+            <span class="badge"></span>
           </div>
         </a>
       </div>
@@ -65,7 +111,11 @@
     <div class="js-show-sources ab-show-sources ab-sources-hidden">
 
     </div>
+    <script src="scripts/ublock/lib/punycode.js"></script>
+    <script src="scripts/ublock/vapi-common.js"></script>
+    <script src="scripts/ublock/vapi-client.js"></script>
     <script src="scripts/ublock/udom.js"></script>
+    <script src="scripts/ublock/i18n.js"></script>
     <script src="scripts/popup.js"></script>
   </body>
 </html>

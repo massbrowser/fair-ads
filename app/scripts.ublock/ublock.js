@@ -504,13 +504,15 @@ var matchWhitelistDirective = function(url, hostname, directive) {
             }
             pendingEntries[key] = new Entry(tabId, scriptlet, callback);
         }
-        vAPI.tabs.injectScript(tabId, { file: 'js/scriptlets/' + scriptlet + '.js' });
+        // vAPI.tabs.injectScript(tabId, { file: 'js/scriptlets/' + scriptlet + '.js' });
+        vAPI.tabs.injectScript(tabId, { file: `scripts/ublock/scriptlets/${scriptlet}.js`});
     };
 
     // TODO: think about a callback mechanism.
     var injectDeep = function(tabId, scriptlet) {
         vAPI.tabs.injectScript(tabId, {
-            file: 'js/scriptlets/' + scriptlet + '.js',
+            // file: 'js/scriptlets/' + scriptlet + '.js',
+            file: `scripts/ublock/scriptlets/${scriptlet}.js`,
             allFrames: true
         });
     };
