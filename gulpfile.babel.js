@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+import LessAutoprefix from 'less-plugin-autoprefix';
 import del from 'del';
 import {argv as argv} from 'yargs';
 import runSequence from 'run-sequence';
@@ -105,8 +106,11 @@ gulp.task('babel', () => {
 });
 
 gulp.task('less', () => {
+  let autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
   return gulp.src(['app/styles.less/*.less'])
-    .pipe($.less())
+    .pipe($.less({
+      plugins: [autoprefix]
+    }))
     .pipe(gulp.dest('app/styles'));
 });
 
