@@ -157,7 +157,7 @@ gulp.task('wiredep', () => {
 gulp.task('package', function () {
   var manifest = require(`./dist/${platformName}/manifest.json`);
   return gulp.src('dist/**')
-      .pipe($.zip(`mass ad block-${manifest.version}.zip`))
+      .pipe($.zip(`mass-fair-ads-${manifest.version}.zip`))
       .pipe(gulp.dest('package'));
 });
 
