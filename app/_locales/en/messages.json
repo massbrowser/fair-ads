@@ -7,8 +7,12 @@
     "message": "Mass is awesome ad-blocking that pleases both industry and users",
     "description": "The description of the application"
   },
-  "advertisement": {
-    "message": "Advertisement",
-    "description": "Advertisement word"
+  "advertisementOn": {
+    "message": "Ads ON",
+    "description": "Advertisement on"
+  },
+  "advertisementOff": {
+    "message": "Ads OFF",
+    "description": "Advertisement off"
   }
 }

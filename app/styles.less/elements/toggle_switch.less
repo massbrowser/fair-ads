@@ -20,12 +20,11 @@
 
   &:before {
     position: absolute;
-    content: "__MSG_advertisement__";
+    content: "__MSG_advertisementOff__";
     height: 36px;
     line-height: 36px;
     //font-family: PTSans;
     text-align: center;
-    text-transform: uppercase;
     font-size: 12px;
     //font-weight: bold;
     letter-spacing: 1px;
@@ -53,6 +52,7 @@ input {
     + .slider {
       background-color: #068ffc;
       &:before {
+        content: "__MSG_advertisementOn__";
         -webkit-transform: translateX(46px);
         -ms-transform: translateX(46px);
         transform: translateX(46px);
