@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/settings.css">
+</head>
+<body>
+
+<!--<div id="cloudWidget" class="hide" data-cloud-entry="whitelistPane"></div>-->
+
+<!--<p data-i18n="whitelistPrompt"></p>-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>White list</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <textarea id="whitelist" dir="auto" spellcheck="false" rows="20" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <button id="whitelistApply" class="btn btn-block btn-success" type="button" disabled="true" data-i18n="whitelistApply"></button>&ensp;
+                </div>
+                <div class="col-xs-6">
+                    <button id="whitelistRevert" class="btn btn-block btn-warning" type="button" disabled="true" data-i18n="genericRevert"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<p>-->
+    <!--<button id="importWhitelistFromFile" class="custom" data-i18n="whitelistImport"></button>&ensp;-->
+    <!--<button id="exportWhitelistToFile" class="custom" data-i18n="whitelistExport"></button>-->
+    <!--<input id="importFilePicker" type="file" accept="text/plain" class="hiddenFileInput">-->
+<!--</p>-->
+
+<script src="scripts/ublock/lib/punycode.js"></script>
+<script src="scripts/ublock/vapi-common.js"></script>
+<script src="scripts/ublock/vapi-client.js"></script>
+<script src="scripts/ublock/udom.js"></script>
+<script src="scripts/ublock/i18n.js"></script>
+<script src="scripts/ublock/dashboard-common.js"></script>
+<script src="scripts/ublock/cloud-ui.js"></script>
+<script src="scripts/ublock/whitelist.js"></script>
+
+</body>
+</html>
