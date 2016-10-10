@@ -38,5 +38,101 @@
   "whitelistApply":{
     "message":"Save changes",
     "description":"English: Apply changes"
+  },
+  "3pListsOfBlockedHostsPrompt":{
+    "message":"{{netFilterCount}} network filters ＋ {{cosmeticFilterCount}} cosmetic filters from:",
+    "description":"Appears at the top of the _3rd-party filters_ pane"
+  },
+  "3pListsOfBlockedHostsPerListStats":{
+    "message":"{{used}} used out of {{total}}",
+    "description":"Appears aside each filter list in the _3rd-party filters_ pane"
+  },
+  "3pAutoUpdatePrompt1":{
+    "message":"Auto-update filter lists",
+    "description":"A checkbox in the _3rd-party filters_ pane"
+  },
+  "3pUpdateNow":{
+    "message":"Update now",
+    "description":"A button in the in the _3rd-party filters_ pane"
+  },
+  "3pPurgeAll":{
+    "message":"Purge all caches",
+    "description":"A button in the in the _3rd-party filters_ pane"
+  },
+  "3pParseAllABPHideFiltersPrompt1":{
+    "message":"Parse and enforce cosmetic filters",
+    "description":"English: Parse and enforce Adblock+ element hiding filters."
+  },
+  "3pParseAllABPHideFiltersInfo":{
+    "message":"<p>This option enables the parsing and enforcing of <a href=\"https:\/\/adblockplus.org\/en\/faq_internal#elemhide\">Adblock Plus-compatible &ldquo;element hiding&rdquo; filters<\/a>. These filters are essentially cosmetic, they serve to hide elements in a web page which are deemed to be a visual nuisance, and which can't be blocked by the net request-based filtering engine.<\/p><p>Enabling this feature increases uBlock₀'s memory footprint.<\/p>",
+    "description":"Describes the purpose of the 'Parse and enforce cosmetic filters' feature."
+  },
+  "3pIgnoreGenericCosmeticFilters":{
+    "message":"Ignore generic cosmetic filters",
+    "description":"This will cause uBO to ignore all generic cosmetic filters."
+  },
+  "3pIgnoreGenericCosmeticFiltersInfo":{
+    "message":"<p>Generic cosmetic filters are those cosmetic filters which are meant to apply on all web sites.<p>Though handled efficiently by uBlock₀, generic cosmetic filters may still contribute measurable memory and CPU overhead on some web pages, especially for large and long-lived ones.<p>Enabling this option will eliminate the memory and CPU overhead added to web pages as a result of handling generic cosmetic filters, and also lower the memory footprint of uBlock₀ itself.<p>It is recommended to enable this option on less powerful devices.",
+    "description":"Describes the purpose of the 'Ignore generic cosmetic filters' feature."
+  },
+  "3pListsOfBlockedHostsHeader":{
+    "message":"Lists of blocked hosts",
+    "description":"English: Lists of blocked hosts"
+  },
+  "3pApplyChanges":{
+    "message":"Apply changes",
+    "description":"English: Apply changes"
+  },
+  "3pGroupAds":{
+    "message":"Ads",
+    "description":"English: Ads"
+  },
+  "3pGroupPrivacy":{
+    "message":"Privacy",
+    "description":"English: Privacy"
+  },
+  "3pGroupMalware":{
+    "message":"Malware domains",
+    "description":"English: Malware domains"
+  },
+  "3pGroupSocial":{
+    "message":"Social",
+    "description":"English: Social"
+  },
+  "3pGroupMultipurpose":{
+    "message":"Multipurpose",
+    "description":"English: Multipurpose"
+  },
+  "3pGroupRegions":{
+    "message":"Regions, languages",
+    "description":"English: Regions, languages"
+  },
+  "3pGroupCustom":{
+    "message":"Custom",
+    "description":"English: Custom"
+  },
+  "3pExternalListsHint":{
+    "message":"One URL per line. Lines prefixed with &lsquo;!&rsquo; will be ignored. Invalid URLs will be silently ignored.",
+    "description":"English: One URL per line. Lines prefixed with &lsquo;!&rsquo; will be ignored. Invalid URLs will be silently ignored."
+  },
+  "3pExternalListsApply":{
+    "message":"Parse",
+    "description":"English: Parse"
+  },
+  "3pExternalListPurge":{
+    "message":"purge cache",
+    "description":"English: purge cache"
+  },
+  "3pExternalListNew":{
+    "message":"new version available",
+    "description":"English: new version available"
+  },
+  "3pExternalListObsolete":{
+    "message":"out of date",
+    "description":"a filter list is 'out of date' (possibly needs to be updated)"
+  },
+  "3pLastUpdate":{
+    "message":"Last update: {{ago}}",
+    "description":"English: Last update: {{ago}}, where 'ago' will be replaced with something like '2 days ago'"
   }
 }

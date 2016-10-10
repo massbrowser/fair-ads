@@ -105,6 +105,10 @@ gulp.task('babel', () => {
       .pipe(gulp.dest('app/scripts'));
 });
 
+gulp.task('lib', () => {
+  return gulp.src(['app/scripts.lib/**/*.js']).pipe(gulp.dest('app/scripts/lib'));
+});
+
 gulp.task('less', () => {
   let autoprefix = new LessAutoprefix({ browsers: ['last 2 versions'] });
   return gulp.src(['app/styles.less/*.less'])
@@ -124,7 +128,7 @@ gulp.task('ublock', () => {
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('compile', ['lint', 'babel', 'ublock', 'less', 'makeManifest']);
+gulp.task('compile', ['lint', 'babel', 'lib', 'ublock', 'less', 'makeManifest']);
 
 gulp.task('watch', ['compile'], () => {
   $.livereload.listen();

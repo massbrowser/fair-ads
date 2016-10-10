@@ -6,37 +6,148 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles/settings.css">
+    <style>
+        .tab-pane {
+            padding: 20px 0;
+        }
+        #buttonApply.disabled {
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
 <!--<div id="cloudWidget" class="hide" data-cloud-entry="whitelistPane"></div>-->
 
 <!--<p data-i18n="whitelistPrompt"></p>-->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <h4>White list</h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 col-xs-12">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <textarea id="whitelist" dir="auto" spellcheck="false" rows="20" class="form-control"></textarea>
+<div class="container-fluid" style="padding-top: 15px">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#whiteist-tab" aria-controls="whiteist-tab" role="tab" data-toggle="tab">Whitelist</a></li>
+            <li role="presentation"><a href="#third-party-filters-tab" aria-controls="third-party-filters-tab" role="tab" data-toggle="tab">Third-party filters</a></li>
+            <li role="presentation"><a href="#my-filters-tab" aria-controls="my-filters-tab" role="tab" data-toggle="tab">My filters</a></li>
+            <li role="presentation"><a href="#my-rules-tab" aria-controls="my-rules-tab" role="tab" data-toggle="tab">My rules</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="whiteist-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Whitelist</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <textarea id="whitelist" dir="auto" spellcheck="false" rows="20" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button id="whitelistApply" class="btn btn-block btn-success" type="button" disabled="true" data-i18n="whitelistApply"></button>&ensp;
+                            </div>
+                            <div class="col-xs-6">
+                                <button id="whitelistRevert" class="btn btn-block btn-warning" type="button" disabled="true" data-i18n="genericRevert"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <button id="whitelistApply" class="btn btn-block btn-success" type="button" disabled="true" data-i18n="whitelistApply"></button>&ensp;
+
+
+            <div role="tabpanel" class="tab-pane" id="third-party-filters-tab">
+                <div id="cloudWidget" class="hide" data-cloud-entry="tpFiltersPane"></div>
+
+                <div style="position: relative;">
+                    <div style="position: fixed; top: 15px; right: 15px;">
+                        <button id="buttonApply" class="disabled btn btn-success" data-i18n="3pApplyChanges"></button>
+                    </div>
+                    <ul id="options" class="list-group">
+                        <li class="list-group-item">
+                            <input type="checkbox" id="autoUpdate">
+                            <label data-i18n="3pAutoUpdatePrompt1" for="autoUpdate"></label>
+                            &ensp;
+                            <button class="btn btn-default custom important disabled" id="buttonUpdate" data-i18n="3pUpdateNow"></button>
+                            <button id="buttonPurgeAll" class="btn btn-default custom disabled" data-i18n="3pPurgeAll"></button>
+                        </li>
+                        <li class="list-group-item">
+                            <input type="checkbox" id="parseCosmeticFilters">
+                            <label data-i18n="3pParseAllABPHideFiltersPrompt1" for="parseCosmeticFilters" data-toggle="tooltip" data-placement="left" title="Tooltip on left"></label>
+                            <!--<button class="whatisthis"></button>-->
+                            <span data-toggle="collapse" data-target="#whatIsParseCosmeticFilters" style="cursor: pointer">
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                            </span>
+                            <div id="whatIsParseCosmeticFilters" class="collapse" data-i18n="3pParseAllABPHideFiltersInfo"></div>
+
+                            <ul class="list-unstyled" style="padding-left: 2em;">
+                                <li>
+                                    <input type="checkbox" id="ignoreGenericCosmeticFilters">
+                                    <label data-i18n="3pIgnoreGenericCosmeticFilters" for="ignoreGenericCosmeticFilters"></label>
+                                    <span data-toggle="collapse" data-target="#whatIsIgnoreGenericCosmeticFilters" style="cursor: pointer">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                    <div id="whatIsIgnoreGenericCosmeticFilters" class="collapse" data-i18n="3pIgnoreGenericCosmeticFiltersInfo"></div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item">
+                            <p id="listsOfBlockedHostsPrompt"></p>
+                        </li>
+                    </ul>
+                    <ul id="lists" class="list-unstyled"></ul>
                 </div>
-                <div class="col-xs-6">
-                    <button id="whitelistRevert" class="btn btn-block btn-warning" type="button" disabled="true" data-i18n="genericRevert"></button>
+
+                <div id="externalListsDiv">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>
+                                <span data-i18n="3pExternalListsHint" style="margin: 0 0 0.25em 0; font-size: 13px;"></span>
+                            </p>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="10" id="externalLists" dir="ltr" spellcheck="false"></textarea>
+                            </div>
+                            <button id="externalListsApply" class="btn btn-default" disabled="true" data-i18n="3pExternalListsApply"></button>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="busyOverlay">
+                    <div></div>
+                    <!-- progress bar widget -->
+                    <div><div></div><div></div></div>
+                </div>
+
+                <div id="templates" style="display: none;">
+                    <ul>
+                        <li class="groupEntry"><span class="geName"></span> <span class="geCount dim"></span>
+                            <ul></ul>
+                        </li>
+                        <li class="listEntry">
+                            <input type="checkbox">
+                            <a type="text/plain" target="_blank" href=""></a>
+                            <a class="fa" style="display: none;" target="_blank">&#xf05a;</a>
+                            <a href="" style="display: none;" target="_blank"></a>:
+                            <span class="counts dim"></span>
+                            <span class="status unsecure" style="display: none;">http</span>
+                            <span class="status new" style="display: none;" data-i18n="3pExternalListNew"></span>
+                            <span class="status obsolete" style="display: none;" data-i18n="3pExternalListObsolete"></span>
+                            <span class="status purge" style="display: none;" data-i18n="3pExternalListPurge"></span>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div role="tabpanel" class="tab-pane" id="my-filters-tab">
+
+            </div>
+            <div role="tabpanel" class="tab-pane" id="my-rules-tab">
+
+            </div>
         </div>
-    </div>
+
 </div>
 <!--<p>-->
     <!--<button id="importWhitelistFromFile" class="custom" data-i18n="whitelistImport"></button>&ensp;-->
@@ -48,10 +159,13 @@
 <script src="scripts/ublock/vapi-common.js"></script>
 <script src="scripts/ublock/vapi-client.js"></script>
 <script src="scripts/ublock/udom.js"></script>
+<script src="scripts/lib/jquery.js"></script>
+<script src="scripts/lib/bootstrap.js"></script>
 <script src="scripts/ublock/i18n.js"></script>
 <script src="scripts/ublock/dashboard-common.js"></script>
 <script src="scripts/ublock/cloud-ui.js"></script>
 <script src="scripts/ublock/whitelist.js"></script>
+<script src="scripts/ublock/3p-filters.js"></script>
 
 </body>
 </html>

@@ -726,3 +726,5 @@ window.addEventListener('beforeunload', onBeforeUnload);
 return DOMListFactory;
 
 })();
+
+var jQuery = $ = uDom;
