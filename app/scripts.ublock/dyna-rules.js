@@ -34,7 +34,7 @@ var messaging = vAPI.messaging;
 /******************************************************************************/
 
 var renderRules = function(details) {
-    var liTemplate = uDom('#templates > ul > li');
+    var liTemplate = uDom('#templatesRules > ul > li');
     var ulLeft = uDom('#diff > .left ul').empty().remove();
     var ulRight = uDom('#diff > .right ul').empty().remove();
     var liLeft, liRight;
@@ -259,7 +259,7 @@ self.cloud.onPull = setCloudData;
 
 // Handle user interaction
 uDom('#importButton').on('click', startImportFilePicker);
-uDom('#importFilePicker').on('change', handleImportFilePicker);
+uDom('#importFilePickerRules').on('change', handleImportFilePicker);
 uDom('#exportButton').on('click', exportUserRulesToFile);
 
 uDom('#revertButton').on('click', revertHandler);

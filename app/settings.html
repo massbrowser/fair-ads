@@ -17,20 +17,17 @@
 </head>
 <body>
 
-<!--<div id="cloudWidget" class="hide" data-cloud-entry="whitelistPane"></div>-->
-
-<!--<p data-i18n="whitelistPrompt"></p>-->
 <div class="container-fluid" style="padding-top: 15px">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#whiteist-tab" aria-controls="whiteist-tab" role="tab" data-toggle="tab">Whitelist</a></li>
+            <li role="presentation"><a href="#whiteist-tab" aria-controls="whiteist-tab" role="tab" data-toggle="tab">Whitelist</a></li>
             <li role="presentation"><a href="#third-party-filters-tab" aria-controls="third-party-filters-tab" role="tab" data-toggle="tab">Third-party filters</a></li>
             <li role="presentation"><a href="#my-filters-tab" aria-controls="my-filters-tab" role="tab" data-toggle="tab">My filters</a></li>
-            <li role="presentation"><a href="#my-rules-tab" aria-controls="my-rules-tab" role="tab" data-toggle="tab">My rules</a></li>
+            <li role="presentation" class="active"><a href="#my-rules-tab" aria-controls="my-rules-tab" role="tab" data-toggle="tab">My rules</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="whiteist-tab">
+            <div role="tabpanel" class="tab-pane" id="whiteist-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Whitelist</h4>
@@ -59,39 +56,61 @@
 
 
             <div role="tabpanel" class="tab-pane" id="third-party-filters-tab">
-                <div id="cloudWidget" class="hide" data-cloud-entry="tpFiltersPane"></div>
+                <div class="cloudWidget hide" data-cloud-entry="tpFiltersPane"></div>
 
                 <div style="position: relative;">
-                    <div style="position: fixed; top: 15px; right: 15px;">
+                    <div style="position: fixed; top: 15px; right: 15px; z-index: 100;">
                         <button id="buttonApply" class="disabled btn btn-success" data-i18n="3pApplyChanges"></button>
                     </div>
                     <ul id="options" class="list-group">
                         <li class="list-group-item">
-                            <input type="checkbox" id="autoUpdate">
-                            <label data-i18n="3pAutoUpdatePrompt1" for="autoUpdate"></label>
-                            &ensp;
-                            <button class="btn btn-default custom important disabled" id="buttonUpdate" data-i18n="3pUpdateNow"></button>
-                            <button id="buttonPurgeAll" class="btn btn-default custom disabled" data-i18n="3pPurgeAll"></button>
+                            <label class="switch">
+                                <input type="checkbox" id="autoUpdate">
+                                <div class="slider round"></div>
+                            </label>
+                            <span data-i18n="3pAutoUpdatePrompt1"></span>
+                            <div class="btn-toolbar pull-right" role="toolbar">
+                                <button class="btn btn-default custom important disabled" id="buttonUpdate" data-i18n="3pUpdateNow"></button>
+                                <button id="buttonPurgeAll" class="btn btn-default custom disabled" data-i18n="3pPurgeAll"></button>
+                            </div>
                         </li>
                         <li class="list-group-item">
-                            <input type="checkbox" id="parseCosmeticFilters">
-                            <label data-i18n="3pParseAllABPHideFiltersPrompt1" for="parseCosmeticFilters" data-toggle="tooltip" data-placement="left" title="Tooltip on left"></label>
-                            <!--<button class="whatisthis"></button>-->
-                            <span data-toggle="collapse" data-target="#whatIsParseCosmeticFilters" style="cursor: pointer">
-                                <i class="glyphicon glyphicon-question-sign"></i>
-                            </span>
-                            <div id="whatIsParseCosmeticFilters" class="collapse" data-i18n="3pParseAllABPHideFiltersInfo"></div>
-
-                            <ul class="list-unstyled" style="padding-left: 2em;">
-                                <li>
-                                    <input type="checkbox" id="ignoreGenericCosmeticFilters">
-                                    <label data-i18n="3pIgnoreGenericCosmeticFilters" for="ignoreGenericCosmeticFilters"></label>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="switch pull-left">
+                                        <input type="checkbox" id="parseCosmeticFilters">
+                                        <div class="slider round"></div>
+                                    </label>
+                                    <span data-i18n="3pParseAllABPHideFiltersPrompt1"></span>
+                                    <span data-toggle="collapse" data-target="#whatIsParseCosmeticFilters" style="cursor: pointer">
+                                        <i class="glyphicon glyphicon-question-sign"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div id="whatIsParseCosmeticFilters" class="row collapse">
+                                <div class="col-md-12">
+                                    <div class="well m-t" data-i18n="3pParseAllABPHideFiltersInfo"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="switch">
+                                        <input type="checkbox" id="ignoreGenericCosmeticFilters">
+                                        <div class="slider round"></div>
+                                    </label>
+                                    <span data-i18n="3pIgnoreGenericCosmeticFilters"></span>
                                     <span data-toggle="collapse" data-target="#whatIsIgnoreGenericCosmeticFilters" style="cursor: pointer">
                                         <i class="glyphicon glyphicon-question-sign"></i>
                                     </span>
-                                    <div id="whatIsIgnoreGenericCosmeticFilters" class="collapse" data-i18n="3pIgnoreGenericCosmeticFiltersInfo"></div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
+                            <div id="whatIsIgnoreGenericCosmeticFilters" class="row collapse">
+                                <div class="col-md-12">
+                                    <div class="well m-t" data-i18n="3pIgnoreGenericCosmeticFiltersInfo"></div>
+                                </div>
+                            </div>
                         </li>
                         <li class="list-group-item">
                             <p id="listsOfBlockedHostsPrompt"></p>
@@ -122,12 +141,15 @@
                 </div>
 
                 <div id="templates" style="display: none;">
-                    <ul>
-                        <li class="groupEntry"><span class="geName"></span> <span class="geCount dim"></span>
-                            <ul></ul>
+                    <ul class="list-group">
+                        <li class="groupEntry list-group-item"><span class="geName"></span> <span class="geCount dim"></span>
+                            <ul class="list-unstyled"></ul>
                         </li>
                         <li class="listEntry">
-                            <input type="checkbox">
+                            <label class="switch pull-left">
+                                <input type="checkbox">
+                                <div class="slider round"></div>
+                            </label>
                             <a type="text/plain" target="_blank" href=""></a>
                             <a class="fa" style="display: none;" target="_blank">&#xf05a;</a>
                             <a href="" style="display: none;" target="_blank"></a>:
@@ -141,13 +163,92 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="my-filters-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cloudWidget hide" data-cloud-entry="myFiltersPane"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span data-i18n="1pFormatHint"></span>
+                        <a class="glyphicon glyphicon-info-sign" href="https://github.com/gorhill/uBlock/wiki/Static-filter-syntax" target="_blank"></a>
+                    </div>
+                </div>
+                <div class="row m-b">
+                    <div class="col-md-12">
+                        <span class="btn-toolbar"></span>
+                        <button id="userFiltersApply" class="btn btn-primary" type="button" disabled="true" data-i18n="1pApplyChanges"></button>&ensp;
+                        <button id="userFiltersRevert" class="btn btn-default" type="button" disabled="true" data-i18n="genericRevert"></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <!--<textarea class="userFilters" id="userFilters" dir="auto" spellcheck="false"></textarea>-->
+                            <textarea class="form-control" id="userFilters" dir="auto" spellcheck="false" rows="20"></textarea>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="btn-toolbar">
+                            <button id="importUserFiltersFromFile" class="btn btn-default" data-i18n="1pImport"></button>&ensp;
+                            <button id="exportUserFiltersToFile" class="btn btn-default" data-i18n="1pExport"></button>
+                        </div>
+                        <input id="importFilePicker" type="file" accept="text/plain" class="hidden">
+                    </div>
+                </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="my-rules-tab">
+            <div role="tabpanel" class="tab-pane active" id="my-rules-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="cloudWidget hide" data-cloud-entry="myRulesPane"></div>
 
+                        <p data-i18n="rulesHint"></p>
+                        <p data-i18n="rulesFormatHint"></p>
+                    </div>
+                </div>
+                <div id="diff" class="row">
+                    <div class="col-md-6 pane left">
+                        <div class="text-center ruleActions">
+                            <h2 data-i18n="rulesPermanentHeader"></h2>
+                            <div class="btn-toolbar" style="display: inline-block">
+                                <button type="button" class="btn btn-default" id="exportButton" data-i18n="rulesExport"></button>
+                                <button type="button" class="btn btn-default" id="revertButton" data-i18n="rulesRevert"></button>
+                            </div>
+                        </div>
+                        <div class="rulesContainer">
+                            <ul class="list-unstyled"></ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 pane right">
+                        <div class="text-center ruleActions">
+                            <h2 data-i18n="rulesTemporaryHeader"></h2>
+                            <div class="btn-toolbar" style="display: inline-block">
+                                <button type="button" class="btn btn-default" id="commitButton" data-i18n="rulesCommit"></button>
+                                <button type="button" class="btn btn-default" id="editEnterButton" data-i18n="rulesEdit"></button>
+                                <button type="button" class="btn btn-default" id="editStopButton" data-i18n="rulesEditSave"></button>
+                                <button type="button" class="btn btn-default" id="editCancelButton" data-i18n="rulesEditDiscard"></button>
+                                <button type="button" class="btn btn-default" id="importButton" data-i18n="rulesImport"></button>
+                            </div>
+                        </div>
+                        <div class="rulesContainer rules-сontainer">
+                            <textarea spellcheck="false" class="hidden-textarea" autofocus></textarea>
+                            <ul class="list-unstyled"></ul>
+                        </div>
+                    </div>
+
+                <div id="templatesRules" class="hidden">
+                    <input class="hidden" id="importFilePickerRules" type="file" accept="text/plain">
+                    <span class="hidden" data-i18n="rulesDefaultFileName"></span>
+                    <ul>
+                        <li>&nbsp;</li>
+                    </ul>
+                </div>
             </div>
         </div>
-
+    </div>
 </div>
 <!--<p>-->
     <!--<button id="importWhitelistFromFile" class="custom" data-i18n="whitelistImport"></button>&ensp;-->
@@ -166,6 +267,8 @@
 <script src="scripts/ublock/cloud-ui.js"></script>
 <script src="scripts/ublock/whitelist.js"></script>
 <script src="scripts/ublock/3p-filters.js"></script>
+<script src="scripts/ublock/1p-filters.js"></script>
+<script src="scripts/ublock/dyna-rules.js"></script>
 
 </body>
 </html>
