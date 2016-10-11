@@ -10,3 +10,16 @@
 .m-l {
   margin-left: 15px;
 }
+
+ul {
+  &.striped {
+    li {
+      &:nth-child(even) {
+        background-color: #ddd;
+      }
+      &:nth-child(odd) {
+        background-color: #fafafa;
+      }
+    }
+  }
+}
