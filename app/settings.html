@@ -17,17 +17,85 @@
 </head>
 <body>
 
-<div class="container-fluid" style="padding-top: 15px">
+<div class="container" style="padding-top: 15px">
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation"><a href="#whiteist-tab" aria-controls="whiteist-tab" role="tab" data-toggle="tab">Whitelist</a></li>
+            <li role="presentation" class="active"><a href="#account-tab" aria-controls="account-tab" role="tab" data-toggle="tab">Account</a></li>
+            <li role="presentation"><a href="#stop-combinations-tab" aria-controls="stop-combinations-tab" role="tab" data-toggle="tab">Stop combinations</a></li>
+            <li role="presentation"><a href="#whitelist-tab" aria-controls="whitelist-tab" role="tab" data-toggle="tab">Whitelist</a></li>
             <li role="presentation"><a href="#third-party-filters-tab" aria-controls="third-party-filters-tab" role="tab" data-toggle="tab">Third-party filters</a></li>
             <li role="presentation"><a href="#my-filters-tab" aria-controls="my-filters-tab" role="tab" data-toggle="tab">My filters</a></li>
-            <li role="presentation" class="active"><a href="#my-rules-tab" aria-controls="my-rules-tab" role="tab" data-toggle="tab">My rules</a></li>
+            <li role="presentation"><a href="#my-rules-tab" aria-controls="my-rules-tab" role="tab" data-toggle="tab">My rules</a></li>
         </ul>
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane" id="whiteist-tab">
+            <div role="tabpanel" class="tab-pane active" id="account-tab">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Max ads level</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1 text-center">
+                        <a href="#" class="ab-ads-level js-ads-level" data-class="a">
+                            <span class="text-success glyphicon glyphicon-ok-sign"></span>
+                            A
+                        </a>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <a href="#" class="ab-ads-level js-ads-level" data-class="b">
+                            <span class="text-success glyphicon glyphicon-ok-sign"></span>
+                            B
+                        </a>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <a href="#" class="ab-ads-level js-ads-level" data-class="c">
+                            <span class="text-success glyphicon glyphicon-ok-sign"></span>
+                            C
+                        </a>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <a href="#" class="ab-ads-level js-ads-level" data-class="d">
+                            <span class="text-success glyphicon glyphicon-ok-sign"></span>
+                            D
+                        </a>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <a href="#" class="ab-ads-level js-ads-level" data-class="e">
+                            <span class="text-success glyphicon glyphicon-ok-sign"></span>
+                            E
+                        </a>
+                    </div>
+                    <div class="col-md-1 text-center">
+                        <a href="#" class="ab-ads-level js-ads-level" data-class="f">
+                            <span class="text-success glyphicon glyphicon-ok-sign"></span>
+                            F
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Bitcoin account</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" class="js-bitcoin-input form-control" placeholder="Wallet ID">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="js-check-bitcoin-id btn btn-success">Ok</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="js-check-bitcoin-success text-success"></span>
+                        <span class="js-check-bitcoin-fail text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="stop-combinations-tab">
+            </div>
+            <div role="tabpanel" class="tab-pane" id="whitelist-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <h4>Whitelist</h4>
@@ -200,7 +268,7 @@
                     </div>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane active" id="my-rules-tab">
+            <div role="tabpanel" class="tab-pane" id="my-rules-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="cloudWidget hide" data-cloud-entry="myRulesPane"></div>
@@ -269,6 +337,7 @@
 <script src="scripts/ublock/3p-filters.js"></script>
 <script src="scripts/ublock/1p-filters.js"></script>
 <script src="scripts/ublock/dyna-rules.js"></script>
+<script src="scripts/settings.js"></script>
 
 </body>
 </html>

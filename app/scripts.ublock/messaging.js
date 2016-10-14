@@ -1264,3 +1264,16 @@ vAPI.messaging.listen('scriptlets', onMessage);
 
 /******************************************************************************/
 /******************************************************************************/
+
+
+(function () {
+    vAPI.messaging.listen('saveData', function (request, sender, callback) {
+        vAPI.storage.set(request);
+        callback();
+    });
+    vAPI.messaging.listen('getData', function(request, sender, callback) {
+        vAPI.storage.get(request.key, function (data) {
+            callback(data);
+        });
+    });
+})();

@@ -40,9 +40,11 @@ self.cloud = {
 /******************************************************************************/
 
 // var widget = uDom.nodeFromId('cloudWidget');
-var widget = uDom('.tab-pane.active .cloudWidget').nodes[0];
-console.log(widget);
-if ( widget === null ) {
+var widget = null;
+if (uDom('.tab-pane.active .cloudWidget')) {
+    widget = uDom('.tab-pane.active .cloudWidget').nodes[0];
+}
+if ( widget == null ) {
     return;
 }
 
