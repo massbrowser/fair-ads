@@ -1277,3 +1277,63 @@ vAPI.messaging.listen('scriptlets', onMessage);
         });
     });
 })();
+
+(function () {
+    let adsClasses = [
+        {
+            domain: 'example.com',
+            class: 'a'
+        },
+        {
+            domain: 'google.com',
+            class: 'b'
+        },
+        {
+            domain: 'facebook.com',
+            class: 'c'
+        },
+        {
+            domain: 'mail.ru',
+            class: 'd'
+        },
+        {
+            domain: '',
+            class: 'e'
+        },
+        {
+            domain: '',
+            class: 'f'
+        }
+    ];
+    function extractDomain(url) {
+        var domain;
+        //find & remove protocol (http, ftp, etc.) and get domain
+        if (url.indexOf("://") > -1) {
+            domain = url.split('/')[2];
+        }
+        else {
+            domain = url.split('/')[0];
+        }
+
+        //find & remove port number
+        domain = domain.split(':')[0];
+
+        return domain;
+    }
+    function getAdaClass(url) {
+        let domain = extractDomain(url);
+        let result = '';
+        adsClasses.forEach(function (el) {
+            if ((el.domain === domain) || (`www.${el.domain}` === domain)) {
+                result = el.class;
+            }
+        });
+        return result;
+    }
+    vAPI.messaging.listen('checkUrlClass', function (request, sender, callback) {
+        chrome.tabs.get(request.tabId, function (tab) {
+            console.log(tab);
+            callback(getAdaClass(tab.url));
+        });
+    });
+})();

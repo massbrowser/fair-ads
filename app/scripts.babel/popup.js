@@ -24,6 +24,17 @@
 'use strict';
 
 /******************************************************************************/
+var checkTabStatus = function (popupData) {
+  vAPI.messaging.send(
+    'checkUrlClass',
+    {
+      tabId: popupData.tabId
+    },
+    function (tabUrlClass) {
+      uDom('.js-ads-class-temp').text(tabUrlClass);
+    }
+  );
+};
 
 (function() {
 
@@ -504,6 +515,7 @@
     if ( dfPaneVisible ) {
       buildAllFirewallRows();
     }
+    checkTabStatus(popupData);
   };
 
   /******************************************************************************/
