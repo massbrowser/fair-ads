@@ -686,6 +686,21 @@ vAPI.net.onHeadersReceived = {
     callback: onHeadersReceived
 };
 
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  function(details) {
+      for (var i = 0; i < details.requestHeaders.length; ++i) {
+          if (details.requestHeaders[i].name === 'User-Agent') {
+              let val = details.requestHeaders[i].value;
+              details.requestHeaders[i].value = `${val} Mass/0.1`;
+              break;
+          }
+      }
+      return {requestHeaders: details.requestHeaders};
+  },
+  {urls: ["<all_urls>"]},
+  ["blocking", "requestHeaders"]
+);
+
 vAPI.net.registerListeners();
 
 //console.log('traffic.js > Beginning to intercept net requests at %s', (new Date()).toISOString());

@@ -1332,7 +1332,6 @@ vAPI.messaging.listen('scriptlets', onMessage);
     }
     vAPI.messaging.listen('checkUrlClass', function (request, sender, callback) {
         chrome.tabs.get(request.tabId, function (tab) {
-            console.log(tab);
             callback(getAdaClass(tab.url));
         });
     });
