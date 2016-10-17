@@ -1303,6 +1303,94 @@ vAPI.messaging.listen('scriptlets', onMessage);
         {
             domain: '',
             class: 'f'
+        },
+        {
+            domain: 'youtube.com',
+            class: 'D'
+        },
+        {
+            domain: 'baidu.com',
+            class: ''
+        },
+        {
+            domain: 'wikipedia.org',
+            class: 'a'
+        },
+        {
+            domain: 'yahoo.com',
+            class: 'b'
+        },
+        {
+            domain: 'google.co.in',
+            class: 'b'
+        },
+        {
+            domain: 'twitter.com',
+            class: ''
+        },
+        {
+            domain: 'amazon.com',
+            class: ''
+        },
+        {
+            domain: 'qq.com',
+            class: ''
+        },
+        {
+            domain: 'google.co.jp',
+            class: 'b'
+        },
+        {
+            domain: 'live.com',
+            class: 'b'
+        },
+        {
+            domain: 'linkedin.com',
+            class: 'c'
+        },
+        {
+            domain: 'taobao.com',
+            class: 'c'
+        },
+        {
+            domain: 'vk.com',
+            class: 'b'
+        },
+        {
+            domain: 'hao123.com',
+            class: ''
+        },
+        {
+            domain: 'sohu.com',
+            class: ''
+        },
+        {
+            domain: 'weibo.com',
+            class: 'c'
+        },
+        {
+            domain: 'sina.com.cn',
+            class: 'c'
+        },
+        {
+            domain: '360.cn',
+            class: 'd'
+        },
+        {
+            domain: 'google.de',
+            class: 'b'
+        },
+        {
+            domain: 'yahoo.co.jp',
+            class: 'b'
+        },
+        {
+            domain: 'reddit.com',
+            class: 'b'
+        },
+        {
+            domain: 'google.com.br',
+            class: 'b'
         }
     ];
     function extractDomain(url) {
@@ -1321,10 +1409,12 @@ vAPI.messaging.listen('scriptlets', onMessage);
         return domain;
     }
     function getAdaClass(url) {
-        let domain = extractDomain(url);
+        let domainArray = extractDomain(url).split('.');
+        let firstLevel = domainArray[domainArray.length - 1];
+        let secondLevel = domainArray[domainArray.length - 2];
         let result = '';
         adsClasses.forEach(function (el) {
-            if ((el.domain === domain) || (`www.${el.domain}` === domain)) {
+            if (el.domain === `${secondLevel}.${firstLevel}`) {
                 result = el.class;
             }
         });
