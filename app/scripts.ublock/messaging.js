@@ -1430,7 +1430,7 @@ vAPI.messaging.listen('scriptlets', onMessage);
     vAPI.messaging.listen('updWhiteList', function (request) {
      let adsClass = request.adsClass;
         adsClasses.forEach(function (el) {
-            if (el.class <= adsClass) {
+            if (el.class > adsClass) {
                 µBlock.toggleNetFilteringSwitch(`http://${el.domain}/`, '', true);
                 µBlock.toggleNetFilteringSwitch(`https://${el.domain}/`, '', true);
             } else {
