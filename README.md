@@ -22,3 +22,7 @@ Go to the Extensions page and turn on Developer mode:
     chrome://extensions/
     
 Load app folder
+
+    Press 'Pack extension' button on page chrome://extensions/
+    
+Packing extension
