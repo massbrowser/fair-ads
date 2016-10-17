@@ -18,7 +18,7 @@ if (argv.firefox) {
   platformName = 'safari';
 }
 
-var distBasePath = `build/${platformName}/mass-fair-ads`;
+var distBasePath = `app`;
 
 gulp.task('extras', () => {
   return gulp.src([
@@ -60,16 +60,11 @@ gulp.task('images', () => {
       console.log(err);
       this.end();
     })))
-    .pipe(gulp.dest(`dist/${platformName}/images`));
+    .pipe(gulp.dest(`${distBasePath}/images`));
 });
 
 gulp.task('html',  () => {
   return gulp.src('app/*.html')
-    // .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    // .pipe($.sourcemaps.init())
-    // .pipe($.if('*.js', $.uglify()))
-    // .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
-    // .pipe($.sourcemaps.write())
     .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
     .pipe(gulp.dest(`${distBasePath}`));
 });
@@ -82,21 +77,23 @@ gulp.task('makeManifest', () => {
 
 gulp.task('buildManifest', () => {
   return gulp.src(`app/manifest.${platformName}.json`)
-    .pipe($.chromeManifest({
-      // buildnumber: true,
-      background: {
-        target: `${distBasePath}'/scripts/background.js'`,
-        exclude: [
-          'scripts/chromereload.js'
-        ]
-      },
-  }))
-  .pipe($.rename('manifest.json'))
-  // .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
-  // .pipe($.if('*.js', $.sourcemaps.init()))
-  // .pipe($.if('*.js', $.uglify()))
-  // .pipe($.if('*.js', $.sourcemaps.write('.')))
-  .pipe(gulp.dest(`${distBasePath}`));
+    .pipe($.jsonEditor(function (json) {
+      let index = -1;
+      json.background.scripts.forEach(function (el, i) {
+        if (el.includes('chromereload')) {
+          index = i;
+        }
+      });
+      json.background.scripts.splice(index, 1);
+      return json;
+    }))
+    .pipe($.rename('manifest.json'))
+    .pipe(gulp.dest(distBasePath))
+});
+
+gulp.task('locales', () => {
+  return gulp.src('app/_locales/**/*.*')
+    .pipe(gulp.dest(`${distBasePath}/_locales`));
 });
 
 gulp.task('babel', () => {
@@ -104,11 +101,11 @@ gulp.task('babel', () => {
       .pipe($.babel({
         presets: ['es2015']
       }))
-      .pipe(gulp.dest('app/scripts'));
+      .pipe(gulp.dest(`${distBasePath}/scripts`));
 });
 
 gulp.task('lib', () => {
-  return gulp.src(['app/scripts.lib/**/*.js']).pipe(gulp.dest('app/scripts/lib'));
+  return gulp.src(['app/scripts.lib/**/*.js']).pipe(gulp.dest(`${distBasePath}/scripts/lib`));
 });
 
 gulp.task('less', () => {
@@ -117,18 +114,15 @@ gulp.task('less', () => {
     .pipe($.less({
       plugins: [autoprefix]
     }))
-    .pipe(gulp.dest('app/styles'));
+    .pipe(gulp.dest(`${distBasePath}/styles`));
 });
 
 gulp.task('ublock', () => {
   return gulp.src(['app/scripts.ublock/**/*.js'])
-    // .pipe($.babel({
-    //   presets: ['es2015']
-    // }))
-    .pipe(gulp.dest('app/scripts/ublock'));
+    .pipe(gulp.dest(`${distBasePath}/scripts/ublock`));
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
+gulp.task('clean', del.bind(null, ['.tmp', `build/${platformName}/mass-fair-ads`]));
 
 gulp.task('compile', ['lint', 'babel', 'lib', 'ublock', 'less', 'makeManifest']);
 
@@ -171,15 +165,10 @@ gulp.task('package', function () {
       .pipe(gulp.dest('package'));
 });
 
-// gulp.task('build', (cb) => {
-//   runSequence(
-//     'lint', 'babel', 'ublock', 'chromeManifest',
-//     ['html', 'images', 'extras'],
-//     'size', cb);
-// });
-
-// gulp.task('build', ['lint', 'babel', 'lib', 'ublock', 'less', 'makeManifest']);
-gulp.task('build', ['lint', 'babel', 'html', 'buildManifest']);
+gulp.task('build', (cb) => {
+  distBasePath = `build/${platformName}/mass-fair-ads`;
+  runSequence('lint', 'babel', 'html', 'buildManifest', 'lib', 'ublock', 'less', 'images', 'locales', cb);
+});
 
 gulp.task('default', ['clean'], cb => {
   runSequence('build', cb);

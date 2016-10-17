@@ -9,9 +9,13 @@ Install dependencies:
 
     npm install
     
-Run gulp:
+Run watcher:
 
     gulp watch
+
+Build extension (to build folder):
+
+    gulp
     
 For firefox/opera/safari use flag:
 
