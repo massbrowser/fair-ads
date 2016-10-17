@@ -18,6 +18,8 @@ if (argv.firefox) {
   platformName = 'safari';
 }
 
+var distBasePath = `build/${platformName}/mass-fair-ads`;
+
 gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
@@ -63,13 +65,13 @@ gulp.task('images', () => {
 
 gulp.task('html',  () => {
   return gulp.src('app/*.html')
-    .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
-    .pipe($.sourcemaps.init())
-    .pipe($.if('*.js', $.uglify()))
-    .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
-    .pipe($.sourcemaps.write())
+    // .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
+    // .pipe($.sourcemaps.init())
+    // .pipe($.if('*.js', $.uglify()))
+    // .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
+    // .pipe($.sourcemaps.write())
     .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
-    .pipe(gulp.dest(`dist/${platformName}`));
+    .pipe(gulp.dest(`${distBasePath}`));
 });
 
 gulp.task('makeManifest', () => {
@@ -78,23 +80,23 @@ gulp.task('makeManifest', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('chromeManifest', () => {
-  return gulp.src('app/manifest.chromium.json')
+gulp.task('buildManifest', () => {
+  return gulp.src(`app/manifest.${platformName}.json`)
     .pipe($.chromeManifest({
-      buildnumber: true,
+      // buildnumber: true,
       background: {
-        target: 'scripts/background.js',
+        target: `${distBasePath}'/scripts/background.js'`,
         exclude: [
           'scripts/chromereload.js'
         ]
-      }
+      },
   }))
   .pipe($.rename('manifest.json'))
-  .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
-  .pipe($.if('*.js', $.sourcemaps.init()))
-  .pipe($.if('*.js', $.uglify()))
-  .pipe($.if('*.js', $.sourcemaps.write('.')))
-  .pipe(gulp.dest(`dist/${platformName}`));
+  // .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
+  // .pipe($.if('*.js', $.sourcemaps.init()))
+  // .pipe($.if('*.js', $.uglify()))
+  // .pipe($.if('*.js', $.sourcemaps.write('.')))
+  .pipe(gulp.dest(`${distBasePath}`));
 });
 
 gulp.task('babel', () => {
@@ -169,12 +171,15 @@ gulp.task('package', function () {
       .pipe(gulp.dest('package'));
 });
 
-gulp.task('build', (cb) => {
-  runSequence(
-    'lint', 'babel', 'ublock', 'chromeManifest',
-    ['html', 'images', 'extras'],
-    'size', cb);
-});
+// gulp.task('build', (cb) => {
+//   runSequence(
+//     'lint', 'babel', 'ublock', 'chromeManifest',
+//     ['html', 'images', 'extras'],
+//     'size', cb);
+// });
+
+// gulp.task('build', ['lint', 'babel', 'lib', 'ublock', 'less', 'makeManifest']);
+gulp.task('build', ['lint', 'babel', 'html', 'buildManifest']);
 
 gulp.task('default', ['clean'], cb => {
   runSequence('build', cb);
