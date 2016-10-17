@@ -32,6 +32,26 @@ var checkTabStatus = function (popupData) {
     },
     function (tabUrlClass) {
       uDom('.js-ads-class-temp').text(tabUrlClass);
+      // vAPI.messaging.send(
+      //   'getData',
+      //   {
+      //     key: 'adsClass'
+      //   },
+      //   function (adsClass) {
+      //     console.log(adsClass);
+      //     console.log(tabUrlClass);
+      //   }
+      // );
+      // messaging.send(
+      //   'popupPanel',
+      //   {
+      //     what: 'toggleNetFiltering',
+      //     url: popupData.pageURL,
+      //     scope: ev.ctrlKey || ev.metaKey ? 'page' : '',
+      //     state: !uDom(ev.currentTarget).prop('checked'),
+      //     tabId: popupData.tabId
+      //   }
+      // );
     }
   );
 };
@@ -172,8 +192,6 @@ var checkTabStatus = function (popupData) {
     }
     hasher.sort();
     hasher.push(uDom('body').hasClass('off'));
-    console.log('switcher');
-    console.log(uDom('#adSwitcher').prop('checked'));
     hasher.push(uDom.nodeFromId('no-large-media').classList.contains('on'));
     hasher.push(uDom.nodeFromId('no-cosmetic-filtering').classList.contains('on'));
     hasher.push(uDom.nodeFromId('no-remote-fonts').classList.contains('on'));
@@ -542,8 +560,6 @@ var checkTabStatus = function (popupData) {
   /******************************************************************************/
 
   var toggleNetFilteringSwitch = function(ev) {
-    console.log('toggleNetFilteringSwitch');
-    console.log(uDom(ev.currentTarget).prop('checked'));
     if ( !popupData || !popupData.pageURL ) {
       return;
     }

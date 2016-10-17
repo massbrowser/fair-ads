@@ -10,7 +10,6 @@
   "default_locale": "en",
   "background": {
     "scripts": [
-      "scripts/chromereload.js",
       "scripts/ublock/polyfill.js",
       "scripts/ublock/lib/punycode.js",
       "scripts/ublock/lib/publicsuffixlist.js",

@@ -7,11 +7,12 @@ var bitcoinInputClass = 'js-bitcoin-input';
 var defaultAdsClass = 'c';
 
 var setAdsClass = function (data) {
-  if ($.isEmptyObject(data)) {
-    $(`.js-ads-level[data-class=${defaultAdsClass}]`).addClass(selectedClass);
-  } else {
-    $(`.js-ads-level[data-class=${data.adsClass}]`).addClass(selectedClass);
-  }
+  // if ($.isEmptyObject(data)) {
+  //   $(`.js-ads-level[data-class=${defaultAdsClass}]`).addClass(selectedClass);
+  // } else {
+  //   $(`.js-ads-level[data-class=${data.adsClass}]`).addClass(selectedClass);
+  // }
+  $(`.js-ads-level[data-class=${data.adsClass}]`).addClass(selectedClass);
 };
 
 vAPI.messaging.send('getData', {'key': 'adsClass'}, setAdsClass);
@@ -22,6 +23,10 @@ vAPI.messaging.send('getData', {'key': 'bitcoinId'}, function (data) {
   }
 });
 
+function updateWhiteListByAdsClass(adsClass) {
+  vAPI.messaging.send('updWhiteList', {'adsClass': adsClass}, function (data) {});
+}
+
 
 $(`.${adsClassClass}`).on('click', function (e) {
   e.preventDefault();
@@ -29,6 +34,7 @@ $(`.${adsClassClass}`).on('click', function (e) {
   vAPI.messaging.send('saveData', {'adsClass': adsClass}, function () {
     $(`.${adsClassClass}`).removeClass(selectedClass);
     $(e.currentTarget).addClass(selectedClass);
+    updateWhiteListByAdsClass(adsClass);
   });
 });
 

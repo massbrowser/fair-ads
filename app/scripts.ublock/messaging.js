@@ -413,6 +413,7 @@ var onMessage = function(request, sender, callback) {
     case 'toggleNetFiltering':
         pageStore = µb.pageStoreFromTabId(request.tabId);
         if ( pageStore ) {
+            console.log(request);
             pageStore.toggleNetFilteringSwitch(request.url, request.scope, request.state);
             µb.updateBadgeAsync(request.tabId);
         }
@@ -1306,7 +1307,7 @@ vAPI.messaging.listen('scriptlets', onMessage);
         },
         {
             domain: 'youtube.com',
-            class: 'D'
+            class: 'd'
         },
         {
             domain: 'baidu.com',
@@ -1423,6 +1424,19 @@ vAPI.messaging.listen('scriptlets', onMessage);
     vAPI.messaging.listen('checkUrlClass', function (request, sender, callback) {
         chrome.tabs.get(request.tabId, function (tab) {
             callback(getAdaClass(tab.url));
+        });
+    });
+
+    vAPI.messaging.listen('updWhiteList', function (request) {
+     let adsClass = request.adsClass;
+        adsClasses.forEach(function (el) {
+            if (el.class <= adsClass) {
+                µBlock.toggleNetFilteringSwitch(`http://${el.domain}/`, '', true);
+                µBlock.toggleNetFilteringSwitch(`https://${el.domain}/`, '', true);
+            } else {
+                µBlock.toggleNetFilteringSwitch(`http://${el.domain}/`, '', false);
+                µBlock.toggleNetFilteringSwitch(`https://${el.domain}/`, '', false);
+            }
         });
     });
 })();
