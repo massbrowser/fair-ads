@@ -1394,7 +1394,7 @@ vAPI.messaging.listen('scriptlets', onMessage);
             class: 'b'
         },
         {
-            domain: 'forlog.com',
+            domain: 'forklog.com',
             class: 'c'
         },
         {
