@@ -60,6 +60,12 @@ var onBeforeRequest = function(details) {
     // Lookup the page store associated with this tab id.
     var µb = µBlock;
     var pageStore = µb.pageStoreFromTabId(tabId);
+    if (pageStore != null) {
+        if (µBlock.checkIfUrlFitsAdsClass(pageStore.tabHostname)) {
+            return;
+        }
+    }
+
     if ( !pageStore ) {
         var tabContext = µb.tabContextManager.mustLookup(tabId);
         if ( vAPI.isBehindTheSceneTabId(tabContext.tabId) ) {

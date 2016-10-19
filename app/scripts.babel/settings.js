@@ -31,7 +31,7 @@ function updateWhiteListByAdsClass(adsClass) {
 $(`.${adsClassClass}`).on('click', function (e) {
   e.preventDefault();
   let adsClass = $(e.currentTarget).data('class');
-  vAPI.messaging.send('saveData', {'adsClass': adsClass}, function () {
+  vAPI.messaging.send('saveAdsClass', {'adsClass': adsClass}, function () {
     $(`.${adsClassClass}`).removeClass(selectedClass);
     $(e.currentTarget).addClass(selectedClass);
     updateWhiteListByAdsClass(adsClass);

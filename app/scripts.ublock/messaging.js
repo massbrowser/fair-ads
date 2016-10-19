@@ -1272,6 +1272,11 @@ vAPI.messaging.listen('scriptlets', onMessage);
         vAPI.storage.set(request);
         callback();
     });
+    vAPI.messaging.listen('saveAdsClass', function (request, sender, callback) {
+        vAPI.storage.set(request);
+        µBlock.adsClass = request.adsClass;
+        callback();
+    });
     vAPI.messaging.listen('getData', function(request, sender, callback) {
         vAPI.storage.get(request.key, function (data) {
             callback(data);
@@ -1280,132 +1285,6 @@ vAPI.messaging.listen('scriptlets', onMessage);
 })();
 
 (function () {
-    let adsClasses = [
-        {
-            domain: 'example.com',
-            class: 'a'
-        },
-        {
-            domain: 'google.com',
-            class: 'b'
-        },
-        {
-            domain: 'facebook.com',
-            class: 'c'
-        },
-        {
-            domain: 'mail.ru',
-            class: 'd'
-        },
-        {
-            domain: '',
-            class: 'e'
-        },
-        {
-            domain: '',
-            class: 'f'
-        },
-        {
-            domain: 'youtube.com',
-            class: 'd'
-        },
-        {
-            domain: 'baidu.com',
-            class: ''
-        },
-        {
-            domain: 'wikipedia.org',
-            class: 'a'
-        },
-        {
-            domain: 'yahoo.com',
-            class: 'b'
-        },
-        {
-            domain: 'google.co.in',
-            class: 'b'
-        },
-        {
-            domain: 'twitter.com',
-            class: ''
-        },
-        {
-            domain: 'amazon.com',
-            class: ''
-        },
-        {
-            domain: 'qq.com',
-            class: ''
-        },
-        {
-            domain: 'google.co.jp',
-            class: 'b'
-        },
-        {
-            domain: 'live.com',
-            class: 'b'
-        },
-        {
-            domain: 'linkedin.com',
-            class: 'c'
-        },
-        {
-            domain: 'taobao.com',
-            class: 'c'
-        },
-        {
-            domain: 'vk.com',
-            class: 'b'
-        },
-        {
-            domain: 'hao123.com',
-            class: ''
-        },
-        {
-            domain: 'sohu.com',
-            class: ''
-        },
-        {
-            domain: 'weibo.com',
-            class: 'c'
-        },
-        {
-            domain: 'sina.com.cn',
-            class: 'c'
-        },
-        {
-            domain: '360.cn',
-            class: 'd'
-        },
-        {
-            domain: 'google.de',
-            class: 'b'
-        },
-        {
-            domain: 'yahoo.co.jp',
-            class: 'b'
-        },
-        {
-            domain: 'reddit.com',
-            class: 'b'
-        },
-        {
-            domain: 'google.com.br',
-            class: 'b'
-        },
-        {
-            domain: 'forklog.com',
-            class: 'c'
-        },
-        {
-            domain: 'forklog.net',
-            class: 'c'
-        },
-        {
-            domain: 'bitcointalk.org',
-            class: 'b'
-        }
-    ];
     function extractDomain(url) {
         var domain;
         //find & remove protocol (http, ftp, etc.) and get domain
@@ -1426,7 +1305,7 @@ vAPI.messaging.listen('scriptlets', onMessage);
         let firstLevel = domainArray[domainArray.length - 1];
         let secondLevel = domainArray[domainArray.length - 2];
         let result = '?';
-        adsClasses.forEach(function (el) {
+        µBlock.adsClasses.forEach(function (el) {
             if (el.domain === `${secondLevel}.${firstLevel}`) {
                 result = el.class;
             }
@@ -1441,14 +1320,5 @@ vAPI.messaging.listen('scriptlets', onMessage);
 
     vAPI.messaging.listen('updWhiteList', function (request) {
      let adsClass = request.adsClass;
-        adsClasses.forEach(function (el) {
-            if (el.class > adsClass) {
-                µBlock.toggleNetFilteringSwitch(`http://${el.domain}/`, '', true);
-                µBlock.toggleNetFilteringSwitch(`https://${el.domain}/`, '', true);
-            } else {
-                µBlock.toggleNetFilteringSwitch(`http://${el.domain}/`, '', false);
-                µBlock.toggleNetFilteringSwitch(`https://${el.domain}/`, '', false);
-            }
-        });
     });
 })();

@@ -215,6 +215,7 @@ var onSystemSettingsReady = function(fetched) {
 var onFirstFetchReady = function(fetched) {
     // https://github.com/gorhill/uBlock/issues/747
     µb.firstInstall = fetched.version === '0.0.0.0';
+    µb.adsClass = fetched.adsClass;
 
     // Order is important -- do not change:
     onSystemSettingsReady(fetched);
@@ -263,6 +264,7 @@ var onAdminSettingsRestored = function() {
     µb.assets.remoteFetchBarrier += 1;
 
     var fetchableProps = {
+        'adsClass': '',
         'compiledMagic': '',
         'dynamicFilteringString': 'behind-the-scene * 3p noop\nbehind-the-scene * 3p-frame noop',
         'urlFilteringString': '',
