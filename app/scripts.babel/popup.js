@@ -30,7 +30,6 @@ var checkTabStatus = function (popupData) {
       tabId: popupData.tabId
     },
     function (tabUrlClass) {
-      console.log(tabUrlClass);
       jQuery('.js-ads-class').addClass(`ads-class-${tabUrlClass}`);
       jQuery('.js-ads-class-text-letter').text(tabUrlClass);
     });
@@ -808,6 +807,8 @@ var checkTabStatus = function (popupData) {
   /******************************************************************************/
 
   var toggleHostnameSwitch = function(ev) {
+    ev.preventDefault();
+    console.log('toggleHostnameSwitch');
     var target = ev.currentTarget;
     var switchName = target.getAttribute('id');
     if ( !switchName ) {

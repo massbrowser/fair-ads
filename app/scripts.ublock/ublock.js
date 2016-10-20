@@ -587,6 +587,19 @@ var matchWhitelistDirective = function(url, hostname, directive) {
     }
   ];
 
+µBlock.isGoogleDomain = function (url) {
+    let urlArray = url.split('.');
+    if ((urlArray[urlArray.length - 2] === 'com') || (urlArray[urlArray.length - 2] === 'co') ) {
+        if (urlArray[urlArray.length - 3] === 'google') {
+            return true;
+        }
+    } else if (urlArray[urlArray.length - 2] === 'google') {
+        return true;
+    } else {
+        return false;
+    }
+};
+
 µBlock.checkIfUrlFitsAdsClass = function (url) {
     let adsClass = this.adsClass;
     let urlListWithClasses = this.adsClasses;
@@ -594,12 +607,8 @@ var matchWhitelistDirective = function(url, hostname, directive) {
     let urlArray = url.split('.');
     // for google
     if (adsClass >= 'b') {
-        if ((urlArray[urlArray.length - 2] === 'com') || (urlArray[urlArray.length - 2] === 'co') ) {
-          if (urlArray[urlArray.length - 3] === 'google') {
+        if (this.isGoogleDomain(url)) {
             result = true;
-          }
-        } else if (urlArray[urlArray.length - 2] === 'google') {
-          result = true;
         }
     }
     // for domains in list
