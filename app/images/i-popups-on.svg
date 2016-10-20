@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: sketchtool 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
     <title>Group 65 Copy</title>
     <desc>Created with sketchtool.</desc>
     <defs></defs>
     <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="1-Ads-on" transform="translate(-221.000000, -398.000000)">
-            <g id="Group-86-Copy-2" transform="translate(200.000000, 111.000000)">
-                <g id="Group-81-Copy-14" transform="translate(18.000000, 281.000000)">
-                    <g id="Group-71-Copy-8">
-                        <g id="Group-65-Copy" transform="translate(0.000000, 3.000000)">
-                            <rect id="Rectangle-374-Copy" opacity="0.13671875" x="0" y="0" width="24" height="24"></rect>
-                            <rect id="Combined-Shape" fill="#909096" x="9" y="3" width="12" height="12" rx="1"></rect>
-                            <path d="M8,9 L4.00247329,9 C3.45576096,9 3,9.44882258 3,10.0024733 L3,19.9975267 C3,20.544239 3.44882258,21 4.00247329,21 L13.9975267,21 C14.544239,21 15,20.5511774 15,19.9975267 L15,16 L13,16 L13,19 L5,19 L5,11 L8,11 L8,9 L8,9 Z" id="Combined-Shape" fill="#909096"></path>
+        <g id="3-Advanced-mode" transform="translate(-218.000000, -395.000000)">
+            <g id="Group-85-Copy-3" transform="translate(200.000000, 111.000000)">
+                <g id="Group-88">
+                    <g id="Group-81-Copy-14" transform="translate(18.000000, 281.000000)">
+                        <g id="Group-71-Copy-8">
+                            <g id="Group-65-Copy" transform="translate(0.000000, 3.000000)">
+                                <rect id="Rectangle-374-Copy" opacity="0.13671875" x="0" y="0" width="24" height="24"></rect>
+                                <rect id="Combined-Shape" fill="#909096" x="9" y="3" width="12" height="12" rx="1"></rect>
+                                <path d="M8,9 L4.00247329,9 C3.45576096,9 3,9.44882258 3,10.0024733 L3,19.9975267 C3,20.544239 3.44882258,21 4.00247329,21 L13.9975267,21 C14.544239,21 15,20.5511774 15,19.9975267 L15,16 L13,16 L13,19 L5,19 L5,11 L8,11 L8,9 L8,9 Z" id="Combined-Shape" fill="#909096"></path>
+                                <g id="Group-67" transform="translate(12.000000, 12.000000) rotate(45.000000) translate(-12.000000, -12.000000) translate(-2.000000, 10.000000)">
+                                    <rect id="Rectangle-426" fill="#068FFC" x="1.49347201e-12" y="-1.62514446e-12" width="28" height="2"></rect>
+                                    <rect id="Rectangle-426-Copy" fill="#FFFFFF" x="1.49347201e-12" y="2" width="28" height="2"></rect>
+                                </g>
+                            </g>
                         </g>
                     </g>
                 </g>

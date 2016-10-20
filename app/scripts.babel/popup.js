@@ -964,7 +964,7 @@ var checkTabStatus = function (popupData) {
     uDom('a[href]').on('click', gotoURL);
     uDom('h2').on('click', toggleFirewallPane);
     uDom('#refresh').on('click', reloadTab);
-    uDom('.hnSwitch').on('click', toggleHostnameSwitch);
+    uDom('.js-bottom-one-icon').on('click', toggleHostnameSwitch);
     uDom('#saveRules').on('click', saveFirewallRules);
     uDom('#revertRules').on('click', revertFirewallRules);
     uDom('[data-i18n="popupAnyRulePrompt"]').on('click', toggleMinimize);

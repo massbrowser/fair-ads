@@ -190,30 +190,53 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 32px;
+    height: 50px;
+    border-top: 1px solid #e9e9e9;
     font-size: 12px;
-    background-color: #f4f4f4;
-    border-radius: 0 0 3px 3px;
     .ab-bottom-one-icon {
       position: relative;
       float: left;
       width: 25%;
       height: 100%;
       color: #909096;
+      cursor: pointer;
       outline: none;
+      &.on {
+        img {
+          &.off {
+            display: none;
+          }
+          &.on {
+            display: inline-block;
+          }
+        }
+      }
+      img {
+        &.on {
+          display: none;
+        }
+        &.off {
+          display: inline-block;
+        }
+      }
       .ab-bottom-icon-wrap {
         position: absolute;
-        top: 40%;
-        left: 50%;
-        width: auto;
-        img {
-          margin-top: -50%;
-          margin-left: -50%;
-        }
+        left: calc(~'50% - 12px');
+        top: calc(~'50% - 12px');
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
         span {
           position: absolute;
-          top: -12px;
-          right: -2px;
+          top: -2px;
+          right: -13px;
         }
       }
     }
