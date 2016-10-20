@@ -591,8 +591,19 @@ var matchWhitelistDirective = function(url, hostname, directive) {
     let adsClass = this.adsClass;
     let urlListWithClasses = this.adsClasses;
     let result = false;
+    let urlArray = url.split('.');
+    // for google
+    if (adsClass >= 'b') {
+        if ((urlArray[urlArray.length - 2] === 'com') || (urlArray[urlArray.length - 2] === 'co') ) {
+          if (urlArray[urlArray.length - 3] === 'google') {
+            result = true;
+          }
+        } else if (urlArray[urlArray.length - 2] === 'google') {
+          result = true;
+        }
+    }
+    // for domains in list
     urlListWithClasses.forEach(function (el) {
-        let urlArray = url.split('.');
         let domainArray = el.domain.split('.');
         if ((urlArray[urlArray.length - 1] == domainArray[domainArray.length - 1]) && (urlArray[urlArray.length - 2] == domainArray[domainArray.length - 2])) {
             result =  el.class <= adsClass;
