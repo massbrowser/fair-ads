@@ -203,10 +203,6 @@
     "message": "Rule syntax: <code>source destination type action<\/code> (<a href='https:\/\/github.com\/gorhill\/uBlock\/wiki\/Dynamic-filtering:-rule-syntax'>full documentation<\/a>).",
     "description": "English: dynamic rule syntax and full documentation."
   },
-  "pickerContextMenuEntry":{
-    "message":"Block element",
-    "description":"English: Block element"
-  },
   "contextMenuTemporarilyAllowLargeMediaElements": {
     "message": "Temporarily allow large media elements",
     "description": "A context menu entry, present when large media elements have been blocked on the current site"
@@ -242,5 +238,9 @@
   "pickerContextMenuEntry":{
     "message":"Block element",
     "description":"English: Block element"
+  },
+  "popupBalance":{
+    "message":"Balance",
+    "description":"English: Balance"
   }
 }

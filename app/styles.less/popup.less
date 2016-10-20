@@ -5,60 +5,183 @@
 .ab-popup-wrapper {
   position: relative;
   border-left: 1px solid #fff;
-  width: 300px;
-  height: 317px;
+  width: 241px;
+  height: 390px;
+  padding: 1px 1px 0 0;
   background-color: #fff;
   .ab-top-panel {
-    height: 90px;
+    height: 32px;
+    background-color: #2c2c2c;
+    border-radius: 3px 3px 0 0;
+    .ab-balance {
+      font-size: 10px;
+      color: #fff;
+      padding-left: 10px;
+      div {
+        float: left;
+        height: 32px;
+        line-height: 32px;
+        &.ab-balance-icon {
+          margin-left: 4px;
+          margin-right: 2px;
+        }
+        &.ab-balance-number {
+          font-weight: bold;
+        }
+      }
+    }
+    .ab-icon-cog {
+      cursor: pointer;
+      float: right;
+      width: 16px;
+      height: 16px;
+      margin-right: 8px;
+      margin-top: 8px;
+      outline: none;
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .ab-show-ads-class {
+    width: 150px ;
+    height: 93px;
+    margin: 21px auto 0;
+
+    svg {
+      #Fill-34, #Fill-36, #Fill-24, #Fill-31, #Fill-29, #Fill-26 {
+        fill: #BCBEC0;
+      }
+      #ad-arrow-a, #ad-arrow-b, #ad-arrow-c, #ad-arrow-d, #ad-arrow-e, #ad-arrow-f {
+        display: none;
+      }
+    }
+    &.ads-class-a {
+      svg {
+        #Fill-34 {
+          fill: #231F1F;
+        }
+        #ad-arrow-a {
+          display: inline;
+        }
+      }
+    }
+    &.ads-class-b {
+      svg {
+        #Fill-36 {
+          fill: #231F1F;
+        }
+        #ad-arrow-b {
+          display: inline;
+        }
+      }
+    }
+    &.ads-class-c {
+      svg {
+        #Fill-24 {
+          fill: #231F1F;
+        }
+        #ad-arrow-c {
+          display: inline;
+        }
+      }
+    }
+    &.ads-class-d {
+      svg {
+        #Fill-31 {
+          fill: #231F1F;
+        }
+        #ad-arrow-d {
+          display: inline;
+        }
+      }
+    }
+    &.ads-class-e {
+      svg {
+        #Fill-29 {
+          fill: #231F1F;
+        }
+        #ad-arrow-e {
+          display: inline;
+        }
+      }
+    }
+    &.ads-class-f {
+      svg {
+        #Fill-26 {
+          fill: #231F1F;
+        }
+        #ad-arrow-f {
+          display: inline;
+        }
+      }
+    }
+  }
+  .ab-ads-class-text {
+    margin-top: 17px;
+    font-size: 10px;
+    color: #2c2c2c;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    .ab-ads-class-text-letter {
+      text-transform: capitalize;
+    }
+  }
+  .ab-see-grades {
+    width: 100%;
+    height: 10px;
+    line-height: 10px;
+    font-size: 8px;
+    margin-top: 6px;
+    text-align: center;
+    a.ab-see-grades-link {
+      color: #909096;
+    }
+  }
+  .ab-popup-hr {
+    width: 224px;
+    border-bottom: 0.5px solid #d3d3d3;
+    margin: 23px auto 0;
   }
   .ab-ad-toggle-wrap {
+    margin-top: 22.5px;
     width: 100%;
     display: flex;
     justify-content: center;
     .ab-ad-toggle {
     }
   }
-  .ab-icon-class {
-    float: left;
-    width: 32px;
-    height: 39px;
-    margin-left: 14px;
-    margin-top: 14px;
-    img {
-      width: 100%;
-    }
-  }
-  .ab-icon-cog {
-    cursor: pointer;
-    float: right;
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-    margin-top: 12px;
-    outline: none;
-    img {
-      width: 100%;
-    }
-  }
   .ab-popup-menu {
+    float: left;
     width: 100%;
-    font-size: 12px;
+    font-size: 10px;
     color: #909096;
-    padding: 16px 59px 0;
+    padding: 10px 40px 0;
     .ab-popup-menu-item {
       width: 100%;
       float: left;
       cursor: pointer;
       padding-left: 15px;
-      padding-top: 23px;
+      padding-top: 12px;
       line-height: 20px;
       .ab-icon-warning {
         float: left;
+        width: 24px;
         padding-right: 10px;
+        img {
+          margin-top: 3px;
+          width: 100%;
+        }
       }
       .ab-icon-picker {
         float: left;
+        width: 24px;
         padding-right: 10px;
+        img {
+          margin-top: 3px;
+          width: 100%;
+        }
       }
     }
   }
@@ -67,9 +190,10 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50px;
-    border-top: 1px solid #e9e9e9;
+    height: 32px;
     font-size: 12px;
+    background-color: #f4f4f4;
+    border-radius: 0 0 3px 3px;
     .ab-bottom-one-icon {
       position: relative;
       float: left;
@@ -101,7 +225,7 @@
   transition: max-height 0.35s ease-in;
   border-left: 1px solid #fff;
   border-bottom: 1px solid #fff;
-  width: 300px;
+  width: 240px;
   background-color: #2c2c2c;
   border-radius: 0 0 3px 3px;
   overflow: scroll;

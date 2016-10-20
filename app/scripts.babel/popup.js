@@ -25,35 +25,15 @@
 
 /******************************************************************************/
 var checkTabStatus = function (popupData) {
-  vAPI.messaging.send(
-    'checkUrlClass',
+  vAPI.messaging.send('checkUrlClass',
     {
       tabId: popupData.tabId
     },
     function (tabUrlClass) {
-      uDom('.js-ads-class-temp').text(tabUrlClass);
-      // vAPI.messaging.send(
-      //   'getData',
-      //   {
-      //     key: 'adsClass'
-      //   },
-      //   function (adsClass) {
-      //     console.log(adsClass);
-      //     console.log(tabUrlClass);
-      //   }
-      // );
-      // messaging.send(
-      //   'popupPanel',
-      //   {
-      //     what: 'toggleNetFiltering',
-      //     url: popupData.pageURL,
-      //     scope: ev.ctrlKey || ev.metaKey ? 'page' : '',
-      //     state: !uDom(ev.currentTarget).prop('checked'),
-      //     tabId: popupData.tabId
-      //   }
-      // );
-    }
-  );
+      console.log(tabUrlClass);
+      jQuery('.js-ads-class').addClass(`ads-class-${tabUrlClass}`);
+      jQuery('.js-ads-class-text-letter').text(tabUrlClass);
+    });
 };
 
 (function() {

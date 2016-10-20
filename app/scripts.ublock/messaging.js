@@ -1304,7 +1304,7 @@ vAPI.messaging.listen('scriptlets', onMessage);
         let domainArray = extractDomain(url).split('.');
         let firstLevel = domainArray[domainArray.length - 1];
         let secondLevel = domainArray[domainArray.length - 2];
-        let result = '?';
+        let result = 'f';
         µBlock.adsClasses.forEach(function (el) {
             if (el.domain === `${secondLevel}.${firstLevel}`) {
                 result = el.class;

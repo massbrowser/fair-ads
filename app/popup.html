@@ -1,122 +1,318 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link href="styles/popup.css" rel="stylesheet">
-    <title>Mass Fair Ads</title>
-  </head>
-  <body>
-    <div style="display: none !important;">
-      <a href="dashboard.html" target="_blank" id="gotoPrefs" data-i18n-tip="popupTipDashboard" data-tip-position="under"><span id="appname"> </span> <span id="version"> </span><span class="fa">&#xf013;</span></a>
-      <div id="panes">
-        <div class="tooltipContainer">
-          <p id="switch" data-i18n-tip="popupPowerSwitchInfo" data-tip-position="under"><span class="fa">&#xf011;</span></p>
-          <h2 id="dfToggler" data-i18n="popupBlockedRequestPrompt">&nbsp;</h2>
-          <p class="statName">
-            <span data-i18n="popupBlockedOnThisPagePrompt">&nbsp;</span>&ensp;
-            <!--<span id="gotoPick" class="fa tool" data-i18n-tip="popupTipPicker">&#xf1fb;</span>&ensp;-->
-            <a href="logger-ui.html" class="fa tool enabled" data-i18n-tip="popupTipLog">&#xf022;</a>
-          </p>
-          <p class="statValue" id="page-blocked">?</p>
-          <div id="refresh" class="fa">&#xf021;</div>
-          <p class="statName" data-i18n="popupBlockedSinceInstallPrompt">&nbsp;</p>
-          <p class="statValue" id="total-blocked">?</p>
-          <h2 data-i18n="popupHitDomainCountPrompt">&nbsp;</h2>
-          <p class="statValue" id="popupHitDomainCount">&nbsp;</p>
-          <!--<div id="extraTools">-->
-            <!--<span id="no-popups" class="hnSwitch fa" data-i18n-tip="popupTipNoPopups">&#xf0c5;<span class="badge"></span><span></span></span>-->
-            <!--<span id="no-large-media" class="hnSwitch fa" data-i18n-tip="popupTipNoLargeMedia">&#xf008;<span class="badge"></span><span></span></span>-->
-            <!--<span id="no-cosmetic-filtering" class="hnSwitch fa" data-i18n-tip="popupTipNoCosmeticFiltering">&#xf070;<span class="badge"></span><span></span></span>-->
-            <!--<span id="no-remote-fonts" class="hnSwitch fa" data-i18n-tip="popupTipNoRemoteFonts">&#xf031;<span class="badge"></span><span></span></span>-->
-          <!--</div>-->
-        </div><!-- DO NOT REMOVE --><div class="tooltipContainer">
-        <div id="firewallContainer" class="minimized">
-          <div><span data-i18n="popupAnyRulePrompt"></span><span data-src="/" data-des="*" data-type="*" data-i18n-tip="popupTipGlobalRules" data-tip-position="under"> </span><span data-src="." data-des="*" data-type="*" data-i18n-tip="popupTipLocalRules" data-tip-position="under"> </span></div>
-          <div><span data-i18n="popupImageRulePrompt"></span><span data-src="/" data-des="*" data-type="image"> </span><span data-src="." data-des="*" data-type="image"> </span></div>
-          <div><span data-i18n="popup3pAnyRulePrompt"></span><span data-src="/" data-des="*" data-type="3p"> </span><span data-src="." data-des="*" data-type="3p"> </span></div>
-          <div><span data-i18n="popupInlineScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="inline-script"> </span><span data-src="." data-des="*" data-type="inline-script"> </span></div>
-          <div><span data-i18n="popup1pScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="1p-script"> </span><span data-src="." data-des="*" data-type="1p-script"> </span></div>
-          <div><span data-i18n="popup3pScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="3p-script"> </span><span data-src="." data-des="*" data-type="3p-script"> </span></div>
-          <div><span data-i18n="popup3pFrameRulePrompt"></span><span data-src="/" data-des="*" data-type="3p-frame"> </span><span data-src="." data-des="*" data-type="3p-frame"> </span></div>
-        </div><div id="rulesetTools"><span id="saveRules" class="fa" data-i18n-tip="popupTipSaveRules" data-tip-position="under">&#xf023;</span><span id="revertRules" class="fa" data-i18n-tip="popupTipRevertRules" data-tip-position="under">&#xf12d;</span></div>
+<head>
+  <meta charset="utf-8">
+  <link href="styles/popup.css" rel="stylesheet">
+  <title>Mass Fair Ads</title>
+</head>
+<body style="background: #aaa;">
+  <div class="ab-popup-wrapper">
+    <div class="ab-top-panel">
+      <div class="ab-balance">
+        <div data-i18n="popupBalance"></div>
+        <div class="ab-balance-icon">
+          <img src="images/i-mass-coin.svg" alt="Masscoin">
+        </div>
+        <div class="ab-balance-number">100</div>
       </div>
+      <a href="settings.html" class="ab-icon-cog js-settings">
+        <img src="images/i-cog.svg" alt="Cog">
+      </a>
+    </div>
+    <div class="ab-show-ads-class js-ads-class">
+      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 150 92" style="enable-background:new 0 0 150 92;" xml:space="preserve">
+        <style type="text/css">
+            .st0{fill:#BCBEC0;}
+            .st1{fill:#FF455F;}
+            .st2{fill:#068FFC;}
+            .st3{filter:url(#Adobe_OpacityMaskFilter);}
+            .st4{fill:#FFFFFF;}
+            .st5{mask:url(#mask-2);fill:#BCBEC0;}
+            .st6{fill:#231F1F;}
+            .st7{filter:url(#Adobe_OpacityMaskFilter_1_);}
+            .st8{mask:url(#mask-4);fill:#BCBEC0;}
+        </style>
+        <title>Page 1</title>
+        <desc>Created with sketchtool.</desc>
+        <g id="Welcome">
+            <g id="_x33_-Advanced-mode" transform="translate(-305.000000, -168.000000)">
+                <g id="Group-113" transform="translate(260.000000, 111.000000)">
+                    <g id="Group-96-Copy-17">
+                        <g id="Page-1" transform="translate(45.000000, 57.000000)">
+                            <path id="Fill-1" class="st0" d="M56.4,58.7l0.7-0.6l-0.9-0.6l-0.5-0.5l0,0l0.3,0.6L56.4,58.7z M57.7,58.6l-1.1,0.8l0.3,1
+                                l-0.7,0.5l-1.5-4.5l0.5-0.4l4,2.5l-0.7,0.6L57.7,58.6z"/>
+                            <g id="Group-54" transform="translate(0.000000, 0.220116)">
+                                <path id="Fill-2" class="st0" d="M59.4,54c-0.1,0-0.2,0.1-0.2,0.1c-0.1,0-0.1,0.1-0.2,0.1l1.4,2.6c0,0,0,0,0.1,0
+                                    c0,0,0.1,0,0.1-0.1c0,0,0.1,0,0.1-0.1c0,0,0.1,0,0.1,0c0.2-0.1,0.4-0.2,0.5-0.4c0.1-0.2,0.2-0.3,0.2-0.5c0-0.2,0-0.3-0.1-0.5
+                                    c-0.1-0.2-0.1-0.4-0.2-0.5c-0.1-0.2-0.2-0.3-0.3-0.4c-0.1-0.1-0.2-0.2-0.4-0.3c-0.1-0.1-0.3-0.1-0.5-0.1
+                                    C59.8,53.9,59.6,53.9,59.4,54L59.4,54z M57.9,54.1c0.1-0.1,0.2-0.1,0.2-0.2c0.1-0.1,0.2-0.1,0.3-0.2c0.1-0.1,0.2-0.1,0.3-0.2
+                                    c0.1-0.1,0.2-0.1,0.3-0.1c0.3-0.2,0.7-0.3,1-0.3c0.3,0,0.6,0,0.8,0.1c0.2,0.1,0.5,0.2,0.7,0.4c0.2,0.2,0.4,0.4,0.5,0.7
+                                    c0.1,0.3,0.2,0.5,0.3,0.8c0.1,0.3,0.1,0.6,0,0.8c-0.1,0.3-0.2,0.5-0.4,0.8c-0.2,0.3-0.5,0.5-0.8,0.7c-0.1,0-0.1,0.1-0.2,0.1
+                                    c-0.1,0-0.2,0.1-0.3,0.2c-0.1,0.1-0.2,0.1-0.3,0.1c-0.1,0-0.2,0.1-0.2,0.1L57.9,54.1L57.9,54.1z"/>
+                                <polygon id="Fill-4" class="st0" points="63.1,53.5 64.6,53 64.8,53.7 63.4,54.2 						"/>
+                                <path id="Fill-6" class="st0" d="M66.9,52.6c0.1,0.2,0.1,0.4,0.2,0.6s0.2,0.3,0.3,0.4c0.1,0.1,0.2,0.2,0.4,0.2
+                                    c0.1,0,0.3,0.1,0.4,0c0.3-0.1,0.5-0.2,0.6-0.5c0.1-0.3,0.1-0.7,0-1.2c0-0.2-0.1-0.4-0.2-0.6c-0.1-0.2-0.2-0.3-0.3-0.4
+                                    c-0.1-0.1-0.2-0.2-0.4-0.2c-0.1,0-0.3-0.1-0.5,0c-0.3,0.1-0.5,0.2-0.6,0.5C66.7,51.7,66.7,52.1,66.9,52.6 M66,52.8
+                                    c-0.2-0.7-0.1-1.3,0.1-1.8c0.2-0.5,0.6-0.8,1.2-0.9c0.3-0.1,0.6-0.1,0.8,0c0.3,0.1,0.5,0.2,0.7,0.3c0.2,0.2,0.4,0.4,0.5,0.6
+                                    c0.1,0.3,0.2,0.6,0.3,0.9c0.2,0.7,0.1,1.3-0.1,1.8c-0.2,0.5-0.6,0.8-1.2,0.9c-0.3,0.1-0.6,0.1-0.8,0c-0.3-0.1-0.5-0.2-0.7-0.3
+                                    c-0.2-0.2-0.4-0.4-0.5-0.6C66.2,53.4,66.1,53.1,66,52.8"/>
+                                <polygon id="Fill-8" class="st0" points="70.9,51.5 72.5,51.4 72.6,52.1 71,52.2 						"/>
+                                <polygon id="Fill-10" class="st0" points="77.5,51.7 77.6,50.8 77.6,50.8 77.3,51.5 76.2,53.1 76,53.1 75.1,51.4 74.8,50.6
+                                    74.8,50.6 74.9,51.5 74.8,53.8 73.9,53.8 74.2,49.4 75,49.4 76,51.5 76.2,52 76.2,52 76.5,51.5 77.7,49.6 78.5,49.6 78.2,54
+                                    77.3,54 						"/>
+                                <polygon id="Fill-12" class="st0" points="80.4,50 82.9,50.5 82.7,51.3 81,50.9 80.8,51.9 82.4,52.3 82.2,53 80.6,52.6
+                                    80.4,53.7 82.1,54.1 82,54.8 79.4,54.2 						"/>
+                                <polygon id="Fill-14" class="st0" points="87.2,52.9 86.1,52.4 84.7,55.8 83.9,55.5 85.3,52.1 84.1,51.7 84.3,50.9 87.5,52.2
+                                                            "/>
+                                <polygon id="Fill-16" class="st0" points="88.9,52.9 91.2,54.2 90.8,54.8 89.3,54 88.8,54.9 90.2,55.6 89.8,56.3 88.4,55.5
+                                    87.9,56.5 89.4,57.3 89.1,58 86.8,56.7 						"/>
+                                <path id="Fill-18" class="st0" d="M93.3,56.5c-0.1-0.1-0.1-0.1-0.2-0.2c-0.1,0-0.1-0.1-0.2-0.1l-0.8,1l0.3,0.2
+                                    c0.2,0.1,0.4,0.2,0.6,0.2c0.2,0,0.3-0.1,0.5-0.3c0.1-0.1,0.2-0.3,0.1-0.5C93.6,56.8,93.5,56.6,93.3,56.5L93.3,56.5z
+                                     M92.7,55.2c0.1,0,0.2,0.1,0.3,0.2c0.1,0.1,0.2,0.1,0.3,0.2c0.1,0.1,0.2,0.1,0.3,0.2c0.1,0.1,0.2,0.1,0.2,0.2
+                                    c0.2,0.1,0.3,0.3,0.4,0.4c0.1,0.2,0.2,0.3,0.3,0.5c0.1,0.2,0.1,0.3,0.1,0.5c0,0.2-0.1,0.4-0.3,0.6c-0.2,0.3-0.5,0.5-0.7,0.5
+                                    c-0.3,0.1-0.5,0.1-0.8,0l0.1,0.3l-0.2,1.9L91.8,60l0.3-2l-0.3-0.3l-1.1,1.4L90,58.6L92.7,55.2z"/>
+                                <path id="Fill-20" class="st1" d="M136.8,51.1l0.1-0.1c-10.4-17.6-29.5-29.4-51.4-29.4c-25.3,0-47,15.8-55.6,38.1l0,0
+                                    c8-16.6,24.9-28,44.6-28c19.6,0,36.6,11.4,44.6,28l0,0c2.4,4.9,8.3,7,13.2,4.6C137.1,61.9,139.2,56,136.8,51.1"/>
+                                <path id="Fill-22" class="st2" d="M74.5,11.9c-27.5,0-51.2,16-62.4,39.2l0,0c-2.4,4.9-0.3,10.8,4.6,13.2
+                                    c4.9,2.4,10.8,0.3,13.2-4.6l0,0c8.6-22.3,30.3-38.1,55.6-38.1c21.5,0,40.4,11.4,50.8,28.5C125,27.4,101.5,11.9,74.5,11.9"/>
+                                <path id="Fill-24" class="st0" d="M61.1,8.2c-0.2,0.2-0.5,0.4-0.9,0.6C59.8,9,59.4,9.2,59,9.3c-0.5,0.1-1,0.1-1.5,0.1
+                                    c-0.5-0.1-0.9-0.2-1.4-0.5c-0.4-0.3-0.8-0.7-1.1-1.2c-0.3-0.5-0.6-1.2-0.8-2C54,4.9,54,4.2,54.1,3.6C54.2,3,54.4,2.4,54.7,2
+                                    c0.3-0.4,0.6-0.8,1.1-1c0.4-0.3,0.8-0.4,1.3-0.5c0.5-0.1,0.9-0.2,1.2-0.2c0.3,0,0.6,0,0.9,0l0,1.5c-0.2,0-0.4-0.1-0.7,0
+                                    c-0.3,0-0.6,0.1-0.9,0.1c-0.7,0.2-1.1,0.5-1.4,1.1c-0.3,0.6-0.3,1.3-0.1,2.3c0.1,0.4,0.2,0.8,0.4,1.2c0.2,0.3,0.4,0.6,0.6,0.8
+                                    c0.3,0.2,0.5,0.3,0.9,0.4c0.3,0.1,0.7,0.1,1.1,0c0.4-0.1,0.7-0.2,0.9-0.3c0.2-0.1,0.4-0.3,0.6-0.4L61.1,8.2z"/>
+                                <g id="Group-28" transform="translate(139.534884, 42.906977)">
+                                    <g id="Clip-27">
+                                    </g>
+                                    <defs>
+                                        <filter id="Adobe_OpacityMaskFilter" filterUnits="userSpaceOnUse" x="0.3" y="0.3" width="10" height="6.6">
+                                            <feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                                        </filter>
+                                    </defs>
+                                    <mask maskUnits="userSpaceOnUse" x="0.3" y="0.3" width="10" height="6.6" id="mask-2">
+                                        <g class="st3">
+                                            <polygon id="path-1" class="st4" points="10.3,6.9 10.3,0.3 0.3,0.3 0.3,6.9 									"/>
+                                        </g>
+                                    </mask>
+                                    <polygon id="Fill-26" class="st5" points="8,0.3 10.3,4.9 8.9,5.6 7.4,2.5 5.5,3.4 6.9,6.3 5.5,6.9 4.1,4.1 1,5.6 0.3,4.1
+                                                                    "/>
+                                </g>
+                                <polygon id="Fill-29" class="st6" points="123.8,15.2 127.9,18.4 126.9,19.6 124.2,17.4 123,19 125.4,21 124.5,22.1 122,20.2
+                                    120.7,21.8 123.4,24 122.5,25.2 118.5,22 						"/>
+                                <g id="Group-33" transform="translate(87.558140, 0.000000)">
+                                    <g id="Clip-32">
+                                    </g>
+                                    <defs>
+                                        <filter id="Adobe_OpacityMaskFilter_1_" filterUnits="userSpaceOnUse" x="0.1" y="0.1" width="7.8" height="9.3">
+                                            <feColorMatrix  type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+                                        </filter>
+                                    </defs>
+                                    <mask maskUnits="userSpaceOnUse" x="0.1" y="0.1" width="7.8" height="9.3" id="mask-4">
+                                        <g class="st7">
+                                            <polygon id="path-3" class="st4" points="7.9,0.1 0.1,0.1 0.1,9.4 7.9,9.4 									"/>
+                                        </g>
+                                    </mask>
+                                    <path id="Fill-31" class="st8" d="M4.3,2.1C4.2,2,4,2,3.8,2c-0.2,0-0.3-0.1-0.4-0.1L2.1,7.6c0,0,0.1,0,0.2,0.1
+                                        c0.1,0,0.2,0,0.2,0.1c0.1,0,0.2,0,0.3,0.1c0.1,0,0.1,0,0.2,0c0.5,0.1,0.9,0.1,1.2,0C4.5,7.7,4.8,7.6,5,7.3
+                                        c0.2-0.2,0.4-0.5,0.6-0.9C5.8,6.1,5.9,5.8,6,5.4c0.1-0.3,0.1-0.7,0.1-1c0-0.3,0-0.7-0.2-1C5.9,3.1,5.7,2.8,5.4,2.6
+                                        C5.2,2.3,4.8,2.2,4.3,2.1L4.3,2.1z M2.1,0.1c0.2,0,0.4,0,0.6,0.1c0.2,0,0.4,0.1,0.7,0.1c0.2,0,0.4,0.1,0.7,0.1
+                                        c0.2,0,0.4,0.1,0.6,0.1C5.3,0.7,5.9,1,6.4,1.3C6.9,1.6,7.2,2,7.5,2.5c0.2,0.5,0.4,1,0.4,1.5c0,0.6,0,1.1-0.2,1.8
+                                        C7.6,6.4,7.4,6.9,7.1,7.4c-0.3,0.5-0.6,0.9-1,1.2C5.7,9,5.1,9.2,4.5,9.3C3.9,9.4,3.2,9.4,2.4,9.2c-0.1,0-0.3-0.1-0.5-0.1
+                                        C1.7,9,1.5,9,1.2,8.9C1,8.8,0.8,8.8,0.6,8.7C0.4,8.7,0.2,8.6,0.1,8.6L2.1,0.1z"/>
+                                </g>
+                                <path id="Fill-34" class="st0" d="M4.8,48.6l0.8-1.7l-2-0.3l-1.3-0.4l0,0.1l1.1,0.8L4.8,48.6z M6.9,47.2l-1.2,2.4L7.2,51
+                                    l-0.7,1.5L0,45.9l0.5-1.1l9.2,1L9,47.4L6.9,47.2z"/>
+                                <path id="Fill-36" class="st0" d="M27.6,22.6c0.2-0.1,0.3-0.3,0.4-0.4c0.1-0.2,0.2-0.3,0.3-0.5c0.1-0.2,0.1-0.3,0-0.5
+                                    c0-0.2-0.1-0.3-0.2-0.5c-0.2-0.2-0.3-0.3-0.5-0.4c-0.2-0.1-0.4-0.1-0.6,0c-0.2,0-0.4,0.1-0.6,0.2c-0.2,0.1-0.4,0.2-0.5,0.4
+                                    l-0.7,0.6l1.5,1.8c0,0,0.1,0,0.2-0.1C27,23.1,27,23,27.1,23c0.1-0.1,0.2-0.1,0.3-0.2C27.5,22.7,27.5,22.7,27.6,22.6L27.6,22.6
+                                    z M24.9,20c0.1-0.1,0.2-0.2,0.3-0.3c0.1-0.1,0.2-0.2,0.3-0.3c0.2-0.3,0.3-0.6,0.4-0.8c0.1-0.3,0-0.6-0.2-0.8
+                                    c-0.1-0.2-0.3-0.3-0.4-0.3c-0.2-0.1-0.3-0.1-0.5-0.1c-0.2,0-0.3,0.1-0.5,0.2c-0.2,0.1-0.3,0.2-0.5,0.3
+                                    c-0.2,0.1-0.3,0.3-0.5,0.4c-0.1,0.1-0.2,0.2-0.3,0.3l1.4,1.8L24.9,20z M26.7,16.5c0.1,0.2,0.2,0.4,0.3,0.6
+                                    c0.1,0.2,0.1,0.4,0.2,0.6c0,0.2,0,0.4-0.1,0.7c-0.1,0.2-0.2,0.5-0.4,0.7l0,0.1c0.2-0.1,0.4-0.2,0.7-0.3c0.2-0.1,0.5-0.1,0.7,0
+                                    c0.2,0,0.5,0.1,0.7,0.2c0.2,0.1,0.4,0.3,0.7,0.6c0.3,0.3,0.4,0.7,0.5,1.1c0.1,0.4,0,0.7-0.1,1.1c-0.1,0.4-0.3,0.7-0.6,1
+                                    c-0.3,0.3-0.5,0.6-0.9,0.9c-0.1,0.1-0.3,0.2-0.4,0.3c-0.2,0.1-0.4,0.3-0.6,0.4c-0.2,0.1-0.4,0.3-0.6,0.4
+                                    c-0.2,0.1-0.4,0.3-0.6,0.4l-5.3-6.7c0.1-0.1,0.2-0.2,0.4-0.4c0.1-0.1,0.3-0.3,0.5-0.5c0.2-0.2,0.3-0.3,0.5-0.5
+                                    c0.2-0.2,0.4-0.3,0.6-0.5c0.3-0.3,0.6-0.5,1-0.7c0.3-0.2,0.7-0.3,1-0.4c0.3-0.1,0.7,0,1,0.1C26.1,15.9,26.4,16.2,26.7,16.5
+                                    L26.7,16.5z"/>
+                                <polygon id="Fill-38" class="st2" points="9.4,80.6 9.5,79.7 9.4,79.7 9.1,80.4 8.2,82.1 7.9,82.1 6.9,80.4 6.6,79.7
+                                    6.6,79.7 6.7,80.6 6.7,82.9 5.9,82.9 5.9,78.5 6.7,78.5 7.9,80.5 8.1,81 8.1,81 8.3,80.5 9.4,78.5 10.2,78.5 10.2,82.9
+                                    9.4,82.9 						"/>
+                                <polygon id="Fill-40" class="st2" points="11.7,82.9 12.6,82.9 12.6,78.5 11.7,78.5 						"/>
+                                <polygon id="Fill-42" class="st2" points="15.2,80.6 14.9,79.9 14.8,79.9 14.9,80.6 14.9,82.9 14.1,82.9 14.1,78.4 14.7,78.4
+                                    16.4,80.8 16.8,81.5 16.8,81.5 16.7,80.8 16.7,78.5 17.5,78.5 17.5,83 16.9,83 						"/>
+                                <path id="Fill-43" class="st2" d="M22,81.2h1l-0.3-1l-0.1-0.7h0l-0.1,0.7L22,81.2z M23.1,81.9h-1.4l-0.3,1h-0.9l1.6-4.5h0.6
+                                    l1.6,4.5h-0.9L23.1,81.9z"/>
+                                <path id="Fill-44" class="st2" d="M26.8,79.2c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.2,0v3c0,0,0,0,0.1,0c0,0,0.1,0,0.1,0
+                                    c0,0,0.1,0,0.1,0c0,0,0.1,0,0.1,0c0.2,0,0.5,0,0.6-0.1c0.2-0.1,0.3-0.2,0.4-0.3c0.1-0.1,0.2-0.3,0.2-0.5
+                                    c0-0.2,0.1-0.4,0.1-0.6c0-0.2,0-0.4-0.1-0.5c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.2-0.3-0.4-0.3C27.3,79.2,27.1,79.2,26.8,79.2
+                                    L26.8,79.2z M25.4,78.5c0.1,0,0.2,0,0.3,0c0.1,0,0.2,0,0.3,0c0.1,0,0.2,0,0.3,0c0.1,0,0.2,0,0.3,0c0.4,0,0.7,0.1,1,0.2
+                                    c0.3,0.1,0.5,0.3,0.7,0.5c0.2,0.2,0.3,0.4,0.4,0.7c0.1,0.3,0.1,0.6,0.1,0.9c0,0.3,0,0.6-0.1,0.9c-0.1,0.3-0.2,0.5-0.4,0.7
+                                    c-0.2,0.2-0.4,0.4-0.7,0.5S27.1,83,26.7,83c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.4,0c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.2,0
+                                    V78.5z"/>
+                                <path id="Fill-45" class="st2" d="M32.2,81.7c0-0.1-0.1-0.2-0.2-0.3c-0.1-0.1-0.2-0.2-0.4-0.2c-0.2-0.1-0.3-0.1-0.5-0.2
+                                    c-0.2-0.1-0.3-0.2-0.5-0.3c-0.2-0.1-0.3-0.2-0.4-0.4c-0.1-0.2-0.2-0.4-0.2-0.6c0-0.2,0-0.4,0.1-0.6c0.1-0.2,0.2-0.3,0.3-0.4
+                                    c0.1-0.1,0.3-0.2,0.5-0.2c0.2-0.1,0.4-0.1,0.6-0.1c0.3,0,0.5,0,0.7,0.1c0.2,0,0.4,0.1,0.6,0.2l-0.3,0.7
+                                    c-0.1-0.1-0.2-0.1-0.4-0.2c-0.2,0-0.4-0.1-0.6-0.1c-0.2,0-0.4,0-0.5,0.1C31,79.3,31,79.4,31,79.6c0,0.1,0.1,0.2,0.2,0.3
+                                    c0.1,0.1,0.2,0.2,0.4,0.2c0.2,0.1,0.3,0.1,0.5,0.2c0.2,0.1,0.3,0.2,0.5,0.3c0.2,0.1,0.3,0.2,0.4,0.4c0.1,0.2,0.2,0.4,0.2,0.6
+                                    c0,0.2,0,0.4-0.1,0.6c-0.1,0.2-0.2,0.3-0.3,0.4c-0.1,0.1-0.3,0.2-0.5,0.3C31.9,83,31.6,83,31.4,83c-0.3,0-0.6,0-0.8-0.1
+                                    c-0.2-0.1-0.4-0.1-0.5-0.2l0.3-0.7c0,0,0.1,0.1,0.2,0.1c0.1,0,0.2,0.1,0.3,0.1c0.1,0,0.2,0,0.3,0.1c0.1,0,0.2,0,0.3,0
+                                    c0.3,0,0.5,0,0.6-0.1C32.1,82,32.2,81.9,32.2,81.7"/>
+                                <polygon id="Fill-46" class="st1" points="119.5,80.6 119.6,79.7 119.5,79.7 119.3,80.4 118.3,82.1 118,82.1 117,80.4
+                                    116.8,79.7 116.7,79.7 116.9,80.6 116.9,82.9 116,82.9 116,78.5 116.8,78.5 118,80.5 118.2,81 118.3,81 118.4,80.5
+                                    119.6,78.5 120.4,78.5 120.4,82.9 119.5,82.9 						"/>
+                                <path id="Fill-47" class="st1" d="M122.8,81.2h1l-0.3-1l-0.1-0.7h0l-0.1,0.7L122.8,81.2z M124,81.9h-1.4l-0.3,1h-0.9l1.6-4.5
+                                    h0.6l1.6,4.5h-0.9L124,81.9z"/>
+                                <polygon id="Fill-48" class="st1" points="127.1,80.7 125.9,78.5 127,78.5 127.6,79.7 127.8,80.2 127.9,79.7 128.7,78.5
+                                    129.6,78.5 128.3,80.6 129.7,82.9 128.6,82.9 127.9,81.5 127.7,81.1 127.5,81.5 126.7,82.9 125.8,82.9 						"/>
+                                <path id="Fill-49" class="st1" d="M133.6,81.2h1l-0.3-1l-0.1-0.7h0l-0.1,0.7L133.6,81.2z M134.8,81.9h-1.4l-0.3,1h-0.9
+                                    l1.6-4.5h0.6l1.6,4.5h-0.9L134.8,81.9z"/>
+                                <path id="Fill-50" class="st1" d="M138.5,79.2c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.2,0v3c0,0,0,0,0.1,0c0,0,0.1,0,0.1,0
+                                    c0,0,0.1,0,0.1,0c0,0,0.1,0,0.1,0c0.2,0,0.5,0,0.6-0.1c0.2-0.1,0.3-0.2,0.4-0.3c0.1-0.1,0.2-0.3,0.2-0.5
+                                    c0-0.2,0.1-0.4,0.1-0.6c0-0.2,0-0.4-0.1-0.5c0-0.2-0.1-0.3-0.2-0.5c-0.1-0.1-0.2-0.3-0.4-0.3
+                                    C138.9,79.2,138.7,79.2,138.5,79.2L138.5,79.2z M137.1,78.5c0.1,0,0.2,0,0.3,0c0.1,0,0.2,0,0.3,0c0.1,0,0.2,0,0.3,0
+                                    c0.1,0,0.2,0,0.3,0c0.4,0,0.7,0.1,1,0.2c0.3,0.1,0.5,0.3,0.7,0.5c0.2,0.2,0.3,0.4,0.4,0.7c0.1,0.3,0.1,0.6,0.1,0.9
+                                    c0,0.3,0,0.6-0.1,0.9c-0.1,0.3-0.2,0.5-0.4,0.7c-0.2,0.2-0.4,0.4-0.7,0.5s-0.7,0.2-1.1,0.2c-0.1,0-0.2,0-0.3,0
+                                    c-0.1,0-0.2,0-0.4,0c-0.1,0-0.2,0-0.3,0c-0.1,0-0.2,0-0.2,0V78.5z"/>
+                                <path id="Fill-51" class="st1" d="M143.8,81.7c0-0.1-0.1-0.2-0.2-0.3c-0.1-0.1-0.2-0.2-0.4-0.2c-0.2-0.1-0.3-0.1-0.5-0.2
+                                    c-0.2-0.1-0.3-0.2-0.5-0.3c-0.2-0.1-0.3-0.2-0.4-0.4s-0.2-0.4-0.2-0.6c0-0.2,0-0.4,0.1-0.6c0.1-0.2,0.2-0.3,0.3-0.4
+                                    c0.1-0.1,0.3-0.2,0.5-0.2c0.2-0.1,0.4-0.1,0.6-0.1c0.3,0,0.5,0,0.7,0.1c0.2,0,0.4,0.1,0.6,0.2l-0.3,0.7
+                                    c-0.1-0.1-0.2-0.1-0.4-0.2c-0.2,0-0.4-0.1-0.6-0.1c-0.2,0-0.4,0-0.5,0.1c-0.1,0.1-0.2,0.2-0.2,0.3c0,0.1,0.1,0.2,0.2,0.3
+                                    c0.1,0.1,0.2,0.2,0.4,0.2c0.2,0.1,0.3,0.1,0.5,0.2c0.2,0.1,0.3,0.2,0.5,0.3c0.2,0.1,0.3,0.2,0.4,0.4c0.1,0.2,0.2,0.4,0.2,0.6
+                                    c0,0.2,0,0.4-0.1,0.6c-0.1,0.2-0.2,0.3-0.3,0.4c-0.1,0.1-0.3,0.2-0.5,0.3c-0.2,0.1-0.4,0.1-0.7,0.1c-0.3,0-0.6,0-0.8-0.1
+                                    c-0.2-0.1-0.4-0.1-0.5-0.2l0.3-0.7c0,0,0.1,0.1,0.2,0.1c0.1,0,0.2,0.1,0.3,0.1c0.1,0,0.2,0,0.3,0.1c0.1,0,0.2,0,0.3,0
+                                    c0.3,0,0.5,0,0.6-0.1C143.7,82,143.8,81.9,143.8,81.7"/>
+                                <path id="Fill-52" class="st0" d="M68.3,88.9c4.3,3.4,10.5,2.7,13.9-1.6c3.4-4.3,2.7-10.5-1.6-13.9C76.4,70,70.1,70.7,66.7,75
+                                    C63.3,79.3,64,85.5,68.3,88.9"/>
+                                <path id="ad-arrow-a" class="st6" d="M72.8,85.5c0.1,0,0.2,0.1,0.3,0.1c2.5,1.1,5.4,0,6.6-2.4c1.1-2.5,0-5.4-2.4-6.6
+                              c-0.1,0-0.2-0.1-0.3-0.1l0,0L16.1,54.2L72.8,85.5L72.8,85.5"/>
+                                <path id="ad-arrow-b" class="st6" d="M70.9,84c0.1,0.1,0.1,0.2,0.2,0.3c1.7,2.1,4.8,2.5,6.9,0.8c2.1-1.7,2.5-4.8,0.8-6.9
+                              c-0.1-0.1-0.1-0.2-0.2-0.2l0,0L34.5,30.5L70.9,84L70.9,84"/>
+                                <path id="ad-arrow-c" class="st6" d="M69.6,82.3c0,0.1,0,0.2,0.1,0.3c0.6,2.7,3.3,4.3,5.9,3.7c2.7-0.6,4.3-3.3,3.7-5.9
+                              c0-0.1-0.1-0.2-0.1-0.3l0,0L59.6,18.4L69.6,82.3L69.6,82.3"/>
+                                <path id="ad-arrow-d" class="st6" d="M79.4,82.3L79.4,82.3l9.9-64L69.8,80.1l0,0c0,0.1-0.1,0.2-0.1,0.3c-0.6,2.7,1,5.3,3.7,5.9
+                              c2.7,0.6,5.3-1,5.9-3.7C79.4,82.6,79.4,82.5,79.4,82.3"/>
+                                <path id="ad-arrow-e" class="st6" d="M78.5,84L78.5,84l36.4-53.5L70.8,77.8l0,0c-0.1,0.1-0.1,0.1-0.2,0.2
+                                    c-1.7,2.1-1.4,5.2,0.8,6.9c2.1,1.7,5.2,1.4,6.9-0.8C78.4,84.2,78.5,84.1,78.5,84"/>
+                                <path id="ad-arrow-f" class="st6" d="M77.4,85.5L77.4,85.5L134,54.2L73.3,76.6l0,0c-0.1,0-0.2,0.1-0.3,0.1
+							c-2.5,1.1-3.6,4.1-2.4,6.6c1.1,2.5,4.1,3.6,6.6,2.4C77.2,85.6,77.3,85.6,77.4,85.5"/>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+      </svg>
+    </div>
+    <div class="ab-ads-class-text">This page has '<span class="js-ads-class-text-letter ab-ads-class-text-letter"></span>' grade of Mass certificate</div>
+    <div class="ab-see-grades">
+      <a class="ab-see-grades-link">See table of grades</a>
+    </div>
+    <div class="ab-popup-hr"></div>
+    <div class="ab-ad-toggle-wrap">
+      <label class="switch toggle">
+        <input type="checkbox" id="adSwitcher">
+        <div class="slider round"></div>
+      </label>
+    </div>
+    <div class="ab-popup-menu">
+      <div class="ab-popup-menu-item" id="gotoPick">
+        <div class="ab-icon-picker">
+          <img src="images/i-picker.svg" alt="Picker mode">
+        </div>
+        Element picker mode
       </div>
-
-      <div id="templates" style="display: none">
-        <div><span></span><span data-src="/" data-des="" data-type="*"> </span><span data-src="." data-des="" data-type="*"> </span><span data-src="." data-des="" data-type="*"> </span></div>
-        <div id="actionSelector"><span id="dynaAllow"></span><span id="dynaNoop"></span><span id="dynaBlock"></span></div>
-        <div id="hotspotTip"></div>
-        <div id="tooltip"></div>
+      <div class="ab-popup-menu-item">
+        <div class="ab-icon-warning">
+          <img src="images/i-warning.svg" alt="Complain about page">
+        </div>
+        Complain about page
       </div>
     </div>
 
+    <div class="ab-bottom-icons">
+      <a href="#" class="ab-bottom-one-icon" id="no-popups">
+        <div class="ab-bottom-icon-wrap">
+          <img src="images/i-popups-on.svg" alt="Popups">
+          <span class="badge"></span>
+        </div>
+      </a>
+      <a href="#" class="ab-bottom-one-icon" id="no-large-media">
+        <div class="ab-bottom-icon-wrap">
+          <img src="images/i-heavy-on.svg" alt="Heavy media content">
+          <span class="badge"></span>
+        </div>
+      </a>
+      <a href="#" class="ab-bottom-one-icon" id="no-cosmetic-filtering">
+        <div class="ab-bottom-icon-wrap">
+          <img src="images/i-cosmetic-on.svg" alt="Cosmetic">
+          <span class="badge"></span>
+        </div>
+      </a>
+      <a href="#" class="ab-bottom-one-icon" id="no-remote-fonts">
+        <div class="ab-bottom-icon-wrap">
+          <img src="images/i-fonts-on.svg" alt="Fonts">
+          <span class="badge"></span>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="js-show-sources ab-show-sources ab-sources-hidden">
 
-    <div class="ab-popup-wrapper">
-      <div class="ab-top-panel">
-        <!--<div class="ab-icon-class">-->
-          <!--<img src="images/i-class-a.svg" alt="Class">-->
+
+
+
+
+
+  <div style="display: none !important;">
+    <a href="dashboard.html" target="_blank" id="gotoPrefs" data-i18n-tip="popupTipDashboard" data-tip-position="under"><span id="appname"> </span> <span id="version"> </span><span class="fa">&#xf013;</span></a>
+    <div id="panes">
+      <div class="tooltipContainer">
+        <p id="switch" data-i18n-tip="popupPowerSwitchInfo" data-tip-position="under"><span class="fa">&#xf011;</span></p>
+        <h2 id="dfToggler" data-i18n="popupBlockedRequestPrompt">&nbsp;</h2>
+        <p class="statName">
+          <span data-i18n="popupBlockedOnThisPagePrompt">&nbsp;</span>&ensp;
+          <!--<span id="gotoPick" class="fa tool" data-i18n-tip="popupTipPicker">&#xf1fb;</span>&ensp;-->
+          <a href="logger-ui.html" class="fa tool enabled" data-i18n-tip="popupTipLog">&#xf022;</a>
+        </p>
+        <p class="statValue" id="page-blocked">?</p>
+        <div id="refresh" class="fa">&#xf021;</div>
+        <p class="statName" data-i18n="popupBlockedSinceInstallPrompt">&nbsp;</p>
+        <p class="statValue" id="total-blocked">?</p>
+        <h2 data-i18n="popupHitDomainCountPrompt">&nbsp;</h2>
+        <p class="statValue" id="popupHitDomainCount">&nbsp;</p>
+        <!--<div id="extraTools">-->
+        <!--<span id="no-popups" class="hnSwitch fa" data-i18n-tip="popupTipNoPopups">&#xf0c5;<span class="badge"></span><span></span></span>-->
+        <!--<span id="no-large-media" class="hnSwitch fa" data-i18n-tip="popupTipNoLargeMedia">&#xf008;<span class="badge"></span><span></span></span>-->
+        <!--<span id="no-cosmetic-filtering" class="hnSwitch fa" data-i18n-tip="popupTipNoCosmeticFiltering">&#xf070;<span class="badge"></span><span></span></span>-->
+        <!--<span id="no-remote-fonts" class="hnSwitch fa" data-i18n-tip="popupTipNoRemoteFonts">&#xf031;<span class="badge"></span><span></span></span>-->
         <!--</div>-->
-        <div class="js-ads-class-temp" style="font-weight: 700; font-size: 22px; float: left; height: 50px; line-height: 50px; color: #aaa; text-transform: capitalize; padding: 0 10px;"></div>
-        <a href="settings.html" class="ab-icon-cog js-settings">
-          <img src="images/i-cog.svg" alt="Cog">
-        </a>
-      </div>
-      <div class="ab-ad-toggle-wrap">
-        <label class="switch toggle">
-          <input type="checkbox" id="adSwitcher">
-          <div class="slider round"></div>
-        </label>
-      </div>
-      <div class="ab-popup-menu">
-        <div class="ab-popup-menu-item" id="gotoPick">
-          <div class="ab-icon-picker">
-            <img src="images/i-picker.svg" alt="Picker mode">
-          </div>
-          Element picker mode
-        </div>
-        <div class="ab-popup-menu-item">
-          <div class="ab-icon-warning">
-            <img src="images/i-warning.svg" alt="Complain about page">
-          </div>
-          Complain about page
-        </div>
-      </div>
-
-      <div class="ab-bottom-icons">
-        <a href="#" class="ab-bottom-one-icon" id="no-popups">
-          <div class="ab-bottom-icon-wrap">
-            <img src="images/i-popups-on.svg" alt="Popups">
-            <span class="badge"></span>
-          </div>
-        </a>
-        <a href="#" class="ab-bottom-one-icon" id="no-large-media">
-          <div class="ab-bottom-icon-wrap">
-            <img src="images/i-heavy-on.svg" alt="Heavy media content">
-            <span class="badge"></span>
-          </div>
-        </a>
-        <a href="#" class="ab-bottom-one-icon" id="no-cosmetic-filtering">
-          <div class="ab-bottom-icon-wrap">
-            <img src="images/i-cosmetic-on.svg" alt="Cosmetic">
-            <span class="badge"></span>
-          </div>
-        </a>
-        <a href="#" class="ab-bottom-one-icon" id="no-remote-fonts">
-          <div class="ab-bottom-icon-wrap">
-            <img src="images/i-fonts-on.svg" alt="Fonts">
-            <span class="badge"></span>
-          </div>
-        </a>
-      </div>
+      </div><!-- DO NOT REMOVE --><div class="tooltipContainer">
+      <div id="firewallContainer" class="minimized">
+        <div><span data-i18n="popupAnyRulePrompt"></span><span data-src="/" data-des="*" data-type="*" data-i18n-tip="popupTipGlobalRules" data-tip-position="under"> </span><span data-src="." data-des="*" data-type="*" data-i18n-tip="popupTipLocalRules" data-tip-position="under"> </span></div>
+        <div><span data-i18n="popupImageRulePrompt"></span><span data-src="/" data-des="*" data-type="image"> </span><span data-src="." data-des="*" data-type="image"> </span></div>
+        <div><span data-i18n="popup3pAnyRulePrompt"></span><span data-src="/" data-des="*" data-type="3p"> </span><span data-src="." data-des="*" data-type="3p"> </span></div>
+        <div><span data-i18n="popupInlineScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="inline-script"> </span><span data-src="." data-des="*" data-type="inline-script"> </span></div>
+        <div><span data-i18n="popup1pScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="1p-script"> </span><span data-src="." data-des="*" data-type="1p-script"> </span></div>
+        <div><span data-i18n="popup3pScriptRulePrompt"></span><span data-src="/" data-des="*" data-type="3p-script"> </span><span data-src="." data-des="*" data-type="3p-script"> </span></div>
+        <div><span data-i18n="popup3pFrameRulePrompt"></span><span data-src="/" data-des="*" data-type="3p-frame"> </span><span data-src="." data-des="*" data-type="3p-frame"> </span></div>
+      </div><div id="rulesetTools"><span id="saveRules" class="fa" data-i18n-tip="popupTipSaveRules" data-tip-position="under">&#xf023;</span><span id="revertRules" class="fa" data-i18n-tip="popupTipRevertRules" data-tip-position="under">&#xf12d;</span></div>
     </div>
-    <div class="js-show-sources ab-show-sources ab-sources-hidden">
-
     </div>
-    <script src="scripts/ublock/lib/punycode.js"></script>
-    <script src="scripts/ublock/vapi-common.js"></script>
-    <script src="scripts/ublock/vapi-client.js"></script>
-    <script src="scripts/ublock/udom.js"></script>
-    <script src="scripts/ublock/i18n.js"></script>
-    <script src="scripts/popup.js"></script>
-  </body>
+
+    <div id="templates" style="display: none">
+      <div><span></span><span data-src="/" data-des="" data-type="*"> </span><span data-src="." data-des="" data-type="*"> </span><span data-src="." data-des="" data-type="*"> </span></div>
+      <div id="actionSelector"><span id="dynaAllow"></span><span id="dynaNoop"></span><span id="dynaBlock"></span></div>
+      <div id="hotspotTip"></div>
+      <div id="tooltip"></div>
+    </div>
+  </div>
+
+</div>
+<script src="scripts/ublock/lib/punycode.js"></script>
+<script src="scripts/ublock/vapi-common.js"></script>
+<script src="scripts/ublock/vapi-client.js"></script>
+<script src="scripts/ublock/udom.js"></script>
+<script src="scripts/ublock/i18n.js"></script>
+<script src="scripts/popup.js"></script>
+</body>
 </html>
