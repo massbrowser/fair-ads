@@ -96,6 +96,16 @@ gulp.task('locales', () => {
     .pipe(gulp.dest(`${distBasePath}/_locales`));
 });
 
+gulp.task('fonts', () => {
+  return gulp.src('app/fonts/**/*.*')
+    .pipe(gulp.dest(`${distBasePath}/fonts`));
+});
+
+gulp.task('assets', () => {
+  return gulp.src('app/assets/**/*.*')
+    .pipe(gulp.dest(`${distBasePath}/assets`));
+});
+
 gulp.task('babel', () => {
   return gulp.src(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/**/*.js`])
       .pipe($.babel({
@@ -167,7 +177,7 @@ gulp.task('package', function () {
 
 gulp.task('build', (cb) => {
   distBasePath = `build/${platformName}/mass-fair-ads`;
-  runSequence('lint', 'babel', 'html', 'buildManifest', 'lib', 'ublock', 'less', 'images', 'locales', cb);
+  runSequence('lint', 'babel', 'html', 'buildManifest', 'lib', 'ublock', 'less', 'images', 'locales', 'fonts', 'assets', cb);
 });
 
 gulp.task('default', ['clean'], cb => {
