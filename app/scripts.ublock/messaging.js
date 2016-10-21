@@ -519,7 +519,7 @@ var onMessage = function(request, sender, callback) {
             response = {
                 loggerEnabled: µb.logger.isEnabled(),
                 collapseBlocked: µb.userSettings.collapseBlocked,
-                noCosmeticFiltering: µb.cosmeticFilteringEngine.acceptedCount === 0 || pageStore.noCosmeticFiltering === true,
+                noCosmeticFiltering: µBlock.checkIfUrlFitsAdsClass(pageStore.tabHostname) || (µb.cosmeticFilteringEngine.acceptedCount === 0 || pageStore.noCosmeticFiltering === true),
                 noGenericCosmeticFiltering: pageStore.noGenericCosmeticFiltering === true
             };
             response.specificCosmeticFilters = µb.cosmeticFilteringEngine.retrieveDomainSelectors(
