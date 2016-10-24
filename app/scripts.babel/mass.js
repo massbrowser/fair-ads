@@ -168,6 +168,9 @@ ub.isGoogleDomain = function (url) {
 ub.getDomainAdsClass = function (url) {
   let result = '?';
   let domain = extractDomain(url);
+  if (this.isGoogleDomain(domain)) {
+    result = 'b';
+  }
   let domainArray = domain.split('.');
   this.adsClasses.forEach(function (el) {
     let elDomainArray = el.domain.split('.');
