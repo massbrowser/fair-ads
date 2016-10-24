@@ -898,7 +898,7 @@ vAPI.tabs.registerListeners();
                 badge = this.formatCount(pageStore.perLoadBlockedRequestCount);
             }
         }
-
+        badge = this.getDomainAdsClass(pageStore.tabHostname).toUpperCase();
         vAPI.setIcon(tabId, state ? 'on' : 'off', badge);
     };
 
