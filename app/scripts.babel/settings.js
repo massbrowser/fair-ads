@@ -23,18 +23,12 @@ vAPI.messaging.send('getData', {'key': 'bitcoinId'}, function (data) {
   }
 });
 
-function updateWhiteListByAdsClass(adsClass) {
-  vAPI.messaging.send('updWhiteList', {'adsClass': adsClass}, function (data) {});
-}
-
-
 $(`.${adsClassClass}`).on('click', function (e) {
   e.preventDefault();
   let adsClass = $(e.currentTarget).data('class');
   vAPI.messaging.send('saveAdsClass', {'adsClass': adsClass}, function () {
     $(`.${adsClassClass}`).removeClass(selectedClass);
     $(e.currentTarget).addClass(selectedClass);
-    updateWhiteListByAdsClass(adsClass);
   });
 });
 
