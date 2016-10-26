@@ -4,7 +4,7 @@
 var ub = µBlock;
 
 function extractDomain(url) {
-  var domain;
+  let domain, domainArr;
   //find & remove protocol (http, ftp, etc.) and get domain
   if (url.indexOf('://') > -1) {
     domain = url.split('/')[2];
@@ -15,6 +15,10 @@ function extractDomain(url) {
 
   //find & remove port number
   domain = domain.split(':')[0];
+
+  domainArr = domain.split('.');
+
+  domain = `${domainArr[domainArr.length - 2]}.${domainArr[domainArr.length - 1]}`;
 
   return domain;
 }
@@ -196,6 +200,25 @@ ub.checkIfUrlFitsAdsClass = function (url) {
     result =  domainAdsClass <= adsClass;
   }
   return result;
+};
+
+ub.cachedDomains = {};
+
+ub.isUrlHasCachedClass = function (url) {
+  let domain = extractDomain(url);
+  return domain in this.cachedDomains;
+};
+
+ub.getAndCacheDomainClass = function (url) {
+  return new Promise((resolve) => {
+    let domain = extractDomain(url);
+    let domainClass = this.getDomainAdsClass(url);
+    this.cachedDomains[domain] = {
+      class: domainClass,
+      time: 0
+    };
+    resolve(url);
+  });
 };
 
 })();

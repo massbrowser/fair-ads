@@ -28,7 +28,7 @@
 µBlock.webRequest = (function() {
 
 /******************************************************************************/
-
+var ub = µBlock;
 var exports = {};
 
 /******************************************************************************/
@@ -36,10 +36,12 @@ var exports = {};
 // Intercept and filter web requests.
 
 var onBeforeRequest = function(details) {
+    var µb = µBlock;
     // Special handling for root document.
     // https://github.com/chrisaljoudi/uBlock/issues/1001
     // This must be executed regardless of whether the request is
     // behind-the-scene
+
     var requestType = details.type;
     if ( requestType === 'main_frame' ) {
         return onBeforeRootFrameRequest(details);
@@ -58,21 +60,20 @@ var onBeforeRequest = function(details) {
     }
 
     // Lookup the page store associated with this tab id.
-    var µb = µBlock;
-    var pageStore = µb.pageStoreFromTabId(tabId);
+    var pageStore = ub.pageStoreFromTabId(tabId);
     if (pageStore != null) {
-        if (µBlock.checkIfUrlFitsAdsClass(pageStore.tabHostname)) {
+        if (ub.checkIfUrlFitsAdsClass(pageStore.tabHostname)) {
             return;
         }
     }
 
     if ( !pageStore ) {
-        var tabContext = µb.tabContextManager.mustLookup(tabId);
+        var tabContext = ub.tabContextManager.mustLookup(tabId);
         if ( vAPI.isBehindTheSceneTabId(tabContext.tabId) ) {
             return onBeforeBehindTheSceneRequest(details);
         }
         vAPI.tabs.onNavigation({ tabId: tabId, frameId: 0, url: tabContext.rawURL });
-        pageStore = µb.pageStoreFromTabId(tabId);
+        pageStore = ub.pageStoreFromTabId(tabId);
     }
 
     // https://github.com/chrisaljoudi/uBlock/issues/886
@@ -90,7 +91,7 @@ var onBeforeRequest = function(details) {
     // Setup context and evaluate
     var requestURL = details.url;
     requestContext.requestURL = requestURL;
-    requestContext.requestHostname = µb.URI.hostnameFromURI(requestURL);
+    requestContext.requestHostname = ub.URI.hostnameFromURI(requestURL);
     requestContext.requestType = requestType;
 
     var result = pageStore.filterRequest(requestContext);
@@ -99,8 +100,8 @@ var onBeforeRequest = function(details) {
 
     pageStore.logRequest(requestContext, result);
 
-    if ( µb.logger.isEnabled() ) {
-        µb.logger.writeOne(
+    if ( ub.logger.isEnabled() ) {
+        ub.logger.writeOne(
             tabId,
             'net',
             result,
@@ -112,7 +113,7 @@ var onBeforeRequest = function(details) {
     }
 
     // Not blocked
-    if ( µb.isAllowResult(result) ) {
+    if ( ub.isAllowResult(result) ) {
         // https://github.com/chrisaljoudi/uBlock/issues/114
         if ( details.parentFrameId !== -1 && isFrame ) {
             pageStore.setFrame(details.frameId, requestURL);
@@ -125,16 +126,16 @@ var onBeforeRequest = function(details) {
 
     // https://github.com/chrisaljoudi/uBlock/issues/905#issuecomment-76543649
     // No point updating the badge if it's not being displayed.
-    if ( µb.userSettings.showIconBadge ) {
-        µb.updateBadgeAsync(tabId);
+    if ( ub.userSettings.showIconBadge ) {
+        ub.updateBadgeAsync(tabId);
     }
 
     // https://github.com/gorhill/uBlock/issues/949
     // Redirect blocked request?
-    var url = µb.redirectEngine.toURL(requestContext);
+    var url = ub.redirectEngine.toURL(requestContext);
     if ( url !== undefined ) {
-        if ( µb.logger.isEnabled() ) {
-            µb.logger.writeOne(
+        if ( ub.logger.isEnabled() ) {
+            ub.logger.writeOne(
                 tabId,
                 'redirect',
                 'rr:' + µb.redirectEngine.resourceNameRegister,
@@ -155,20 +156,27 @@ var onBeforeRequest = function(details) {
 /******************************************************************************/
 
 var onBeforeRootFrameRequest = function(details) {
-    var tabId = details.tabId;
-    var requestURL = details.url;
-    var µb = µBlock;
+    let tabId = details.tabId;
+    let requestURL = details.url;
+    let ub = µBlock;
 
-    µb.tabContextManager.push(tabId, requestURL);
+    if (!ub.isUrlHasCachedClass(details.url)) {
+        let getData = `?url=${encodeURIComponent(details.url)}`;
+        let url = `chrome-extension://${chrome.runtime.id}/redirect.html${getData}`;
+        console.log(url);
+        return { redirectUrl: url }
+    }
+
+    ub.tabContextManager.push(tabId, requestURL);
 
     // Special handling for root document.
     // https://github.com/chrisaljoudi/uBlock/issues/1001
     // This must be executed regardless of whether the request is
     // behind-the-scene
-    var µburi = µb.URI;
-    var requestHostname = µburi.hostnameFromURI(requestURL);
-    var requestDomain = µburi.domainFromHostname(requestHostname) || requestHostname;
-    var context = {
+    let µburi = ub.URI;
+    let requestHostname = µburi.hostnameFromURI(requestURL);
+    let requestDomain = µburi.domainFromHostname(requestHostname) || requestHostname;
+    let context = {
         rootHostname: requestHostname,
         rootDomain: requestDomain,
         pageHostname: requestHostname,
@@ -178,16 +186,16 @@ var onBeforeRootFrameRequest = function(details) {
         requestType: 'main_frame'
     };
 
-    var result = '';
+    let result = '';
 
     // If the site is whitelisted, disregard strict blocking
-    if ( µb.getNetFilteringSwitch(requestURL) === false ) {
+    if ( ub.getNetFilteringSwitch(requestURL) === false ) {
         result = 'ua:whitelisted';
     }
 
     // Permanently unrestricted?
-    if ( result === '' && µb.hnSwitches.evaluateZ('no-strict-blocking', requestHostname) ) {
-        result = 'ua:no-strict-blocking: ' + µb.hnSwitches.z + ' true';
+    if ( result === '' && ub.hnSwitches.evaluateZ('no-strict-blocking', requestHostname) ) {
+        result = 'ua:no-strict-blocking: ' + ub.hnSwitches.z + ' true';
     }
 
     // Temporarily whitelisted?
@@ -199,7 +207,7 @@ var onBeforeRootFrameRequest = function(details) {
     }
 
     // Static filtering: We always need the long-form result here.
-    var snfe = µb.staticNetFilteringEngine;
+    var snfe = ub.staticNetFilteringEngine;
 
     // Check for specific block
     if (
@@ -226,13 +234,13 @@ var onBeforeRootFrameRequest = function(details) {
     }
 
     // Log
-    var pageStore = µb.bindTabToPageStats(tabId, 'beforeRequest');
+    var pageStore = ub.bindTabToPageStats(tabId, 'beforeRequest');
     if ( pageStore ) {
         pageStore.logRequest(context, result);
     }
 
-    if ( µb.logger.isEnabled() ) {
-        µb.logger.writeOne(
+    if ( ub.logger.isEnabled() ) {
+        ub.logger.writeOne(
             tabId,
             'net',
             result,
@@ -244,7 +252,7 @@ var onBeforeRootFrameRequest = function(details) {
     }
 
     // Not blocked
-    if ( µb.isAllowResult(result) ) {
+    if ( ub.isAllowResult(result) ) {
         return;
     }
 

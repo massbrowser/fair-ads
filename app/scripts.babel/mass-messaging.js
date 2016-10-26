@@ -24,4 +24,8 @@
       callback(data);
     });
   });
+
+  vAPI.messaging.listen('checkDomainClass', function(request, sender, callback) {
+    ub.getAndCacheDomainClass(request.url).then(callback);
+  });
 })();
