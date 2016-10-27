@@ -169,20 +169,42 @@ ub.isGoogleDomain = function (url) {
   }
 };
 
-ub.getDomainAdsClass = function (url) {
-  let result = '?';
-  let domain = extractDomain(url);
-  if (this.isGoogleDomain(domain)) {
-    result = 'b';
-  }
-  let domainArray = domain.split('.');
-  this.adsClasses.forEach(function (el) {
-    let elDomainArray = el.domain.split('.');
-    if ((domainArray[domainArray.length - 1] == elDomainArray[elDomainArray.length - 1]) && (domainArray[domainArray.length - 2] == elDomainArray[elDomainArray.length - 2])) {
-      result =  el.class;
-    }
+ub.getAndCacheDomainClass = function (url) {
+  return new Promise((resolve) => {
+    let domain = extractDomain(url);
+
+    let domainClass = ((url) => {
+      let result = '?';
+      let domain = extractDomain(url);
+      if (this.isGoogleDomain(domain)) {
+        result = 'b';
+      }
+      let domainArray = domain.split('.');
+      this.adsClasses.forEach(function (el) {
+        let elDomainArray = el.domain.split('.');
+        if ((domainArray[domainArray.length - 1] == elDomainArray[elDomainArray.length - 1]) && (domainArray[domainArray.length - 2] == elDomainArray[elDomainArray.length - 2])) {
+          result =  el.class;
+        }
+      });
+      return result;
+    })(url);
+    this.cachedDomains[domain] = {
+      class: domainClass,
+      time: 0
+    };
+    resolve(url);
   });
-  return result;
+};
+
+ub.cachedDomains = {};
+
+ub.getDomainAdsClass = function (url) {
+  let domain = extractDomain(url);
+  if (domain in this.cachedDomains) {
+    return this.cachedDomains[domain].class;
+  } else {
+    return '?!';
+  }
 };
 
 ub.checkIfUrlFitsAdsClass = function (url) {
@@ -202,23 +224,9 @@ ub.checkIfUrlFitsAdsClass = function (url) {
   return result;
 };
 
-ub.cachedDomains = {};
-
 ub.isUrlHasCachedClass = function (url) {
   let domain = extractDomain(url);
   return domain in this.cachedDomains;
-};
-
-ub.getAndCacheDomainClass = function (url) {
-  return new Promise((resolve) => {
-    let domain = extractDomain(url);
-    let domainClass = this.getDomainAdsClass(url);
-    this.cachedDomains[domain] = {
-      class: domainClass,
-      time: 0
-    };
-    resolve(url);
-  });
 };
 
 })();
