@@ -192,7 +192,9 @@ ub.getAndCacheDomainClass = function (url) {
       class: domainClass,
       time: 0
     };
-    resolve(url);
+    setTimeout(function () {
+      resolve(url);
+    }, 500);
   });
 };
 
