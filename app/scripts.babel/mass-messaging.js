@@ -3,7 +3,7 @@
   let ub = µBlock;
 
   vAPI.messaging.listen('checkUrlClass', function (request, sender, callback) {
-    chrome.tabs.get(request.tabId, function (tab) {
+    vAPI.tabs.get(request.tabId, function (tab) {
       callback(ub.getDomainAdsClass(tab.url));
     });
   });
