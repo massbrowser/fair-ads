@@ -37,9 +37,9 @@ var cachedUserFilters = '';
 // This is to give a visual hint that the content of user blacklist has changed.
 
 function userFiltersChanged() {
-    var changed = uDom.nodeFromId('userFilters').value.trim() !== cachedUserFilters;
-    uDom.nodeFromId('userFiltersApply').disabled = !changed;
-    uDom.nodeFromId('userFiltersRevert').disabled = !changed;
+    var changed = $('#userFilters')[0].value.trim() !== cachedUserFilters;
+    $('#userFiltersApply')[0].disabled = !changed;
+    $('#userFiltersRevert')[0].disabled = !changed;
 }
 
 /******************************************************************************/
@@ -50,7 +50,7 @@ function renderUserFilters() {
             return;
         }
         cachedUserFilters = details.content.trim();
-        uDom.nodeFromId('userFilters').value = details.content;
+        $('#userFilters')[0].value = details.content;
         userFiltersChanged();
     };
     messaging.send('dashboard', { what: 'readUserFilters' }, onRead);
@@ -60,7 +60,7 @@ function renderUserFilters() {
 
 function allFiltersApplyHandler() {
     messaging.send('dashboard', { what: 'reloadAllFilters' });
-    uDom('#userFiltersApply').prop('disabled', true );
+    $('#userFiltersApply').prop('disabled', true );
 }
 
 /******************************************************************************/
@@ -93,7 +93,7 @@ var handleImportFilePicker = function() {
 
     var fileReaderOnLoadHandler = function() {
         var sanitized = abpImporter(this.result);
-        var textarea = uDom('#userFilters');
+        var textarea = $('#userFilters');
         textarea.val(textarea.val().trim() + '\n' + sanitized);
         userFiltersChanged();
     };
@@ -123,7 +123,7 @@ var startImportFilePicker = function() {
 /******************************************************************************/
 
 var exportUserFiltersToFile = function() {
-    var val = uDom('#userFilters').val().trim();
+    var val = $('#userFilters').val().trim();
     if ( val === '' ) {
         return;
     }
@@ -140,7 +140,7 @@ var exportUserFiltersToFile = function() {
 /******************************************************************************/
 
 var applyChanges = function() {
-    var textarea = uDom.nodeFromId('userFilters');
+    var textarea = $('#userFilters')[0];
 
     var onWritten = function(details) {
         if ( details.error ) {
@@ -161,21 +161,21 @@ var applyChanges = function() {
 };
 
 var revertChanges = function() {
-    uDom.nodeFromId('userFilters').value = cachedUserFilters + '\n';
+    $('#userFilters')[0].value = cachedUserFilters + '\n';
     userFiltersChanged();
 };
 
 /******************************************************************************/
 
 var getCloudData = function() {
-    return uDom.nodeFromId('userFilters').value;
+    return $('#userFilters')[0].value;
 };
 
 var setCloudData = function(data, append) {
     if ( typeof data !== 'string' ) {
         return;
     }
-    var textarea = uDom.nodeFromId('userFilters');
+    var textarea = $('#userFilters')[0];
     if ( append ) {
         data = uBlockDashboard.mergeNewLines(textarea.value, data);
     }
@@ -189,12 +189,12 @@ self.cloud.onPull = setCloudData;
 /******************************************************************************/
 
 // Handle user interaction
-uDom('#importUserFiltersFromFile').on('click', startImportFilePicker);
-uDom('#importFilePicker').on('change', handleImportFilePicker);
-uDom('#exportUserFiltersToFile').on('click', exportUserFiltersToFile);
-uDom('#userFilters').on('input', userFiltersChanged);
-uDom('#userFiltersApply').on('click', applyChanges);
-uDom('#userFiltersRevert').on('click', revertChanges);
+$('#importUserFiltersFromFile').on('click', startImportFilePicker);
+$('#importFilePicker').on('change', handleImportFilePicker);
+$('#exportUserFiltersToFile').on('click', exportUserFiltersToFile);
+$('#userFilters').on('input', userFiltersChanged);
+$('#userFiltersApply').on('click', applyChanges);
+$('#userFiltersRevert').on('click', revertChanges);
 
 renderUserFilters();
 

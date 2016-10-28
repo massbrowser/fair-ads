@@ -142,7 +142,7 @@
   var hashFromPopupData = function(reset) {
     // It makes no sense to offer to refresh the behind-the-scene scope
     if ( popupData.pageHostname === 'behind-the-scene' ) {
-      uDom('body').toggleClass('dirty', false);
+      $('body').toggleClass('dirty', false);
       return;
     }
 
@@ -159,16 +159,16 @@
       }
     }
     hasher.sort();
-    hasher.push(uDom('body').hasClass('off'));
-    hasher.push(uDom.nodeFromId('no-large-media').classList.contains('on'));
-    hasher.push(uDom.nodeFromId('no-cosmetic-filtering').classList.contains('on'));
-    hasher.push(uDom.nodeFromId('no-remote-fonts').classList.contains('on'));
+    hasher.push($('body').hasClass('off'));
+    hasher.push($('#no-large-media').hasClass('on'));
+    hasher.push($('#no-cosmetic-filtering').hasClass('on'));
+    hasher.push($('#no-remote-fonts').hasClass('on'));
 
     var hash = hasher.join('');
     if ( reset ) {
       cachedPopupHash = hash;
     }
-    uDom('body').toggleClass('dirty', hash !== cachedPopupHash);
+    $('body').toggleClass('dirty', hash !== cachedPopupHash);
   };
 
   /******************************************************************************/
@@ -201,11 +201,11 @@
   var addFirewallRow = function(des) {
     var row = rowsToRecycle.pop();
     if ( row.length === 0 ) {
-      row = uDom('#templates > div:nth-of-type(1)').clone();
+      row = $('#templates > div:nth-of-type(1)').clone();
     }
 
-    row.descendants('[data-des]').attr('data-des', des);
-    row.descendants('span:nth-of-type(1)').text(punycode.toUnicode(des));
+    row.find('[data-des]').attr('data-des', des);
+    row.find('span:nth-of-type(1)').text(punycode.toUnicode(des));
 
     var hnDetails = popupData.hostnameDict[des] || {};
     var isDomain = des === hnDetails.domain;
@@ -225,7 +225,7 @@
 
   var updateFirewallCell = function(scope, des, type, rule) {
     var selector = '#firewallContainer span[data-src="' + scope + '"][data-des="' + des + '"][data-type="' + type + '"]';
-    var cell = uDom(selector);
+    var cell = $(selector);
 
     // This should not happen
     if ( cell.length === 0 ) {
@@ -315,7 +315,7 @@
 
     positionRulesetTools();
 
-    uDom.nodeFromId('firewallContainer').classList.toggle(
+    $('#firewallContainer').toggleClass(
       'dirty',
       popupData.matrixIsDirty === true
     );
@@ -326,7 +326,7 @@
   var buildAllFirewallRows = function() {
     // Do this before removing the rows
     if ( dfHotspots === null ) {
-      dfHotspots = uDom('#actionSelector')
+      dfHotspots = $('#actionSelector')
         .toggleClass('colorBlind', popupData.colorBlindFriendly)
         .on('click', 'span', setFirewallRuleHandler);
     }
@@ -334,7 +334,7 @@
 
     // Remove and reuse all rows: the order may have changed, we can't just
     // reuse them in-place.
-    rowsToRecycle = uDom('#firewallContainer > div:nth-of-type(7) ~ div').detach();
+    rowsToRecycle = $('#firewallContainer > div:nth-of-type(7) ~ div').detach();
 
     var n = allHostnameRows.length;
     for ( var i = 0; i < n; i++ ) {
@@ -342,7 +342,7 @@
     }
 
     if ( dfPaneBuilt !== true ) {
-      uDom('#firewallContainer')
+      $('#firewallContainer')
         .on('click', 'span[data-src]', unsetFirewallRuleHandler)
         .on('mouseenter', '[data-src]', mouseenterCellHandler)
         .on('mouseleave', '[data-src]', mouseleaveCellHandler);
@@ -399,7 +399,7 @@
 
     var summary = domainsHitStr.replace('{{count}}', touchedDomainCount.toLocaleString())
       .replace('{{total}}', allDomainCount.toLocaleString());
-    uDom.nodeFromId('popupHitDomainCount').textContent = summary;
+    $('#popupHitDomainCount').text(summary);
   };
 
   /******************************************************************************/
@@ -411,9 +411,9 @@
       document.title = popupData.appName + ' - ' + popupData.tabTitle;
     }
 
-    uDom.nodeFromId('appname').textContent = popupData.appName;
-    uDom.nodeFromId('version').textContent = popupData.appVersion;
-    uDom('body')
+    $('#appname').text(popupData.appName);
+    $('#version').text(popupData.appVersion);
+    $('body')
       .toggleClass('advancedUser', popupData.advancedUserEnabled)
       .toggleClass(
         'off',
@@ -423,7 +423,7 @@
       );
 
     // If you think the `=== true` is pointless, you are mistaken
-    uDom.nodeFromId('gotoPick').classList.toggle('enabled', popupData.canElementPicker === true);
+    $('#gotoPick').toggleClass('enabled', popupData.canElementPicker === true);
 
     var text;
     var blocked = popupData.pageBlockedRequestCount;
@@ -434,7 +434,7 @@
       text = statsStr.replace('{{count}}', formatNumber(blocked))
         .replace('{{percent}}', formatNumber(Math.floor(blocked * 100 / total)));
     }
-    uDom.nodeFromId('page-blocked').textContent = text;
+    $('#page-blocked').text(text);
 
     blocked = popupData.globalBlockedRequestCount;
     total = popupData.globalAllowedRequestCount + blocked;
@@ -444,12 +444,12 @@
       text = statsStr.replace('{{count}}', formatNumber(blocked))
         .replace('{{percent}}', formatNumber(Math.floor(blocked * 100 / total)));
     }
-    uDom.nodeFromId('total-blocked').textContent = text;
+    $('#total-blocked').text(text);
 
     // https://github.com/gorhill/uBlock/issues/507
     // Convenience: open the logger with current tab automatically selected
     if ( popupData.tabId ) {
-      uDom.nodeFromSelector('.statName > a[href^="logger-ui.html"]').setAttribute(
+      $('.statName > a[href^="logger-ui.html"]').attr(
         'href',
         'logger-ui.html#tab_' + popupData.tabId
       );
@@ -459,25 +459,25 @@
     renderPrivacyExposure();
 
     // Extra tools
-    uDom.nodeFromId('no-popups').classList.toggle('on', popupData.noPopups === true);
-    uDom.nodeFromId('no-large-media').classList.toggle('on', popupData.noLargeMedia === true);
-    uDom.nodeFromId('no-cosmetic-filtering').classList.toggle('on', popupData.noCosmeticFiltering === true);
-    uDom.nodeFromId('no-remote-fonts').classList.toggle('on', popupData.noRemoteFonts === true);
+    $('#no-popups').toggleClass('on', popupData.noPopups === true);
+    $('#no-large-media').toggleClass('on', popupData.noLargeMedia === true);
+    $('#no-cosmetic-filtering').toggleClass('on', popupData.noCosmeticFiltering === true);
+    $('#no-remote-fonts').toggleClass('on', popupData.noRemoteFonts === true);
 
     // Report blocked popup count on badge
     total = popupData.popupBlockedCount;
-    uDom.nodeFromSelector('#no-popups span.badge')
-      .textContent = total ? total.toLocaleString() : '';
+    $('#no-popups span.badge')
+      .text(total ? total.toLocaleString() : '');
 
     // Report large media count on badge
     total = popupData.largeMediaCount;
-    uDom.nodeFromSelector('#no-large-media span.badge')
-      .textContent = total ? total.toLocaleString() : '';
+    $('#no-large-media span.badge')
+      .text(total ? total.toLocaleString() : '');
 
     // Report remote font count on badge
     total = popupData.remoteFontCount;
-    uDom.nodeFromSelector('#no-remote-fonts > span.badge')
-      .textContent = total ? total.toLocaleString() : '';
+    $('#no-remote-fonts > span.badge')
+      .text(total ? total.toLocaleString() : '');
 
     // https://github.com/chrisaljoudi/uBlock/issues/470
     // This must be done here, to be sure the popup is resized properly
@@ -492,8 +492,8 @@
       vAPI.localStorage.setItem('popupFirewallPane', dfPaneVisibleStored);
     }
 
-    uDom.nodeFromId('panes').classList.toggle('dfEnabled', dfPaneVisible);
-    uDom('#firewallContainer')
+    $('#panes').toggleClass('dfEnabled', dfPaneVisible);
+    $('#firewallContainer')
       .toggleClass('minimized', popupData.firewallPaneMinimized)
       .toggleClass('colorBlind', popupData.colorBlindFriendly);
 
@@ -516,8 +516,8 @@
     switch ( data.what ) {
       case 'cosmeticallyFilteredElementCountChanged':
         var v = data.count || '';
-        uDom.nodeFromSelector('#no-cosmetic-filtering > span.badge')
-          .textContent = typeof v === 'number' ? v.toLocaleString() : v;
+        $('#no-cosmetic-filtering > span.badge')
+          .text(typeof v === 'number' ? v.toLocaleString() : v);
         break;
     }
   };
@@ -539,7 +539,7 @@
         what: 'toggleNetFiltering',
         url: popupData.pageURL,
         scope: ev.ctrlKey || ev.metaKey ? 'page' : '',
-        state: !uDom('body').toggleClass('off').hasClass('off'),
+        state: !$('body').toggleClass('off').hasClass('off'),
         tabId: popupData.tabId
       }
     );
@@ -611,7 +611,7 @@
     vAPI.localStorage.setItem('popupFirewallPane', dfPaneVisibleStored);
 
     // Dynamic filtering pane may not have been built yet
-    uDom.nodeFromId('panes').classList.toggle('dfEnabled', popupData.dfEnabled);
+    $('#panes').toggleClass('dfEnabled', popupData.dfEnabled);
     if ( popupData.dfEnabled && dfPaneBuilt === false ) {
       buildAllFirewallRows();
     }
@@ -620,7 +620,7 @@
   /******************************************************************************/
 
   var mouseenterCellHandler = function() {
-    if ( uDom(this).hasClass('ownRule') === false ) {
+    if ( $(this).hasClass('ownRule') === false ) {
       dfHotspots.appendTo(this);
     }
   };
@@ -660,7 +660,7 @@
   /******************************************************************************/
 
   var unsetFirewallRuleHandler = function(ev) {
-    var cell = uDom(this);
+    var cell = $(this);
     setFirewallRule(
       cell.attr('data-src') === '/' ? '*' : popupData.pageHostname,
       cell.attr('data-des'),
@@ -674,8 +674,8 @@
   /******************************************************************************/
 
   var setFirewallRuleHandler = function(ev) {
-    var hotspot = uDom(this);
-    var cell = hotspot.ancestors('[data-src]');
+    var hotspot = $(this);
+    var cell = hotspot.parents('[data-src]');
     if ( cell.length === 0 ) {
       return;
     }
@@ -718,7 +718,7 @@
     popupData.contentLastModified = -1;
 
     // No need to wait to remove this.
-    uDom('body').toggleClass('dirty', false);
+    $('body').toggleClass('dirty', false);
   };
 
   /******************************************************************************/
@@ -743,9 +743,8 @@
       return;
     }
 
-    popupData.firewallPaneMinimized = uDom.nodeFromId('firewallContainer')
-      .classList
-      .toggle('minimized');
+    popupData.firewallPaneMinimized = $('#firewallContainer')
+      .toggleClass('minimized');
     messaging.send(
       'popupPanel',
       {
@@ -768,7 +767,7 @@
         desHostnames: popupData.hostnameDict
       }
     );
-    uDom.nodeFromId('firewallContainer').classList.remove('dirty');
+    $('#firewallContainer').removeClass('dirty');
   };
 
   /******************************************************************************/
@@ -789,7 +788,7 @@
       },
       onFirewallRuleChanged
     );
-    uDom.nodeFromId('firewallContainer').classList.remove('dirty');
+    $('#firewallContainer').removeClass('dirty');
   };
 
   /******************************************************************************/
@@ -895,15 +894,15 @@
     var target = this;
 
     // Tooltip container
-    var ttc = uDom(target).ancestors('.tooltipContainer').nodeAt(0) ||
+    var ttc = $(target).parents('.tooltipContainer')[0] ||
       document.body;
     var ttcRect = ttc.getBoundingClientRect();
 
     // Tooltip itself
-    var tip = uDom.nodeFromId('tooltip');
-    tip.textContent = target.getAttribute('data-tip');
-    tip.style.removeProperty('top');
-    tip.style.removeProperty('bottom');
+    var tip = $('#tooltip');
+    tip.text(target.getAttribute('data-tip'));
+    tip[0].style.removeProperty('top');
+    tip[0].style.removeProperty('bottom');
     ttc.appendChild(tip);
 
     // Target rect
@@ -924,7 +923,7 @@
   };
 
   var onHideTooltip = function() {
-    uDom.nodeFromId('tooltip').classList.remove('show');
+    $('#tooltip').removeClass('show');
   };
 
   /******************************************************************************/
@@ -944,17 +943,17 @@
     }
     getPopupData(tabId);
 
-    uDom('#switch').on('click', toggleNetFilteringSwitch);
-    uDom('#gotoPick').on('click', gotoPick);
-    uDom('a[href]').on('click', gotoURL);
-    uDom('h2').on('click', toggleFirewallPane);
-    uDom('#refresh').on('click', reloadTab);
-    uDom('.hnSwitch').on('click', toggleHostnameSwitch);
-    uDom('#saveRules').on('click', saveFirewallRules);
-    uDom('#revertRules').on('click', revertFirewallRules);
-    uDom('[data-i18n="popupAnyRulePrompt"]').on('click', toggleMinimize);
+    $('#switch').on('click', toggleNetFilteringSwitch);
+    $('#gotoPick').on('click', gotoPick);
+    $('a[href]').on('click', gotoURL);
+    $('h2').on('click', toggleFirewallPane);
+    $('#refresh').on('click', reloadTab);
+    $('.hnSwitch').on('click', toggleHostnameSwitch);
+    $('#saveRules').on('click', saveFirewallRules);
+    $('#revertRules').on('click', revertFirewallRules);
+    $('[data-i18n="popupAnyRulePrompt"]').on('click', toggleMinimize);
 
-    uDom('body').on('mouseenter', '[data-tip]', onShowTooltip)
+    $('body').on('mouseenter', '[data-tip]', onShowTooltip)
       .on('mouseleave', '[data-tip]', onHideTooltip);
   })();
 

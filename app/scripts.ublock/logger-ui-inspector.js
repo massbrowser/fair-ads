@@ -29,7 +29,7 @@
 
 /******************************************************************************/
 
-var showdomButton = uDom.nodeFromId('showdom');
+var showdomButton = $('#showdom')[0];
 
 // Don't bother if the browser is not modern enough.
 if ( typeof Map === 'undefined' || Map.polyfill || typeof WeakMap === 'undefined' ) {
@@ -47,9 +47,9 @@ var inspectedURL = '';
 var inspectedHostname = '';
 var pollTimer = null;
 var fingerprint = null;
-var inspector = uDom.nodeFromId('domInspector');
-var domTree = uDom.nodeFromId('domTree');
-var tabSelector = uDom.nodeFromId('pageSelector');
+var inspector = $('#domInspector')[0];
+var domTree = $('#domTree')[0];
+var tabSelector = $('#pageSelector')[0];
 var uidGenerator = 1;
 var filterToIdMap = new Map();
 
@@ -306,7 +306,7 @@ var nidFromNode = function(node) {
 /******************************************************************************/
 
 var startDialog = (function() {
-    var dialog = uDom.nodeFromId('cosmeticFilteringDialog');
+    var dialog = $('#cosmeticFilteringDialog')[0];
     var textarea = dialog.querySelector('textarea');
     var hideSelectors = [];
     var unhideSelectors = [];
@@ -503,7 +503,7 @@ var onClick = function(ev) {
             inspectedTabId,
             'domInspector'
         );
-        uDom('[data-filter-id="' + target.getAttribute('data-filter-id') + '"]', inspector).toggleClass(
+        $('[data-filter-id="' + target.getAttribute('data-filter-id') + '"]', inspector).toggleClass(
             'off',
             target.classList.contains('off')
         );
@@ -713,7 +713,7 @@ var toggleHighlightMode = function() {
         'loggerUI',
         {
             what: 'highlightMode',
-            invert: uDom.nodeFromSelector('#domInspector .permatoolbar .highlightMode').classList.toggle('invert')
+            invert: $('#domInspector .permatoolbar .highlightMode').toggleClass('invert')
         },
         inspectedTabId,
         'domInspector'
@@ -723,7 +723,7 @@ var toggleHighlightMode = function() {
 /******************************************************************************/
 
 var revert = function() {
-    uDom('#domTree .off').removeClass('off');
+    $('#domTree .off').removeClass('off');
     messaging.sendTo(
         'loggerUI',
         { what: 'resetToggledNodes' },
@@ -741,9 +741,9 @@ var toggleOn = function() {
     tabSelector.addEventListener('change', onTabIdChanged);
     domTree.addEventListener('click', onClick, true);
     domTree.addEventListener('mouseover', onMouseOver, true);
-    uDom.nodeFromSelector('#domInspector .permatoolbar .highlightMode').addEventListener('click', toggleHighlightMode);
-    uDom.nodeFromSelector('#domInspector .permatoolbar .revert').addEventListener('click', revert);
-    uDom.nodeFromSelector('#domInspector .permatoolbar .commit').addEventListener('click', startDialog);
+    $('#domInspector .permatoolbar .highlightMode')[0].addEventListener('click', toggleHighlightMode);
+    $('#domInspector .permatoolbar .revert')[0].addEventListener('click', revert);
+    $('#domInspector .permatoolbar .commit')[0].addEventListener('click', startDialog);
     injectInspector();
 };
 
@@ -755,9 +755,9 @@ var toggleOff = function() {
     tabSelector.removeEventListener('change', onTabIdChanged);
     domTree.removeEventListener('click', onClick, true);
     domTree.removeEventListener('mouseover', onMouseOver, true);
-    uDom.nodeFromSelector('#domInspector .permatoolbar .highlightMode').removeEventListener('click', toggleHighlightMode);
-    uDom.nodeFromSelector('#domInspector .permatoolbar .revert').removeEventListener('click', revert);
-    uDom.nodeFromSelector('#domInspector .permatoolbar .commit').removeEventListener('click', startDialog);
+    $('#domInspector .permatoolbar .highlightMode')[0].removeEventListener('click', toggleHighlightMode);
+    $('#domInspector .permatoolbar .revert')[0].removeEventListener('click', revert);
+    $('#domInspector .permatoolbar .commit')[0].removeEventListener('click', startDialog);
     inspectedTabId = '';
 };
 

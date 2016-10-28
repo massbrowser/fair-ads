@@ -42,12 +42,12 @@ var loadDashboardPanel = function() {
     if ( pane === '' ) {
         pane = 'settings.html';
     }
-    var tabButton = uDom('[href="#' + pane + '"]');
+    var tabButton = $('[href="#' + pane + '"]');
     if ( !tabButton || tabButton.hasClass('selected') ) {
         return;
     }
-    uDom('.tabButton.selected').toggleClass('selected', false);
-    uDom('iframe').attr('src', pane);
+    $('.tabButton.selected').toggleClass('selected', false);
+    $('iframe').attr('src', pane);
     tabButton.toggleClass('selected', true);
 };
 
@@ -69,10 +69,10 @@ var onTabClickHandler = function(e) {
 
 /******************************************************************************/
 
-uDom.onLoad(function() {
+$(window).load(function() {
     resizeFrame();
     window.addEventListener('resize', resizeFrame);
-    uDom('.tabButton').on('click', onTabClickHandler);
+    $('.tabButton').on('click', onTabClickHandler);
     loadDashboardPanel();
 });
 

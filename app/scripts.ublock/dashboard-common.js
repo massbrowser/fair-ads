@@ -104,12 +104,12 @@ self.uBlockDashboard.mergeNewLines = function(text, newText) {
 /******************************************************************************/
 
 // Open links in the proper window
-uDom('a').attr('target', '_blank');
-uDom('a[href*="dashboard.html"]').attr('target', '_parent');
-uDom('.whatisthis').on('click', function() {
-    uDom(this)
+$('a').attr('target', '_blank');
+$('a[href*="dashboard.html"]').attr('target', '_parent');
+$('.whatisthis').on('click', function() {
+    $(this)
         .parent()
-        .descendants('.whatisthis-expandable')
+        .find('.whatisthis-expandable')
         .first()
         .toggleClass('whatisthis-expanded');
 });

@@ -132,6 +132,10 @@ var onMessage = function(request, sender, callback) {
         response = µb.stringFromWhitelist(µb.netWhitelist);
         break;
 
+    case 'getDefaultWhitelist':
+        response = µb.netWhitelistDefault;
+        break;
+
     case 'launchElementPicker':
         // Launched from some auxiliary pages, clear context menu coords.
         µb.mouseX = µb.mouseY = -1;
@@ -162,6 +166,12 @@ var onMessage = function(request, sender, callback) {
     case 'setWhitelist':
         µb.netWhitelist = µb.whitelistFromString(request.whitelist);
         µb.saveWhitelist();
+        break;
+
+    case 'setDefaultWhitelist':
+        µb.netWhitelist =  µb.whitelistFromString(µb.netWhitelistDefault);
+        µb.saveWhitelist();
+        response = µb.stringFromWhitelist(µb.netWhitelist);
         break;
 
     case 'toggleHostnameSwitch':

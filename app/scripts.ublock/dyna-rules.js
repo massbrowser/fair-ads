@@ -34,9 +34,9 @@ var messaging = vAPI.messaging;
 /******************************************************************************/
 
 var renderRules = function(details) {
-    var liTemplate = uDom('#templatesRules > ul > li');
-    var ulLeft = uDom('#diff > .left ul').empty().remove();
-    var ulRight = uDom('#diff > .right ul').empty().remove();
+    var liTemplate = $('#templatesRules > ul > li');
+    var ulLeft = $('#diff > .left ul').empty().remove();
+    var ulRight = $('#diff > .right ul').empty().remove();
     var liLeft, liRight;
     var rules, rule, i;
 
@@ -100,9 +100,9 @@ var renderRules = function(details) {
         ulRight.append(liRight);
     }
 
-    uDom('#diff > .left > .rulesContainer').append(ulLeft);
-    uDom('#diff > .right > .rulesContainer').append(ulRight);
-    uDom('#diff').toggleClass('dirty', details.sessionRules !== details.permanentRules);
+    $('#diff > .left > .rulesContainer').append(ulLeft);
+    $('#diff > .right > .rulesContainer').append(ulRight);
+    $('#diff').toggleClass('dirty', details.sessionRules !== details.permanentRules);
 };
 
 /******************************************************************************/
@@ -168,10 +168,10 @@ function exportUserRulesToFile() {
 
 var rulesFromHTML = function(selector) {
     var rules = [];
-    var lis = uDom(selector);
+    var lis = $(selector);
     var li;
     for ( var i = 0; i < lis.length; i++ ) {
-        li = lis.at(i);
+        li = lis[i];
         if ( li.hasClassName('toRemove') ) {
             rules.push('');
         } else {
@@ -204,23 +204,23 @@ var commitHandler = function() {
 /******************************************************************************/
 
 var editStartHandler = function() {
-    var parent = uDom(this).ancestors('#diff');
+    var parent = $(this).parents('#diff');
     // If we're already editing, don't reset
-    if ( parent.hasClassName('edit') ) {
+    if ( parent.hasClass('edit') ) {
         return;
     }
-    uDom('#diff .right textarea').val(rulesFromHTML('#diff .right li'));
+    $('#diff .right textarea').val(rulesFromHTML('#diff .right li'));
     parent.toggleClass('edit', true);
 };
 
 /******************************************************************************/
 
 var editStopHandler = function() {
-    var parent = uDom(this).ancestors('#diff');
+    var parent = $(this).parents('#diff');
     parent.toggleClass('edit', false);
     var request = {
         'what': 'setSessionRules',
-        'rules': uDom('#diff .right textarea').val()
+        'rules': $('#diff .right textarea').val()
     };
     messaging.send('dashboard', request, renderRules);
 };
@@ -228,7 +228,7 @@ var editStopHandler = function() {
 /******************************************************************************/
 
 var editCancelHandler = function() {
-    var parent = uDom(this).ancestors('#diff');
+    var parent = $(this).parents('#diff');
     parent.toggleClass('edit', false);
 };
 
@@ -258,16 +258,16 @@ self.cloud.onPull = setCloudData;
 /******************************************************************************/
 
 // Handle user interaction
-uDom('#importButton').on('click', startImportFilePicker);
-uDom('#importFilePickerRules').on('change', handleImportFilePicker);
-uDom('#exportButton').on('click', exportUserRulesToFile);
+$('#importButton').on('click', startImportFilePicker);
+$('#importFilePickerRules').on('change', handleImportFilePicker);
+$('#exportButton').on('click', exportUserRulesToFile);
 
-uDom('#revertButton').on('click', revertHandler);
-uDom('#commitButton').on('click', commitHandler);
-uDom('#editEnterButton').on('click', editStartHandler);
-uDom('#diff > .pane.right > .rulesContainer').on('dblclick', editStartHandler);
-uDom('#editStopButton').on('click', editStopHandler);
-uDom('#editCancelButton').on('click', editCancelHandler);
+$('#revertButton').on('click', revertHandler);
+$('#commitButton').on('click', commitHandler);
+$('#editEnterButton').on('click', editStartHandler);
+$('#diff > .pane.right > .rulesContainer').on('dblclick', editStartHandler);
+$('#editStopButton').on('click', editStopHandler);
+$('#editCancelButton').on('click', editCancelHandler);
 
 messaging.send('dashboard', { what: 'getRules' }, renderRules);
 

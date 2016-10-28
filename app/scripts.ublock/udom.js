@@ -727,4 +727,3 @@ return DOMListFactory;
 
 })();
 
-var jQuery = $ = uDom;
