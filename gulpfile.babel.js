@@ -41,7 +41,7 @@ function lint(files, options) {
   };
 }
 
-gulp.task('lint', lint(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], {
+gulp.task('lint', lint(['app/scripts.babel/**/*.js', `app/platform/${platformName}/*.js`], {
   env: {
     es6: true
   }
@@ -107,7 +107,7 @@ gulp.task('assets', () => {
 });
 
 gulp.task('babel', () => {
-  return gulp.src(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/**/*.js`])
+  return gulp.src(['app/scripts.babel/**/*.js', `app/platform/${platformName}/**/*.js`])
       .pipe($.babel({
         presets: ['es2015']
       }))
@@ -149,7 +149,7 @@ gulp.task('watch', ['compile'], () => {
     $.livereload.reload(options);
   });
 
-  gulp.watch(['app/scripts.babel/**/*.js', `app/scripts.platform.babel/${platformName}/*.js`], ['lint', 'babel']);
+  gulp.watch(['app/scripts.babel/**/*.js', `app/platform/${platformName}/*.js`], ['lint', 'babel']);
   gulp.watch('app/scripts.ublock/**/*.js', ['ublock']);
   gulp.watch('app/styles.less/**/*.less', ['less']);
   gulp.watch('app/manifest.*.json', ['makeManifest']);
