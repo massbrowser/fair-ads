@@ -30,7 +30,7 @@
 /******************************************************************************/
 
 var onAssetContentReceived = function(details) {
-    uDom('#content').text(details && (details.content || ''));
+    $('#content').text(details && (details.content || ''));
 };
 
 /******************************************************************************/

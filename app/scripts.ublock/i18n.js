@@ -49,7 +49,7 @@ vAPI.i18n.render = function(context) {
         if ( text.indexOf('{') !== -1 ) {
             text = text.replace(/\{\{input:([^}]+)\}\}/g, '<input type="$1">');
         }
-        uDom(elem).html(text);
+        $(elem).html(text);
     }
 
     elems = root.querySelectorAll('[title]');

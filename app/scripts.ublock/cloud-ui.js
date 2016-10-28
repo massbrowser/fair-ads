@@ -39,10 +39,10 @@ self.cloud = {
 
 /******************************************************************************/
 
-// var widget = uDom.nodeFromId('cloudWidget');
+// var widget = $('#cloudWidget')[0];
 var widget = null;
-if (uDom('.tab-pane.active .cloudWidget')) {
-    widget = uDom('.tab-pane.active .cloudWidget').nodes[0];
+if ($('.tab-pane.active .cloudWidget')) {
+    widget = $('.tab-pane.active .cloudWidget')[0];
 }
 if ( widget == null ) {
     return;
@@ -64,8 +64,8 @@ var onCloudDataReceived = function(entry) {
 
     self.cloud.data = entry.data;
 
-    uDom.nodeFromId('cloudPull').removeAttribute('disabled');
-    uDom.nodeFromId('cloudPullAndMerge').removeAttribute('disabled');
+    $('#cloudPull').removeAttr('disabled');
+    $('#cloudPullAndMerge').removeAttr('disabled');
 
     var timeOptions = {
         weekday: 'short',
@@ -133,20 +133,20 @@ var pullAndMergeData = function() {
 /******************************************************************************/
 
 var openOptions = function() {
-    var input = uDom.nodeFromId('cloudDeviceName');
+    var input = $('#cloudDeviceName')[0];
     input.value = self.cloud.options.deviceName;
     input.setAttribute('placeholder', self.cloud.options.defaultDeviceName);
-    uDom.nodeFromId('cloudOptions').classList.add('show');
+    $('#cloudOptions').addClass('show');
 };
 
 /******************************************************************************/
 
 var closeOptions = function(ev) {
-    var root = uDom.nodeFromId('cloudOptions');
-    if ( ev.target !== root ) {
+    var root = $('#cloudOptions');
+    if ( ev.target !== root[0] ) {
         return;
     }
-    root.classList.remove('show');
+    root.removeClass('show');
 };
 
 /******************************************************************************/
@@ -164,12 +164,12 @@ var submitOptions = function() {
         {
             what: 'cloudSetOptions',
             options: {
-                deviceName: uDom.nodeFromId('cloudDeviceName').value
+                deviceName: $('#cloudDeviceName')[0].value
             }
         },
         onOptions
     );
-    uDom.nodeFromId('cloudOptions').classList.remove('show');
+    $('#cloudOptions').removeClass('show');
 };
 
 /******************************************************************************/
@@ -204,12 +204,12 @@ var onInitialize = function(options) {
     vAPI.i18n.render(widget);
     widget.classList.remove('hide');
 
-    uDom('#cloudPush').on('click', pushData);
-    uDom('#cloudPull').on('click', pullData);
-    uDom('#cloudPullAndMerge').on('click', pullAndMergeData);
-    uDom('#cloudCog').on('click', openOptions);
-    uDom('#cloudOptions').on('click', closeOptions);
-    uDom('#cloudOptionsSubmit').on('click', submitOptions);
+    $('#cloudPush').on('click', pushData);
+    $('#cloudPull').on('click', pullData);
+    $('#cloudPullAndMerge').on('click', pullAndMergeData);
+    $('#cloudCog').on('click', openOptions);
+    $('#cloudOptions').on('click', closeOptions);
+    $('#cloudOptionsSubmit').on('click', submitOptions);
 };
 
 messaging.send('cloudWidget', { what: 'cloudGetOptions' }, onInitialize);

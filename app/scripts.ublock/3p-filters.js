@@ -72,8 +72,8 @@ var renderNumber = function(value) {
 // TODO: get rid of background page dependencies
 
 var renderFilterLists = function() {
-    var listGroupTemplate = uDom('#templates .groupEntry');
-    var listEntryTemplate = uDom('#templates .listEntry');
+    var listGroupTemplate = $('#templates .groupEntry');
+    var listEntryTemplate = $('#templates .listEntry');
     var listStatsTemplate = vAPI.i18n('3pListsOfBlockedHostsPerListStats');
     var renderElapsedTimeToString = vAPI.i18n.renderElapsedTimeToString;
     var lastUpdateString = vAPI.i18n('3pLastUpdate');
@@ -96,29 +96,29 @@ var renderFilterLists = function() {
         var li = listEntryTemplate.clone();
 
         if ( entry.off !== true ) {
-            li.descendants('input').attr('checked', '');
+            li.find('input').attr('checked', '');
         }
 
-        var elem = li.descendants('a:nth-of-type(1)');
+        var elem = li.find('a:nth-of-type(1)');
         elem.attr('href', 'asset-viewer.html?url=' + encodeURI(listKey));
         elem.attr('type', 'text/html');
         elem.attr('data-listkey', listKey);
         elem.text(listNameFromListKey(listKey) + '\u200E');
 
         if ( entry.instructionURL ) {
-            elem = li.descendants('a:nth-of-type(2)');
+            elem = li.find('a:nth-of-type(2)');
             elem.attr('href', entry.instructionURL);
             elem.css('display', '');
         }
 
         if ( entry.supportName ) {
-            elem = li.descendants('a:nth-of-type(3)');
+            elem = li.find('a:nth-of-type(3)');
             elem.attr('href', entry.supportURL);
             elem.text('(' + entry.supportName + ')');
             elem.css('display', '');
         }
 
-        elem = li.descendants('span.counts');
+        elem = li.find('span.counts');
         var text = listStatsTemplate
             .replace('{{used}}', renderNumber(!entry.off && !isNaN(+entry.entryUsedCount) ? entry.entryUsedCount : 0))
             .replace('{{total}}', !isNaN(+entry.entryCount) ? renderNumber(entry.entryCount) : '?');
@@ -131,7 +131,7 @@ var renderFilterLists = function() {
             remoteURL = entry.homeURL || '';
         }
         if ( remoteURL.lastIndexOf('http:', 0) === 0 ) {
-            li.descendants('span.status.unsecure').css('display', '');
+            li.find('span.status.unsecure').css('display', '');
         }
 
         // https://github.com/chrisaljoudi/uBlock/issues/104
@@ -140,20 +140,20 @@ var renderFilterLists = function() {
         // Badge for update status
         if ( entry.off !== true ) {
             if ( asset.repoObsolete ) {
-                li.descendants('span.status.new').css('display', '');
+                li.find('span.status.new').css('display', '');
                 needUpdate = true;
             } else if ( asset.cacheObsolete ) {
-                li.descendants('span.status.obsolete').css('display', '');
+                li.find('span.status.obsolete').css('display', '');
                 needUpdate = true;
             } else if ( entry.external && !asset.cached ) {
-                li.descendants('span.status.obsolete').css('display', '');
+                li.find('span.status.obsolete').css('display', '');
                 needUpdate = true;
             }
         }
 
         // In cache
         if ( asset.cached ) {
-            elem = li.descendants('span.status.purge');
+            elem = li.find('span.status.purge');
             elem.css('display', '');
             elem.attr('title', lastUpdateString.replace('{{ago}}', renderElapsedTimeToString(asset.lastModified)));
             hasCachedContent = true;
@@ -179,10 +179,10 @@ var renderFilterLists = function() {
         var liGroup = listGroupTemplate.clone();
         var groupName = vAPI.i18n('3pGroup' + groupKey.charAt(0).toUpperCase() + groupKey.slice(1));
         if ( groupName !== '' ) {
-            liGroup.descendants('span.geName').text(groupName);
-            liGroup.descendants('span.geCount').text(listEntryCountFromGroup(listKeys));
+            liGroup.find('span.geName').text(groupName);
+            liGroup.find('span.geCount').text(listEntryCountFromGroup(listKeys));
         }
-        var ulGroup = liGroup.descendants('ul');
+        var ulGroup = liGroup.find('ul');
         if ( !listKeys ) {
             return liGroup;
         }
@@ -223,7 +223,7 @@ var renderFilterLists = function() {
         hasCachedContent = false;
 
         // Visually split the filter lists in purpose-based groups
-        var ulLists = uDom('#lists').empty(), liGroup;
+        var ulLists = $('#lists').empty(), liGroup;
         var groups = groupsFromLists(details.available);
         var groupKey, i;
         var groupKeys = [
@@ -253,14 +253,14 @@ var renderFilterLists = function() {
             ulLists.append(liFromListGroup(groupKey, groups[groupKey]));
         }
 
-        uDom('#listsOfBlockedHostsPrompt').text(
+        $('#listsOfBlockedHostsPrompt').text(
             vAPI.i18n('3pListsOfBlockedHostsPrompt')
                 .replace('{{netFilterCount}}', renderNumber(details.netFilterCount))
                 .replace('{{cosmeticFilterCount}}', renderNumber(details.cosmeticFilterCount))
         );
-        uDom('#autoUpdate').prop('checked', listDetails.autoUpdate === true);
-        uDom('#parseCosmeticFilters').prop('checked', listDetails.parseCosmeticFilters === true);
-        uDom('#ignoreGenericCosmeticFilters').prop('checked', listDetails.ignoreGenericCosmeticFilters === true);
+        $('#autoUpdate').prop('checked', listDetails.autoUpdate === true);
+        $('#parseCosmeticFilters').prop('checked', listDetails.parseCosmeticFilters === true);
+        $('#ignoreGenericCosmeticFilters').prop('checked', listDetails.ignoreGenericCosmeticFilters === true);
 
         renderWidgets();
         renderBusyOverlay(details.manualUpdate, details.manualUpdateProgress);
@@ -277,17 +277,17 @@ var renderBusyOverlay = function(state, progress) {
     progress = progress || {};
     var showProgress = typeof progress.value === 'number';
     if ( showProgress ) {
-        uDom('#busyOverlay > div:nth-of-type(2) > div:first-child').css(
+        $('#busyOverlay > div:nth-of-type(2) > div:first-child').css(
             'width',
             (progress.value * 100).toFixed(1) + '%'
         );
         var text = progress.text || '';
         if ( text !== '' ) {
-            uDom('#busyOverlay > div:nth-of-type(2) > div:last-child').text(text);
+            $('#busyOverlay > div:nth-of-type(2) > div:last-child').text(text);
         }
     }
-    uDom('#busyOverlay > div:nth-of-type(2)').css('display', showProgress ? '' : 'none');
-    uDom('body').toggleClass('busy', !!state);
+    $('#busyOverlay > div:nth-of-type(2)').css('display', showProgress ? '' : 'none');
+    $('body').toggleClass('busy', !!state);
 };
 
 /******************************************************************************/
@@ -295,9 +295,9 @@ var renderBusyOverlay = function(state, progress) {
 // This is to give a visual hint that the selection of blacklists has changed.
 
 var renderWidgets = function() {
-    uDom('#buttonApply').toggleClass('disabled', !listsSelectionChanged());
-    uDom('#buttonUpdate').toggleClass('disabled', !listsContentChanged());
-    uDom('#buttonPurgeAll').toggleClass('disabled', !hasCachedContent);
+    $('#buttonApply').toggleClass('disabled', !listsSelectionChanged());
+    $('#buttonUpdate').toggleClass('disabled', !listsContentChanged());
+    $('#buttonPurgeAll').toggleClass('disabled', !hasCachedContent);
 };
 
 /******************************************************************************/
@@ -358,7 +358,7 @@ var listsContentChanged = function() {
 /******************************************************************************/
 
 var onListCheckboxChanged = function() {
-    var href = uDom(this).parent().descendants('a').first().attr('data-listkey');
+    var href = $(this).parent().find('a').first().attr('data-listkey');
     if ( typeof href !== 'string' ) {
         return;
     }
@@ -372,9 +372,9 @@ var onListCheckboxChanged = function() {
 /******************************************************************************/
 
 var onPurgeClicked = function() {
-    var button = uDom(this);
+    var button = $(this);
     var li = button.parent();
-    var href = li.descendants('a').first().attr('data-listkey');
+    var href = li.find('a').first().attr('data-listkey');
     if ( !href ) {
         return;
     }
@@ -390,14 +390,14 @@ var onPurgeClicked = function() {
     var entry = listDetails.current && listDetails.current[href];
     if ( entry && entry.off !== true && /^[a-z]+:\/\//.test(href) === false ) {
         if ( typeof entry.homeURL !== 'string' || entry.homeURL === '' ) {
-            li.descendants('span.status.new').css('display', '');
+            li.find('span.status.new').css('display', '');
         } else {
-            li.descendants('span.status.obsolete').css('display', '');
+            li.find('span.status.obsolete').css('display', '');
         }
         needUpdate = true;
     }
 
-    if ( li.descendants('input').first().prop('checked') ) {
+    if ( li.find('input').first().prop('checked') ) {
         cacheWasPurged = true;
         renderWidgets();
     }
@@ -420,13 +420,13 @@ var selectFilterLists = function(callback) {
 
     // Filter lists
     var switches = [];
-    var lis = uDom('#lists .listEntry'), li;
+    var lis = $('#lists .listEntry'), li;
     var i = lis.length;
     while ( i-- ) {
         li = lis.at(i);
         switches.push({
-            location: li.descendants('a').attr('data-listkey'),
-            off: li.descendants('input').prop('checked') === false
+            location: li.find('a').attr('data-listkey'),
+            off: li.find('input').prop('checked') === false
         });
     }
 
@@ -443,7 +443,7 @@ var selectFilterLists = function(callback) {
 /******************************************************************************/
 
 var buttonApplyHandler = function() {
-    uDom('#buttonApply').removeClass('enabled');
+    $('#buttonApply').removeClass('enabled');
 
     renderBusyOverlay(true);
 
@@ -459,7 +459,7 @@ var buttonApplyHandler = function() {
 /******************************************************************************/
 
 var buttonUpdateHandler = function() {
-    uDom('#buttonUpdate').removeClass('enabled');
+    $('#buttonUpdate').removeClass('enabled');
 
     if ( needUpdate ) {
         renderBusyOverlay(true);
@@ -477,7 +477,7 @@ var buttonUpdateHandler = function() {
 /******************************************************************************/
 
 var buttonPurgeAllHandler = function() {
-    uDom('#buttonPurgeAll').removeClass('enabled');
+    $('#buttonPurgeAll').removeClass('enabled');
 
     renderBusyOverlay(true);
 
@@ -505,8 +505,8 @@ var autoUpdateCheckboxChanged = function() {
 /******************************************************************************/
 
 var cosmeticSwitchChanged = function() {
-    listDetails.parseCosmeticFilters = uDom.nodeFromId('parseCosmeticFilters').checked;
-    listDetails.ignoreGenericCosmeticFilters = uDom.nodeFromId('ignoreGenericCosmeticFilters').checked;
+    listDetails.parseCosmeticFilters = $('#parseCosmeticFilters')[0].checked;
+    listDetails.ignoreGenericCosmeticFilters = $('#ignoreGenericCosmeticFilters').checked;
     renderWidgets();
 };
 
@@ -514,7 +514,7 @@ var cosmeticSwitchChanged = function() {
 
 var renderExternalLists = function() {
     var onReceived = function(details) {
-        uDom('#externalLists').val(details);
+        $('#externalLists').val(details);
         externalLists = details;
     };
     messaging.send(
@@ -527,14 +527,14 @@ var renderExternalLists = function() {
 /******************************************************************************/
 
 var externalListsChangeHandler = function() {
-    uDom.nodeFromId('externalListsApply').disabled =
-        uDom.nodeFromId('externalLists').value.trim() === externalLists.trim();
+    $('#externalListsApply')[0].disabled =
+        $('#externalLists')[0].value.trim() === externalLists.trim();
 };
 
 /******************************************************************************/
 
 var externalListsApplyHandler = function() {
-    externalLists = uDom.nodeFromId('externalLists').value;
+    externalLists = $('#externalLists')[0].value;
     messaging.send(
         'dashboard',
         {
@@ -544,13 +544,13 @@ var externalListsApplyHandler = function() {
         }
     );
     renderFilterLists();
-    uDom('#externalListsApply').prop('disabled', true);
+    $('#externalListsApply').prop('disabled', true);
 };
 
 /******************************************************************************/
 
 var groupEntryClickHandler = function() {
-    var li = uDom(this).ancestors('.groupEntry');
+    var li = $(this).parents('.groupEntry');
     li.toggleClass('collapsed');
     var key = 'collapseGroup' + li.nthOfType();
     if ( li.hasClass('collapsed') ) {
@@ -564,18 +564,18 @@ var groupEntryClickHandler = function() {
 
 var getCloudData = function() {
     var bin = {
-        parseCosmeticFilters: uDom.nodeFromId('parseCosmeticFilters').checked,
-        ignoreGenericCosmeticFilters: uDom.nodeFromId('ignoreGenericCosmeticFilters').checked,
+        parseCosmeticFilters: $('#parseCosmeticFilters')[0].checked,
+        ignoreGenericCosmeticFilters: $('#ignoreGenericCosmeticFilters')[0].checked,
         selectedLists: [],
         externalLists: externalLists
     };
 
-    var lis = uDom('#lists .listEntry'), li;
+    var lis = $('#lists .listEntry'), li;
     var i = lis.length;
     while ( i-- ) {
         li = lis.at(i);
-        if ( li.descendants('input').prop('checked') ) {
-            bin.selectedLists.push(li.descendants('a').attr('data-listkey'));
+        if ( li.find('input').prop('checked') ) {
+            bin.selectedLists.push(li.find('a').attr('data-listkey'));
         }
     }
 
@@ -589,27 +589,27 @@ var setCloudData = function(data, append) {
 
     var elem, checked;
 
-    elem = uDom.nodeFromId('parseCosmeticFilters');
+    elem = $('#parseCosmeticFilters')[0];
     checked = data.parseCosmeticFilters === true || append && elem.checked;
     elem.checked = listDetails.parseCosmeticFilters = checked;
 
-    elem = uDom.nodeFromId('ignoreGenericCosmeticFilters');
+    elem = $('#ignoreGenericCosmeticFilters')[0];
     checked = data.ignoreGenericCosmeticFilters === true || append && elem.checked;
     elem.checked = listDetails.ignoreGenericCosmeticFilters = checked;
 
-    var lis = uDom('#lists .listEntry'), li, listKey;
+    var lis = $('#lists .listEntry'), li, listKey;
     var i = lis.length;
     while ( i-- ) {
         li = lis.at(i);
-        elem = li.descendants('input');
-        listKey = li.descendants('a').attr('data-listkey');
+        elem = li.find('input');
+        listKey = li.find('a').attr('data-listkey');
         checked = data.selectedLists.indexOf(listKey) !== -1 ||
                   append && elem.prop('checked');
         elem.prop('checked', checked);
         listDetails.available[listKey].off = !checked;
     }
 
-    elem = uDom.nodeFromId('externalLists');
+    elem = $('#externalLists')[0];
     if ( !append ) {
         elem.value = '';
     }
@@ -624,17 +624,17 @@ self.cloud.onPull = setCloudData;
 
 /******************************************************************************/
 
-uDom('#autoUpdate').on('change', autoUpdateCheckboxChanged);
-uDom('#parseCosmeticFilters').on('change', cosmeticSwitchChanged);
-uDom('#ignoreGenericCosmeticFilters').on('change', cosmeticSwitchChanged);
-uDom('#buttonApply').on('click', buttonApplyHandler);
-uDom('#buttonUpdate').on('click', buttonUpdateHandler);
-uDom('#buttonPurgeAll').on('click', buttonPurgeAllHandler);
-uDom('#lists').on('change', '.listEntry > input', onListCheckboxChanged);
-uDom('#lists').on('click', 'span.purge', onPurgeClicked);
-uDom('#externalLists').on('input', externalListsChangeHandler);
-uDom('#externalListsApply').on('click', externalListsApplyHandler);
-uDom('#lists').on('click', '.groupEntry > span', groupEntryClickHandler);
+$('#autoUpdate').on('change', autoUpdateCheckboxChanged);
+$('#parseCosmeticFilters').on('change', cosmeticSwitchChanged);
+$('#ignoreGenericCosmeticFilters').on('change', cosmeticSwitchChanged);
+$('#buttonApply').on('click', buttonApplyHandler);
+$('#buttonUpdate').on('click', buttonUpdateHandler);
+$('#buttonPurgeAll').on('click', buttonPurgeAllHandler);
+$('#lists').on('change', '.listEntry > input', onListCheckboxChanged);
+$('#lists').on('click', 'span.purge', onPurgeClicked);
+$('#externalLists').on('input', externalListsChangeHandler);
+$('#externalListsApply').on('click', externalListsApplyHandler);
+$('#lists').on('click', '.groupEntry > span', groupEntryClickHandler);
 
 renderFilterLists();
 renderExternalLists();

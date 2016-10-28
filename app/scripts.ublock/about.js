@@ -23,14 +23,14 @@
 
 /******************************************************************************/
 
-uDom.onLoad(function() {
+$(window).load(function() {
 
 'use strict';
 
 /******************************************************************************/
 
 var onAppDataReady = function(appData) {
-    uDom('#aboutNameVer').text(appData.name + ' v' + appData.version);
+    $('#aboutNameVer').text(appData.name + ' v' + appData.version);
 };
 
 vAPI.messaging.send('dashboard', { what: 'getAppData' }, onAppDataReady);

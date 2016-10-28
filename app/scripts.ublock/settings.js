@@ -108,7 +108,7 @@ var exportToFile = function() {
 /******************************************************************************/
 
 var onLocalDataReceived = function(details) {
-    uDom('#localData > ul > li:nth-of-type(1)').text(
+    $('#localData > ul > li:nth-of-type(1)').text(
         vAPI.i18n('settingsStorageUsed').replace('{{value}}', details.storageUsed.toLocaleString())
     );
 
@@ -125,18 +125,18 @@ var onLocalDataReceived = function(details) {
     var lastBackupFile = details.lastBackupFile || '';
     if ( lastBackupFile !== '' ) {
         dt = new Date(details.lastBackupTime);
-        uDom('#localData > ul > li:nth-of-type(2) > ul > li:nth-of-type(1)').text(dt.toLocaleString('fullwide', timeOptions));
-        //uDom('#localData > ul > li:nth-of-type(2) > ul > li:nth-of-type(2)').text(lastBackupFile);
-        uDom('#localData > ul > li:nth-of-type(2)').css('display', '');
+        $('#localData > ul > li:nth-of-type(2) > ul > li:nth-of-type(1)').text(dt.toLocaleString('fullwide', timeOptions));
+        //$('#localData > ul > li:nth-of-type(2) > ul > li:nth-of-type(2)').text(lastBackupFile);
+        $('#localData > ul > li:nth-of-type(2)').css('display', '');
     }
 
     var lastRestoreFile = details.lastRestoreFile || '';
-    elem = uDom('#localData > p:nth-of-type(3)');
+    elem = $('#localData > p:nth-of-type(3)');
     if ( lastRestoreFile !== '' ) {
         dt = new Date(details.lastRestoreTime);
-        uDom('#localData > ul > li:nth-of-type(3) > ul > li:nth-of-type(1)').text(dt.toLocaleString('fullwide', timeOptions));
-        uDom('#localData > ul > li:nth-of-type(3) > ul > li:nth-of-type(2)').text(lastRestoreFile);
-        uDom('#localData > ul > li:nth-of-type(3)').css('display', '');
+        $('#localData > ul > li:nth-of-type(3) > ul > li:nth-of-type(1)').text(dt.toLocaleString('fullwide', timeOptions));
+        $('#localData > ul > li:nth-of-type(3) > ul > li:nth-of-type(2)').text(lastRestoreFile);
+        $('#localData > ul > li:nth-of-type(3)').css('display', '');
     }
 };
 
@@ -193,7 +193,7 @@ var onPreventDefault = function(ev) {
 // TODO: use data-* to declare simple settings
 
 var onUserSettingsReceived = function(details) {
-    uDom('[data-setting-type="bool"]').forEach(function(uNode) {
+    $('[data-setting-type="bool"]').forEach(function(uNode) {
         uNode.prop('checked', details[uNode.attr('data-setting-name')] === true)
              .on('change', function() {
                     changeUserSettings(
@@ -203,25 +203,25 @@ var onUserSettingsReceived = function(details) {
                 });
     });
 
-    uDom('[data-setting-name="noLargeMedia"] ~ label:first-of-type > input[type="number"]')
+    $('[data-setting-name="noLargeMedia"] ~ label:first-of-type > input[type="number"]')
         .attr('data-setting-name', 'largeMediaSize')
         .attr('data-setting-type', 'input');
 
-    uDom('[data-setting-type="input"]').forEach(function(uNode) {
+    $('[data-setting-type="input"]').forEach(function(uNode) {
         uNode.val(details[uNode.attr('data-setting-name')])
              .on('change', onInputChanged)
              .on('click', onPreventDefault);
     });
 
-    uDom('#export').on('click', exportToFile);
-    uDom('#import').on('click', startImportFilePicker);
-    uDom('#reset').on('click', resetUserData);
-    uDom('#restoreFilePicker').on('change', handleImportFilePicker);
+    $('#export').on('click', exportToFile);
+    $('#import').on('click', startImportFilePicker);
+    $('#reset').on('click', resetUserData);
+    $('#restoreFilePicker').on('change', handleImportFilePicker);
 };
 
 /******************************************************************************/
 
-uDom.onLoad(function() {
+$(window).load(function() {
     messaging.send('dashboard', { what: 'userSettings' }, onUserSettingsReceived);
     messaging.send('dashboard', { what: 'getLocalData' }, onLocalDataReceived);
 });

@@ -39,6 +39,10 @@
     "message":"Save changes",
     "description":"English: Apply changes"
   },
+  "whitelistDefault":{
+    "message":"Default",
+    "description":"English: Set dafault values"
+  },
   "3pListsOfBlockedHostsPrompt":{
     "message":"{{netFilterCount}} network filters ＋ {{cosmeticFilterCount}} cosmetic filters from:",
     "description":"Appears at the top of the _3rd-party filters_ pane"

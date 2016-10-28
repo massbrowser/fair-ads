@@ -31,6 +31,7 @@
 
 var messaging = vAPI.messaging;
 var cachedWhitelist = '';
+var cachedWhitelistDefault = '';
 
 // Could make it more fancy if needed. But speed... It's a compromise.
 var reUnwantedChars = /[\x00-\x09\x0b\x0c\x0e-\x1f!"$'()<>{}|\\^\[\]`~]/;
@@ -38,13 +39,15 @@ var reUnwantedChars = /[\x00-\x09\x0b\x0c\x0e-\x1f!"$'()<>{}|\\^\[\]`~]/;
 /******************************************************************************/
 
 var whitelistChanged = function() {
-    var textarea = uDom.nodeFromId('whitelist');
-    var s = textarea.value.trim();
+    var textarea = $('#whitelist');
+    var s = textarea.val().trim();
     var changed = s === cachedWhitelist;
+    var isDefault = cachedWhitelist===cachedWhitelistDefault;
     var bad = reUnwantedChars.test(s);
-    uDom.nodeFromId('whitelistApply').disabled = changed || bad;
-    uDom.nodeFromId('whitelistRevert').disabled = changed;
-    textarea.classList.toggle('bad', bad);
+    $('#whitelistApply').prop('disabled', changed || bad);
+    $('#whitelistRevert').prop('disabled', changed);
+    $('#whitelistDefault').prop('disabled', isDefault);
+    textarea.toggleClass('bad', bad);
 };
 
 /******************************************************************************/
@@ -52,7 +55,7 @@ var whitelistChanged = function() {
 var renderWhitelist = function() {
     var onRead = function(whitelist) {
         cachedWhitelist = whitelist.trim();
-        uDom.nodeFromId('whitelist').value = cachedWhitelist + '\n';
+        $('#whitelist').val(cachedWhitelist + '\n');
         whitelistChanged();
     };
     messaging.send('dashboard', { what: 'getWhitelist' }, onRead);
@@ -60,9 +63,18 @@ var renderWhitelist = function() {
 
 /******************************************************************************/
 
+var initDefaultWhitelist = function() {
+    var onRead = function(whitelist) {
+        cachedWhitelistDefault = whitelist.trim();
+    };
+    messaging.send('dashboard', { what: 'getDefaultWhitelist' }, onRead);
+};
+
+/******************************************************************************/
+
 var handleImportFilePicker = function() {
     var fileReaderOnLoadHandler = function() {
-        var textarea = uDom('#whitelist');
+        var textarea = $('#whitelist');
         textarea.val([textarea.val(), this.result].join('\n').trim());
         whitelistChanged();
     };
@@ -92,7 +104,7 @@ var startImportFilePicker = function() {
 /******************************************************************************/
 
 var exportWhitelistToFile = function() {
-    var val = uDom('#whitelist').val().trim();
+    var val = $('#whitelist').val().trim();
     if ( val === '' ) {
         return;
     }
@@ -109,7 +121,7 @@ var exportWhitelistToFile = function() {
 /******************************************************************************/
 
 var applyChanges = function() {
-    cachedWhitelist = uDom.nodeFromId('whitelist').value.trim();
+    cachedWhitelist = $('#whitelist').val().trim();
     var request = {
         what: 'setWhitelist',
         whitelist: cachedWhitelist
@@ -118,21 +130,28 @@ var applyChanges = function() {
 };
 
 var revertChanges = function() {
-    uDom.nodeFromId('whitelist').value = cachedWhitelist + '\n';
+    $('#whitelist').val(cachedWhitelist + '\n');
     whitelistChanged();
+};
+
+var setDefaultValues = function() {
+    var request = {
+        what: 'setDefaultWhitelist'
+    };
+    messaging.send('dashboard', request, renderWhitelist);
 };
 
 /******************************************************************************/
 
 var getCloudData = function() {
-    return uDom.nodeFromId('whitelist').value;
+    return $('#whitelist').val();
 };
 
 var setCloudData = function(data, append) {
     if ( typeof data !== 'string' ) {
         return;
     }
-    var textarea = uDom.nodeFromId('whitelist');
+    var textarea = $('#whitelist')[0];
     if ( append ) {
         data = uBlockDashboard.mergeNewLines(textarea.value.trim(), data);
     }
@@ -145,14 +164,17 @@ self.cloud.onPull = setCloudData;
 
 /******************************************************************************/
 
-uDom('#importWhitelistFromFile').on('click', startImportFilePicker);
-uDom('#importFilePicker').on('change', handleImportFilePicker);
-uDom('#exportWhitelistToFile').on('click', exportWhitelistToFile);
-uDom('#whitelist').on('input', whitelistChanged);
-uDom('#whitelistApply').on('click', applyChanges);
-uDom('#whitelistRevert').on('click', revertChanges);
+$('#importWhitelistFromFile').on('click', startImportFilePicker);
+$('#importFilePicker').on('change', handleImportFilePicker);
+$('#exportWhitelistToFile').on('click', exportWhitelistToFile);
+$('#whitelist').on('input', whitelistChanged);
+$('#whitelistApply').on('click', applyChanges);
+$('#whitelistRevert').on('click', revertChanges);
+$('#whitelistDefault').on('click', setDefaultValues);
 
+initDefaultWhitelist();
 renderWhitelist();
+
 
 /******************************************************************************/
 

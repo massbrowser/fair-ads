@@ -59,7 +59,7 @@ var details = {};
         if ( Array.isArray(lists) === false || lists.length === 0 ) {
             return;
         }
-        var parent = uDom.nodeFromSelector('#whyex > span:nth-of-type(2)');
+        var parent = $('#whyex > span:nth-of-type(2)')[0];
         var separator = '';
         var entry, url, node;
         for ( var i = 0; i < lists.length; i++ ) {
@@ -79,7 +79,7 @@ var details = {};
             parent.appendChild(node);
             separator = ' \u2022 ';
         }
-        uDom.nodeFromId('whyex').style.removeProperty('display');
+        $('#whyex')[0].style.removeProperty('display');
     };
 
     messaging.send(
@@ -146,26 +146,26 @@ var proceedPermanent = function() {
     if ( matches === null ) {
         return;
     }
-    var proceed = uDom('#proceedTemplate').clone();
-    proceed.descendants('span:nth-of-type(1)').text(matches[1]);
-    proceed.descendants('span:nth-of-type(4)').text(matches[2]);
+    var proceed = $('#proceedTemplate').clone();
+    proceed.find('span:nth-of-type(1)').text(matches[1]);
+    proceed.find('span:nth-of-type(4)').text(matches[2]);
 
     if ( details.hn === details.dn ) {
-        proceed.descendants('span:nth-of-type(2)').remove();
-        proceed.descendants('.hn').text(details.hn);
+        proceed.find('span:nth-of-type(2)').remove();
+        proceed.find('.hn').text(details.hn);
     } else {
-        proceed.descendants('span:nth-of-type(3)').remove();
-        proceed.descendants('.hn').text(details.hn).attr('value', details.hn);
-        proceed.descendants('.dn').text(details.dn).attr('value', details.dn);
+        proceed.find('span:nth-of-type(3)').remove();
+        proceed.find('.hn').text(details.hn).attr('value', details.hn);
+        proceed.find('.dn').text(details.dn).attr('value', details.dn);
     }
 
-    uDom('#proceed').append(proceed);
+    $('#proceed').append(proceed);
 })();
 
 /******************************************************************************/
 
-uDom.nodeFromSelector('#theURL > p').textContent = details.url;
-uDom.nodeFromId('why').textContent = details.fs;
+$('#theURL > p').text(details.url);
+$('#why').text(details.fs);
 
 /******************************************************************************/
 
@@ -247,24 +247,24 @@ uDom.nodeFromId('why').textContent = details.fs;
         return true;
     };
 
-    if ( renderParams(uDom.nodeFromId('parsed'), details.url) === false ) {
+    if ( renderParams($('#parsed')[0], details.url) === false ) {
         return;
     }
 
     var toggler = document.createElement('span');
     toggler.className = 'fa';
-    uDom('#theURL > p').append(toggler);
+    $('#theURL > p').append(toggler);
 
-    uDom(toggler).on('click', function() {
-        var cl = uDom.nodeFromId('theURL').classList;
-        cl.toggle('collapsed');
+    $(toggler).on('click', function() {
+        var cl = $('#theURL');
+        cl.toggleClass('collapsed');
         vAPI.localStorage.setItem(
             'document-blocked-expand-url',
-            (cl.contains('collapsed') === false).toString()
+            (cl.hasClass('collapsed') === false).toString()
         );
     });
 
-    uDom.nodeFromId('theURL').classList.toggle(
+    $('#theURL').toggleClass(
         'collapsed',
         vAPI.localStorage.getItem('document-blocked-expand-url') !== 'true'
     );
@@ -273,15 +273,15 @@ uDom.nodeFromId('why').textContent = details.fs;
 /******************************************************************************/
 
 if ( window.history.length > 1 ) {
-    uDom('#back').on('click', function() { window.history.back(); });
-    uDom('#bye').css('display', 'none');
+    $('#back').on('click', function() { window.history.back(); });
+    $('#bye').css('display', 'none');
 } else {
-    uDom('#bye').on('click', function() { window.close(); });
-    uDom('#back').css('display', 'none');
+    $('#bye').on('click', function() { window.close(); });
+    $('#back').css('display', 'none');
 }
 
-uDom('#proceedTemporary').attr('href', details.url).on('click', proceedTemporary);
-uDom('#proceedPermanent').attr('href', details.url).on('click', proceedPermanent);
+$('#proceedTemporary').attr('href', details.url).on('click', proceedTemporary);
+$('#proceedPermanent').attr('href', details.url).on('click', proceedPermanent);
 
 /******************************************************************************/
 
