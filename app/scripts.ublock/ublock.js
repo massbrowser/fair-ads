@@ -87,7 +87,8 @@ var matchWhitelistDirective = function(url, hostname, directive) {
         }
         key = key.slice(pos + 1);
     }
-    return true;
+
+    return !this.checkIfUrlFitsAdsClass(url);
 };
 
 /******************************************************************************/
