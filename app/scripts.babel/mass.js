@@ -209,6 +209,7 @@ ub.getDomainAdsClass = function (url) {
   }
 };
 
+
 ub.checkIfUrlFitsAdsClass = function (url) {
   let adsClass = this.adsClass;
   let result = false;
