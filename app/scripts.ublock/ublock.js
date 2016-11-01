@@ -87,7 +87,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
             i = buckets.length;
             while ( i-- ) {
                 if ( matchWhitelistDirective(url, targetHostname, buckets[i]) ) {
-                    // console.log('"%s" matche url "%s"', buckets[i], url);
+                    //console.log('"%s" matche url "%s"', buckets[i], url); 
                     return true;
                 }
             }
@@ -117,7 +117,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
     var netBlacklist = this.netBlacklist;
     var pos = url.indexOf('#');
     var targetURL = pos !== -1 ? url.slice(0, pos) : url;
-    var targetHostname = this.URI.hostnameFromURI(targetURL);
+    var targetHostname = this.URI.hostnameFromURI(targetURL).replace(/^www\./, '');
     var key = targetHostname;
     var directive = scope === 'page' ? targetURL : targetHostname;
 
@@ -143,6 +143,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
 /******************************************************************************/
 
 µBlock.addToNetList = function(netList, key, directive) {
+    var pos;
     if ( netList.hasOwnProperty(key) === false ) {
             netList[key] = [];
     }
