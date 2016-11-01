@@ -61,12 +61,7 @@ var onBeforeRequest = function(details) {
 
     // Lookup the page store associated with this tab id.
     var µb = µBlock;
-    var pageStore = ub.pageStoreFromTabId(tabId);
-    if (pageStore != null) {
-        if (ub.checkIfUrlFitsAdsClass(pageStore.tabHostname)) {
-            return;
-        }
-    }
+    var pageStore = µb.pageStoreFromTabId(tabId);
 
     if ( !pageStore ) {
         var tabContext = ub.tabContextManager.mustLookup(tabId);
