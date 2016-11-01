@@ -328,7 +328,7 @@ housekeep itself.
     };
 
     TabContext.prototype.getNetFilteringSwitch = function() {
-        if ( this.netFilteringReadTime > µb.netWhitelistModifyTime ) {
+        if ( this.netFilteringReadTime > Math.max(µb.netWhitelistModifyTime, µb.netBlacklistModifyTime) ) {
             return this.netFiltering;
         }
         // https://github.com/chrisaljoudi/uBlock/issues/1078
