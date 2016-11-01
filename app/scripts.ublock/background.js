@@ -85,6 +85,9 @@ return {
         ''
     ].join('\n').trim(),
 
+    netBlacklist: {},
+    netBlacklistModifyTime: 0,
+
     localSettings: {
         blockedRequestCount: 0,
         allowedRequestCount: 0
