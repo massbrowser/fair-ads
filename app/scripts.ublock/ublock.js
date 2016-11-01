@@ -87,7 +87,6 @@ var matchWhitelistDirective = function(url, hostname, directive) {
             i = buckets.length;
             while ( i-- ) {
                 if ( matchWhitelistDirective(url, targetHostname, buckets[i]) ) {
-                    //console.log('"%s" matche url "%s"', buckets[i], url);
                     return true;
                 }
             }
