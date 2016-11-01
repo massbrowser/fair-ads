@@ -67,6 +67,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
 
 µBlock.getNetFilteringSwitch = function(url) {
     var netWhitelist = this.netWhitelist;
+    var netBlacklist = this.netBlacklist;
     var buckets, i, pos;
     var targetHostname = this.URI.hostnameFromURI(url);
     var key = targetHostname;
@@ -78,6 +79,16 @@ var matchWhitelistDirective = function(url, hostname, directive) {
                 if ( matchWhitelistDirective(url, targetHostname, buckets[i]) ) {
                     // console.log('"%s" matche url "%s"', buckets[i], url);
                     return false;
+                }
+            }
+        }
+        if ( netBlacklist.hasOwnProperty(key) ) {
+            buckets = netBlacklist[key];
+            i = buckets.length;
+            while ( i-- ) {
+                if ( matchWhitelistDirective(url, targetHostname, buckets[i]) ) {
+                    // console.log('"%s" matche url "%s"', buckets[i], url);
+                    return true;
                 }
             }
         }
@@ -103,6 +114,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
     }
 
     var netWhitelist = this.netWhitelist;
+    var netBlacklist = this.netBlacklist;
     var pos = url.indexOf('#');
     var targetURL = pos !== -1 ? url.slice(0, pos) : url;
     var targetHostname = this.URI.hostnameFromURI(targetURL);
@@ -111,19 +123,39 @@ var matchWhitelistDirective = function(url, hostname, directive) {
 
     // Add to directive list
     if ( newState === false ) {
-        if ( netWhitelist.hasOwnProperty(key) === false ) {
-            netWhitelist[key] = [];
-        }
-        netWhitelist[key].push(directive);
+        //add to Whitelist
+        this.addToNetList(netWhitelist, key, directive);
         this.saveWhitelist();
+        //remove from Blacklist
+        this.removeFromNetList(netBlacklist, key, targetURL, targetHostname);
+        this.saveBlacklist();
         return true;
     }
 
     // Remove from directive list whatever causes current URL to be whitelisted
-    var buckets, i;
+    this.removeFromNetList(netWhitelist, key, targetURL, targetHostname);
+    this.saveWhitelist();
+    this.addToNetList(netBlacklist, key, directive);
+    this.saveBlacklist();
+    return true;
+};
+
+/******************************************************************************/
+
+µBlock.addToNetList = function(netList, key, directive) {
+    if ( netList.hasOwnProperty(key) === false ) {
+            netList[key] = [];
+    }
+    netList[key].push(directive);
+}
+
+/******************************************************************************/
+
+µBlock.removeFromNetList = function(netList, key, targetURL, targetHostname) {
+    var pos, directive, buckets, i;
     for (;;) {
-        if ( netWhitelist.hasOwnProperty(key) ) {
-            buckets = netWhitelist[key];
+        if ( netList.hasOwnProperty(key) ) {
+            buckets = netList[key];
             i = buckets.length;
             while ( i-- ) {
                 directive = buckets[i];
@@ -135,11 +167,11 @@ var matchWhitelistDirective = function(url, hostname, directive) {
                 // the user interface, keep it around as a commented out
                 // directive
                 if ( isHandcraftedWhitelistDirective(directive) ) {
-                    netWhitelist['#'].push('# ' + directive);
+                    netList['#'].push('# ' + directive);
                 }
             }
             if ( buckets.length === 0 ) {
-                delete netWhitelist[key];
+                delete netList[key];
             }
         }
         pos = key.indexOf('.');
@@ -148,9 +180,7 @@ var matchWhitelistDirective = function(url, hostname, directive) {
         }
         key = key.slice(pos + 1);
     }
-    this.saveWhitelist();
-    return true;
-};
+}
 
 /******************************************************************************/
 

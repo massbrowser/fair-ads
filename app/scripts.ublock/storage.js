@@ -96,7 +96,11 @@
 µBlock.saveWhitelist = function() {
     this.keyvalSetOne('netWhitelist', this.stringFromWhitelist(this.netWhitelist));
     this.netWhitelistModifyTime = Date.now();
-    console.log('test');
+};
+
+µBlock.saveBlacklist = function() {
+    this.keyvalSetOne('netBlacklist', this.stringFromWhitelist(this.netBlacklist));
+    this.netBlacklistModifyTime = Date.now();
 };
 
 /******************************************************************************/
