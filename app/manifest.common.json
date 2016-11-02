@@ -1,0 +1,88 @@
+{
+  "name": "__MSG_appName__",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "redirect.html"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/ublock/polyfill.js",
+      "scripts/ublock/lib/punycode.js",
+      "scripts/ublock/lib/publicsuffixlist.js",
+      "scripts/ublock/lib/yamd5.js",
+      "scripts/ublock/vapi-common.js",
+      "scripts/ublock/vapi-background.js",
+      "scripts/ublock/background.js",
+      "scripts/ublock/utils.js",
+      "scripts/ublock/uritools.js",
+      "scripts/ublock/assets.js",
+      "scripts/ublock/redirect-engine.js",
+      "scripts/ublock/dynamic-net-filtering.js",
+      "scripts/ublock/static-net-filtering.js",
+      "scripts/ublock/url-net-filtering.js",
+      "scripts/ublock/cosmetic-filtering.js",
+      "scripts/ublock/hnswitches.js",
+      "scripts/ublock/ublock.js",
+      "scripts/mass.js",
+      "scripts/ublock/messaging.js",
+      "scripts/mass-messaging.js",
+      "scripts/ublock/profiler.js",
+      "scripts/ublock/storage.js",
+      "scripts/ublock/logger.js",
+      "scripts/ublock/pagestore.js",
+      "scripts/ublock/tab.js",
+      "scripts/ublock/traffic.js",
+      "scripts/ublock/contextmenu.js",
+      "scripts/ublock/reverselookup.js",
+      "scripts/ublock/rpcreceiver.js",
+      "scripts/ublock/start.js"
+    ]
+  },
+  "permissions": [
+    "contentSettings",
+    "contextMenus",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["scripts/ublock/vapi-client.js", "scripts/ublock/contentscript.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["scripts/ublock/scriptlets/subscriber.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Mass Fair Ads",
+    "default_popup": "popup.html"
+  }
+}

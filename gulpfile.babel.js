@@ -70,13 +70,22 @@ gulp.task('html',  () => {
 });
 
 gulp.task('makeManifest', () => {
-  return gulp.src(`app/manifest.${platformName}.json`)
+  return gulp.src('app/manifest.common.json')
+    .pipe($.jsonEditor(function (json) {
+      if (platformName === 'chromium') {
+        json.browser_action.default_icon['38'] = 'images/icon-38.png';
+      } else if (platformName === 'opera') {
+        json.browser_action.default_icon['38'] = 'images/icon-19.png';
+        delete json.options_ui;
+      }
+      return json;
+    }))
     .pipe($.rename('manifest.json'))
     .pipe(gulp.dest('app'));
 });
 
 gulp.task('buildManifest', () => {
-  return gulp.src(`app/manifest.${platformName}.json`)
+  return gulp.src('app/manifest.common.json')
     .pipe($.jsonEditor(function (json) {
       let index = -1;
       json.background.scripts.forEach(function (el, i) {
@@ -85,6 +94,12 @@ gulp.task('buildManifest', () => {
         }
       });
       json.background.scripts.splice(index, 1);
+      if (platformName === 'chromium') {
+        json.browser_action.default_icon['38'] = 'images/icon-38.png';
+      } else if (platformName === 'opera') {
+        json.browser_action.default_icon['38'] = 'images/icon-19.png';
+        delete json.options_ui;
+      }
       return json;
     }))
     .pipe($.rename('manifest.json'))
@@ -107,7 +122,7 @@ gulp.task('assets', () => {
 });
 
 gulp.task('babel', () => {
-  return gulp.src(['app/scripts.babel/**/*.js', `app/platform/${platformName}/**/*.js`])
+  return gulp.src('app/scripts.babel/**/*.js')
       .pipe($.babel({
         presets: ['es2015']
       }))
@@ -132,9 +147,30 @@ gulp.task('ublock', () => {
     .pipe(gulp.dest(`${distBasePath}/scripts/ublock`));
 });
 
+gulp.task('platform', () => {
+  switch (platformName) {
+    case 'chromium':
+    case 'opera':
+      console.log('platform');
+      return gulp.src('app/platform/chromium/**/*.js')
+        // .pipe($.babel({
+        //   presets: ['es2015']
+        // }))
+        .pipe(gulp.dest(`${distBasePath}/scripts`));
+    case 'firefox':
+      console.log('firefox');
+      break;
+    case 'safari':
+      console.log('safari');
+  }
+});
+
 gulp.task('clean', del.bind(null, ['.tmp', `build/${platformName}/mass-fair-ads`]));
 
-gulp.task('compile', ['lint', 'babel', 'lib', 'ublock', 'less', 'makeManifest']);
+gulp.task('clean2', del.bind(null, ['app/scripts', 'app/styles', 'app/manifest.json']));
+
+gulp.task('compile', ['lint', 'babel', 'lib', 'ublock', 'platform', 'less', 'makeManifest']);
+
 
 gulp.task('watch', ['compile'], () => {
   $.livereload.listen();
@@ -177,9 +213,13 @@ gulp.task('package', function () {
 
 gulp.task('build', (cb) => {
   distBasePath = `build/${platformName}/mass-fair-ads`;
-  runSequence('lint', 'babel', 'html', 'buildManifest', 'lib', 'ublock', 'less', 'images', 'locales', 'fonts', 'assets', cb);
+  runSequence('lint', 'babel', 'html', 'buildManifest', 'lib', 'ublock', 'platform', 'less', 'images', 'locales', 'fonts', 'assets', cb);
 });
 
 gulp.task('default', ['clean'], cb => {
   runSequence('build', cb);
+});
+
+gulp.task('mytask', ['clean2'], () => {
+  runSequence('compile');
 });
