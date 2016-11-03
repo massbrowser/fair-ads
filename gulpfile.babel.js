@@ -85,25 +85,31 @@ gulp.task('makeManifest', () => {
 });
 
 gulp.task('buildManifest', () => {
-  return gulp.src('app/manifest.common.json')
-    .pipe($.jsonEditor(function (json) {
-      let index = -1;
-      json.background.scripts.forEach(function (el, i) {
-        if (el.includes('chromereload')) {
-          index = i;
+  if (['chromium', 'opera'].indexOf(platformName) >= 0) {
+    return gulp.src('app/manifest.common.json')
+      .pipe($.jsonEditor(function (json) {
+        let index = -1;
+        json.background.scripts.forEach(function (el, i) {
+          if (el.includes('chromereload')) {
+            index = i;
+          }
+        });
+        json.background.scripts.splice(index, 1);
+        if (platformName === 'chromium') {
+          json.browser_action.default_icon['38'] = 'images/icon-38.png';
+        } else if (platformName === 'opera') {
+          json.browser_action.default_icon['38'] = 'images/icon-19.png';
+          delete json.options_ui;
         }
-      });
-      json.background.scripts.splice(index, 1);
-      if (platformName === 'chromium') {
-        json.browser_action.default_icon['38'] = 'images/icon-38.png';
-      } else if (platformName === 'opera') {
-        json.browser_action.default_icon['38'] = 'images/icon-19.png';
-        delete json.options_ui;
-      }
-      return json;
-    }))
-    .pipe($.rename('manifest.json'))
-    .pipe(gulp.dest(distBasePath))
+        return json;
+      }))
+      .pipe($.rename('manifest.json'))
+      .pipe(gulp.dest(distBasePath))
+  } else {
+    return new Promise(function (res) {
+      res();
+    });
+  }
 });
 
 gulp.task('locales', () => {
@@ -151,7 +157,6 @@ gulp.task('platform', () => {
   switch (platformName) {
     case 'chromium':
     case 'opera':
-      console.log('platform');
       return Promise.all([gulp.src('app/platform/chromium/**/*.js')
       // .pipe($.babel({
       //   presets: ['es2015']
@@ -160,14 +165,26 @@ gulp.task('platform', () => {
         gulp.src('app/platform/chromium/**/*.html').pipe(gulp.dest(`${distBasePath}`))
       ]);
     case 'firefox':
-      console.log('firefox');
-      break;
+      return Promise.all([gulp.src('app/platform/firefox/*.js')
+        .pipe(gulp.dest(`${distBasePath}`)),
+        gulp.src('app/platform/firefox/ublock/*.js')
+          .pipe(gulp.dest(`${distBasePath}/scripts`)),
+        gulp.src('app/platform/firefox/install.rdf')
+          .pipe(gulp.dest(`${distBasePath}/scripts`)),
+        gulp.src(['app/platform/firefox/install.rdf', 'app/platform/firefox/options.xul'])
+          .pipe(gulp.dest(`${distBasePath}`)),
+        gulp.src('app/images/icon-128.png').pipe($.rename('icon.png')).pipe(gulp.dest(`${distBasePath}`))
+      ]);
     case 'safari':
       console.log('safari');
   }
 });
 
-gulp.task('clean', del.bind(null, ['.tmp', `build/${platformName}/mass-fair-ads`]));
+gulp.task('clean', del.bind(null, [
+  '.tmp',
+  `build/${platformName}/mass-fair-ads`,
+  'app/is-webrtc-supported.html'
+]));
 
 gulp.task('clean2', del.bind(null, ['app/scripts', 'app/styles', 'app/manifest.json']));
 
