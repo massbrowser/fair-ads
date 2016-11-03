@@ -12,3 +12,4 @@ app/styles
 .DS_Store
 app/manifest.json
 build/
+app/is-webrtc-supported.html

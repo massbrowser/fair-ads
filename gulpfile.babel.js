@@ -152,11 +152,13 @@ gulp.task('platform', () => {
     case 'chromium':
     case 'opera':
       console.log('platform');
-      return gulp.src('app/platform/chromium/**/*.js')
-        // .pipe($.babel({
-        //   presets: ['es2015']
-        // }))
-        .pipe(gulp.dest(`${distBasePath}/scripts`));
+      return Promise.all([gulp.src('app/platform/chromium/**/*.js')
+      // .pipe($.babel({
+      //   presets: ['es2015']
+      // }))
+        .pipe(gulp.dest(`${distBasePath}/scripts`)),
+        gulp.src('app/platform/chromium/**/*.html').pipe(gulp.dest(`${distBasePath}`))
+      ]);
     case 'firefox':
       console.log('firefox');
       break;
