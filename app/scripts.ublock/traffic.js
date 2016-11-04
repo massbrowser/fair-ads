@@ -1,5 +1,5 @@
 /*******************************************************************************
-
+    
     uBlock Origin - a browser extension to block requests.
     Copyright (C) 2014-2016 Raymond Hill
 
@@ -61,7 +61,12 @@ var onBeforeRequest = function(details) {
 
     // Lookup the page store associated with this tab id.
     var µb = µBlock;
-    var pageStore = µb.pageStoreFromTabId(tabId);
+    var pageStore = ub.pageStoreFromTabId(tabId);
+    if (pageStore != null) {
+        if (ub.checkIfUrlFitsAdsClass(pageStore.tabHostname)) {
+            return;
+        }
+    }
 
     if ( !pageStore ) {
         var tabContext = ub.tabContextManager.mustLookup(tabId);
