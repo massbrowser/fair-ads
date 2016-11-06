@@ -41,7 +41,6 @@ var onBeforeRequest = function(details) {
     // https://github.com/chrisaljoudi/uBlock/issues/1001
     // This must be executed regardless of whether the request is
     // behind-the-scene
-
     var requestType = details.type;
     if ( requestType === 'main_frame' ) {
         return onBeforeRootFrameRequest(details);

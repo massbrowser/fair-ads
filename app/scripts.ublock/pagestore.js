@@ -522,12 +522,13 @@ PageStore.prototype.temporarilyAllowLargeMediaElements = function() {
 PageStore.prototype.filterRequest = function(context) {
     var requestType = context.requestType;
 
-    if ( this.getNetFilteringSwitch() === false ) {
+    //Permanently block counters
+    /*if ( this.getNetFilteringSwitch() === false ) {
         if ( collapsibleRequestTypes.indexOf(requestType) !== -1 ) {
             this.netFilteringCache.add(context, '');
         }
         return '';
-    }
+    }*/
 
     var entry = this.netFilteringCache.lookup(context);
     if ( entry !== undefined ) {
@@ -565,6 +566,7 @@ PageStore.prototype.filterRequest = function(context) {
     if ( result === '' || result.charAt(1) === 'n' ) {
         if ( µb.staticNetFilteringEngine.matchString(context) !== undefined ) {
             result = µb.staticNetFilteringEngine.toResultString(µb.logger.isEnabled());
+            console.log(result);
         }
     }
 
@@ -574,7 +576,6 @@ PageStore.prototype.filterRequest = function(context) {
     }
 
     // console.debug('[%s, %s] = "%s"', context.requestHostname, requestType, result);
-
     return result;
 };
 

@@ -38,7 +38,7 @@ ub.adsClasses = [
   },
   {
     domain: 'mail.ru',
-    class: 'c'
+    class: 'd'
   },
   {
     domain: '',
