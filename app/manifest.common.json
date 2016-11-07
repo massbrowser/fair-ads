@@ -14,7 +14,7 @@
   "background": {
     "scripts": [
       "scripts/chromereload.js",
-      "scripts/ublock/polyfill.js",
+      "scripts/polyfill.js",
       "scripts/ublock/lib/punycode.js",
       "scripts/ublock/lib/publicsuffixlist.js",
       "scripts/ublock/lib/yamd5.js",

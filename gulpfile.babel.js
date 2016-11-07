@@ -7,6 +7,7 @@ import runSequence from 'run-sequence';
 import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
+const VERSION = 0.1;
 
 var platformName = 'chromium';
 
@@ -85,31 +86,29 @@ gulp.task('makeManifest', () => {
 });
 
 gulp.task('buildManifest', () => {
-  if (['chromium', 'opera'].indexOf(platformName) >= 0) {
-    return gulp.src('app/manifest.common.json')
-      .pipe($.jsonEditor(function (json) {
-        let index = -1;
-        json.background.scripts.forEach(function (el, i) {
-          if (el.includes('chromereload')) {
-            index = i;
-          }
-        });
-        json.background.scripts.splice(index, 1);
-        if (platformName === 'chromium') {
-          json.browser_action.default_icon['38'] = 'images/icon-38.png';
-        } else if (platformName === 'opera') {
-          json.browser_action.default_icon['38'] = 'images/icon-19.png';
-          delete json.options_ui;
+  return gulp.src('app/manifest.common.json')
+    .pipe($.jsonEditor(function (json) {
+      let index = -1;
+      json.background.scripts.forEach(function (el, i) {
+        if (el.includes('chromereload')) {
+          index = i;
         }
-        return json;
-      }))
-      .pipe($.rename('manifest.json'))
-      .pipe(gulp.dest(distBasePath))
-  } else {
-    return new Promise(function (res) {
-      res();
-    });
-  }
+      });
+      json.background.scripts.splice(index, 1);
+      if (platformName === 'chromium') {
+        json.browser_action.default_icon['38'] = 'images/icon-38.png';
+      } else if (platformName === 'firefox') {
+        json.browser_action.default_icon['38'] = 'images/icon-38.png';
+        delete json.options_ui.chrome_style;
+        delete json.permissions.unlimitedStorage;
+      } else if (platformName === 'opera') {
+        json.browser_action.default_icon['38'] = 'images/icon-19.png';
+        delete json.options_ui;
+      }
+      return json;
+    }))
+    .pipe($.rename('manifest.json'))
+    .pipe(gulp.dest(distBasePath))
 });
 
 gulp.task('locales', () => {
@@ -165,15 +164,11 @@ gulp.task('platform', () => {
         gulp.src('app/platform/chromium/**/*.html').pipe(gulp.dest(`${distBasePath}`))
       ]);
     case 'firefox':
-      return Promise.all([gulp.src('app/platform/firefox/*.js')
-        .pipe(gulp.dest(`${distBasePath}`)),
-        gulp.src('app/platform/firefox/ublock/*.js')
-          .pipe(gulp.dest(`${distBasePath}/scripts`)),
-        gulp.src('app/platform/firefox/install.rdf')
-          .pipe(gulp.dest(`${distBasePath}/scripts`)),
-        gulp.src(['app/platform/firefox/install.rdf', 'app/platform/firefox/options.xul'])
-          .pipe(gulp.dest(`${distBasePath}`)),
-        gulp.src('app/images/icon-128.png').pipe($.rename('icon.png')).pipe(gulp.dest(`${distBasePath}`))
+      return Promise.all([gulp.src('app/platform/firefox/**/*.js')
+      // .pipe($.babel({
+      //   presets: ['es2015']
+      // }))
+        .pipe(gulp.dest(`${distBasePath}/scripts`)),
       ]);
     case 'safari':
       console.log('safari');
@@ -241,4 +236,104 @@ gulp.task('default', ['clean'], cb => {
 
 gulp.task('mytask', ['clean2'], () => {
   runSequence('compile');
+});
+
+gulp.task('clean_firefox', del.bind(null, [
+  `build/firefox/mass-fair-ads`
+]));
+
+gulp.task('firefox', ['clean_firefox'],  () => {
+  return Promise.all([
+    gulp.src('app/images/**/*').pipe(gulp.dest('build/firefox/mass-fair-ads/images')),
+    gulp.src('app/scripts.babel/**/*')
+      .pipe($.babel({
+        presets: ['es2015']
+      }))
+      .pipe(gulp.dest('build/firefox/mass-fair-ads/scripts')),
+    gulp.src('app/scripts.lib/**/*').pipe(gulp.dest('build/firefox/mass-fair-ads/scripts/lib')),
+    gulp.src('app/scripts.ublock/**/*').pipe(gulp.dest('build/firefox/mass-fair-ads/scripts/ublock')),
+    gulp.src([
+      'app/images/**/*',
+      'app/platform/firefox/img/**/*'
+    ]).pipe(gulp.dest('build/firefox/mass-fair-ads/images')),
+    gulp.src([
+      'app/platform/firefox/polyfill.js',
+      'app/platform/firefox/vapi-*'
+    ]).pipe(gulp.dest('build/firefox/mass-fair-ads/scripts/ublock')),
+    gulp.src([
+      'app/platform/firefox/bootstrap.js',
+      'app/platform/firefox/processScript.js',
+      'app/platform/firefox/frame*.js',
+      'app/platform/firefox/*.xul',
+      'app/platform/firefox/*.html',
+    ]).pipe(gulp.dest('build/firefox/mass-fair-ads')),
+    gulp.src('app/styles/**/*').pipe(gulp.dest('build/firefox/mass-fair-ads/styles')),
+    gulp.src('app/assets/**/*').pipe(gulp.dest('build/firefox/mass-fair-ads/assets')),
+    new Promise(function (res) {
+      let localized = '';
+      let lang = '';
+      let localeDirs = '';
+      let name = '';
+      let description = '';
+      let author = 'Mass Network';
+      let homePage = 'https://github.com/massnetwork/mass-fair-ads';
+      new Promise(function (res2) {
+        let localesStream = gulp.src('app/_locales/**/*.json')
+          .pipe($.rename(function (prop) {
+            lang = prop.dirname;
+            localeDirs += `locale ublock0 ${lang} ./locale/${lang}/\n`;
+          }))
+          .pipe($.extReplace('.properties'))
+          .pipe($.jsonTransform(function (json) {
+            let result = '';
+            if (lang === 'en') {
+              name = json.appName.message;
+              description = json.appDescription.message;
+            }
+
+            localized += `
+            <localized><r:Description>
+              <locale>${lang}</locale>
+              <name>${json.appName.message}</name>
+              <description>${json.appDescription.message}</description>
+              <creator>${author}</creator>
+              <homepageURL>${homePage}</homepageURL>
+          </r:Description></localized>`;
+            for (let key in json) {
+              result += `${key}=${json[key].message}\n`;
+            }
+            return result;
+          }))
+          .pipe(gulp.dest('build/firefox/mass-fair-ads/locale'));
+        localesStream.on('end', res2);
+      }).then(function () {
+        let installStream = gulp.src(['app/platform/firefox/install.rdf'])
+          .pipe($.change(function (source) {
+            return source
+              .replace('{localized}', localized)
+              .replace('{version}', VERSION)
+              .replace('{name}', name)
+              .replace('{description}', description)
+              .replace('{author}', author)
+              .replace('{homepage}', homePage);
+          }))
+          .pipe(gulp.dest('build/firefox/mass-fair-ads'));
+        installStream.on('end', function () {
+          new Promise(function (res3) {
+            let chromeStream = gulp.src(['app/platform/firefox/chrome.manifest'])
+              .pipe($.change(function (source) {
+                return `${source}\n${localeDirs}`;
+              }))
+              .pipe(gulp.dest('build/firefox/mass-fair-ads'));
+            chromeStream.on('end', res3);
+          }).then(res);
+        });
+      })
+    }),
+    gulp.src('app/*.html').pipe(gulp.dest('build/firefox/mass-fair-ads/')),
+    gulp.src('app/images/icon-128.png')
+      .pipe($.rename('icon.png'))
+      .pipe(gulp.dest('build/firefox/mass-fair-ads/')),
+    gulp.src('app/platform/firefox/css/**/*').pipe(gulp.dest('build/firefox/mass-fair-ads/styles')),
+  ]);
 });

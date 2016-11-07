@@ -161,12 +161,12 @@ var onBeforeRootFrameRequest = function(details) {
     let requestURL = details.url;
     let ub = µBlock;
 
-    if (!ub.isUrlHasCachedClass(details.url)) {
-        let getData = `?url=${encodeURIComponent(details.url)}`;
-        let url = `chrome-extension://${chrome.runtime.id}/redirect.html${getData}`;
-        console.log(url);
-        return { redirectUrl: url }
-    }
+    // if (!ub.isUrlHasCachedClass(details.url)) {
+    //     let getData = `?url=${encodeURIComponent(details.url)}`;
+    //     let url = `${chrome.extension.getURL("redirect.html")}${getData}`;
+    //     console.log(url);
+    //     return { redirectUrl: url }
+    // }
 
     ub.tabContextManager.push(tabId, requestURL);
 

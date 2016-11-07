@@ -23,6 +23,7 @@
 
 'use strict';
 
+
 /******************************************************************************/
 var checkTabStatus = function (popupData) {
   vAPI.messaging.send('checkUrlClass',

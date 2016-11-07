@@ -421,6 +421,7 @@ var onMessage = function(request, sender, callback) {
         break;
 
     case 'toggleNetFiltering':
+        console.log('toggleNetFiltering', 'sdfdsfdsffffdsfdsfdsfdsf');
         pageStore = µb.pageStoreFromTabId(request.tabId);
         if ( pageStore ) {
             console.log(request);
