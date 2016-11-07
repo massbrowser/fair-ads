@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" href="styles/common.css" type="text/css">
+    <link rel="stylesheet" href="styles/document_blocked.css" type="text/css">
+</head>
+<body>
+    <div class="container">
+
+            <div id="warningSign">
+                <span class="glyphicon glyphicon-ban-circle"></span>
+            </div>
+            <div>
+                <p data-i18n="docblockedPrompt1"></p>
+                <div id="theURL" class="collapsed">
+                    <p class="code"></p>
+                    <ul id="parsed"></ul>
+                </div>
+            </div>
+
+        <div>
+            <p data-i18n="docblockedPrompt2"></p>
+            <p id="why" class="code"></p><!--
+         --><span id="whyex" style="display: none;"><span data-i18n="docblockedFoundIn"></span> <span></span></span>
+        </div>
+
+        <div>
+            <p>
+                <button id="back" class="btn btn-default" data-i18n="docblockedBack" type="button"></button>
+                <button id="bye" class="btn btn-default" data-i18n="docblockedClose" type="button"></button>
+            </p>
+        </div>
+
+        <div>
+            <p id="proceed"></p>
+            <p>
+                <button id="proceedTemporary" class="btn btn-default" data-i18n="docblockedDisableTemporary" type="button"></button>
+                <button id="proceedPermanent" class="btn btn-default" data-i18n="docblockedDisablePermanent" type="button"></button>
+            </p>
+        </div>
+
+        <div style="display: none;">
+            <span id="proceedTemplate">
+                <span></span>
+                <span class="proceedChoice">
+                    <select class="form-control">
+                        <option class="hn" value="" selected>
+                        <option class="dn" value="">
+                    </select>
+                </span>
+                <span class="proceedChoice code hn"></span>
+                <span></span>
+            </span>
+        </div>
+    </div>
+
+    <script src="scripts/ublock/vapi-common.js"></script>
+    <script src="scripts/ublock/vapi-client.js"></script>
+    <script src="scripts/lib/jquery.js"></script>
+    <script src="scripts/ublock/i18n.js"></script>
+    <script src="scripts/ublock/document-blocked.js"></script>
+</body>
+</html>

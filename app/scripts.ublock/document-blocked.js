@@ -252,15 +252,15 @@ $('#why').text(details.fs);
     }
 
     var toggler = document.createElement('span');
-    toggler.className = 'fa';
+    toggler.className = 'glyphicon glyphicon-zoom-in';
     $('#theURL > p').append(toggler);
 
     $(toggler).on('click', function() {
         var cl = $('#theURL');
-        cl.toggleClass('collapsed');
+        cl.toggleClass('glyphicon-zoom-in');
         vAPI.localStorage.setItem(
             'document-blocked-expand-url',
-            (cl.hasClass('collapsed') === false).toString()
+            (cl.hasClass('glyphicon-zoom-in')).toString()
         );
     });
 
