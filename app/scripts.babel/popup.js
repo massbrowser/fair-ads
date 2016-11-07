@@ -419,7 +419,6 @@ var checkTabStatus = function (popupData) {
 // Assume everything has to be done incrementally.
 
   var renderPopup = function() {
-    console.log('renderPopup');
     if ( popupData.tabTitle ) {
       document.title = popupData.appName + ' - ' + popupData.tabTitle;
     }
