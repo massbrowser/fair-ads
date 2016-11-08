@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <link href="styles/common.css" rel="stylesheet">
     <link href="styles/popup.css" rel="stylesheet">
     <title>Mass Fair Ads</title>
 </head>
@@ -19,8 +20,9 @@
             <img src="images/i-cog.svg" alt="Cog">
         </a>
     </div>
-    <div class="ab-show-ads-class js-ads-class">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="js-defined-ad-class">
+        <div class="ab-show-ads-class js-ads-class">
+            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 150 92" style="enable-background:new 0 0 150 92;" xml:space="preserve">
         <style type="text/css">
             .st0 {
@@ -230,12 +232,24 @@
             </g>
         </g>
       </svg>
+        </div>
+        <div class="ab-ads-class-text">
+            This page has '<span class="js-ads-class-text-letter ab-ads-class-text-letter"></span>' grade of Mass certificate
+        </div>
+        <div class="ab-see-grades">
+            <a class="ab-see-grades-link">See table of grades</a>
+        </div>
     </div>
-    <div class="ab-ads-class-text">
-        This page has '<span class="js-ads-class-text-letter ab-ads-class-text-letter"></span>' grade of Mass certificate
-    </div>
-    <div class="ab-see-grades">
-        <a class="ab-see-grades-link">See table of grades</a>
+    <div class="js-undefined-ad-class ab-undefined-ad-class hidden">
+        <div class="icon-no">
+            <i class="glyphicon glyphicon-plus-sign"></i>
+        </div>
+        <div class="ab-undefined-ad-text">
+            This page has no Mass certificate.
+            <br>All ads are blocked. You can switch them on manually.
+            <br><a>See table of grades</a>
+            <br><a>Interested in getting Mass certificate?</a>
+        </div>
     </div>
     <div class="ab-popup-hr"></div>
     <div class="ab-ad-toggle-wrap">

@@ -31,8 +31,13 @@ var checkTabStatus = function (popupData) {
       tabId: popupData.tabId
     },
     function (tabUrlClass) {
-      jQuery('.js-ads-class').addClass(`ads-class-${tabUrlClass}`);
-      jQuery('.js-ads-class-text-letter').text(tabUrlClass);
+      if ('abcdef'.indexOf(tabUrlClass) > -1) {
+        $('.js-ads-class').addClass(`ads-class-${tabUrlClass}`);
+        $('.js-ads-class-text-letter').text(tabUrlClass);
+      } else {
+        $('.js-defined-ad-class').addClass('hidden');
+        $('.js-undefined-ad-class').removeClass('hidden');
+      }
     });
 };
 
