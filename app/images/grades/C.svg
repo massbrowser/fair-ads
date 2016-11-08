@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="534px" height="394px" viewBox="0 0 534 394" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch Beta 41 (35307) - http://www.bohemiancoding.com/sketch -->
+    <title>C</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs></defs>
+    <g id="Content" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="C">
+            <text id="Medium-amount-of-uno" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                <tspan x="25" y="355">Medium amount of unobtrusive ads</tspan>
+            </text>
+            <text id="Category-C" font-family="PTSans-Bold, PT Sans" font-size="20" font-weight="bold" fill="#000000">
+                <tspan x="25" y="331">Category C</tspan>
+            </text>
+            <g id="Group-2" transform="translate(25.000000, 32.000000)">
+                <rect id="Rectangle" stroke="#979797" stroke-width="0.25" fill="#FFFFFF" x="0" y="0" width="200" height="265"></rect>
+                <g id="Group">
+                    <g id="Content" transform="translate(8.000000, 8.000000)">
+                        <g id="Mass-Banner" transform="translate(137.000000, 0.000000)">
+                            <rect id="Banner" fill="#1B92F9" fill-rule="evenodd" x="0" y="0" width="46.8421053" height="98.5769231"></rect>
+                            <text id="Ad" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold" fill="#FFFFFF">
+                                <tspan x="5.26315789" y="19.3800905">Ad</tspan>
+                            </text>
+                        </g>
+                        <g id="Mass-Banner" transform="translate(137.000000, 138.000000)">
+                            <rect id="Banner" fill="#1B92F9" fill-rule="evenodd" x="0" y="0" width="46.8421053" height="98.5769231"></rect>
+                            <text id="Ad" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold" fill="#FFFFFF">
+                                <tspan x="5.26315789" y="19.3800905">Ad</tspan>
+                            </text>
+                        </g>
+                        <g id="Site-content-w/-pic-&amp;-short-text" fill="#D8D8D8">
+                            <g id="Text" stroke-width="1" transform="translate(-0.052632, 82.547511)">
+                                <rect id="Text-line-1" x="-1.13686838e-13" y="14.760181" width="126.842105" height="4.74434389"></rect>
+                                <rect id="Text-line-2" x="-1.13686838e-13" y="24.2488688" width="121.052632" height="4.74434389"></rect>
+                                <rect id="Text-line-3" x="-1.13686838e-13" y="33.7375566" width="124.210526" height="4.74434389"></rect>
+                                <rect id="Title" x="-1.13686838e-13" y="0" width="105.789474" height="8.43438914"></rect>
+                            </g>
+                            <rect id="Picture" x="-0.0526315789" y="-0.214932127" width="130.526316" height="73.800905"></rect>
+                        </g>
+                        <g id="Site-content-w/-small-pic-&amp;-short-text" transform="translate(0.000000, 126.000000)" fill="#D8D8D8">
+                            <g id="Text" stroke-width="1" transform="translate(-0.052632, 0.547511)">
+                                <rect id="Text-line-11" x="-1.13686838e-13" y="79" width="126.842105" height="4.74434389"></rect>
+                                <rect id="Text-line-12" x="-1.13686838e-13" y="88.5" width="121.052632" height="4.74434389"></rect>
+                                <rect id="Text-line-13" x="-1.13686838e-13" y="98" width="124.210526" height="4.74434389"></rect>
+                                <rect id="Text-line-14" x="-1.13686838e-13" y="107.5" width="126.842105" height="4.74434389"></rect>
+                                <rect id="Text-line-15" x="-1.13686838e-13" y="117" width="121.052632" height="4.74434389"></rect>
+                                <rect id="Text-line-1" x="-1.13686838e-13" y="0" width="79.3000031" height="4.74434389"></rect>
+                                <rect id="Text-line-2" x="-1.13686838e-13" y="9.6" width="74.9599991" height="4.74434389"></rect>
+                                <rect id="Text-line-3" x="-1.13686838e-13" y="19.2" width="71.7803255" height="4.74434389"></rect>
+                                <rect id="Text-line-4" x="0.0526315789" y="28.8" width="79.3000031" height="4.74434389"></rect>
+                                <rect id="Text-line-5" x="0.0526315789" y="38.4" width="81.9599991" height="4.74434389"></rect>
+                                <rect id="Text-line-6" x="0.0526315789" y="48" width="51.7799988" height="4.74434389"></rect>
+                                <rect id="Title" x="-1.13686838e-13" y="64" width="105.789474" height="8.43438914"></rect>
+                            </g>
+                            <rect id="Picture" x="94" y="0" width="37" height="44"></rect>
+                        </g>
+                    </g>
+                    <rect id="Rectangle-Copy" stroke="#000000" stroke-width="0.5" x="0" y="0" width="200" height="138"></rect>
+                </g>
+                <g id="Fold" transform="translate(200.000000, 112.000000)">
+                    <text id="20%-of-space-before" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                        <tspan x="19" y="18">20% of space before the fold</tspan>
+                    </text>
+                    <text id="30%-of-space-after-t" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                        <tspan x="19" y="49">30% of space after the fold</tspan>
+                    </text>
+                    <path d="M0.5,26 L263.593139,26" id="Line" stroke="#979797" stroke-width="0.5" stroke-linecap="square"></path>
+                </g>
+                <text id="Simple-text-and-non--Copy" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="219" y="18">Simple text and non-</tspan>
+                    <tspan x="219" y="42">animated graphic ads</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

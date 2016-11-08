@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="534px" height="264px" viewBox="0 0 534 264" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch Beta 41 (35307) - http://www.bohemiancoding.com/sketch -->
+    <title>A (no ads)</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs>
+        <path d="M-4.5,-4.5 L51.5,102.5" id="path-1"></path>
+    </defs>
+    <g id="Content" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="A-(no-ads)">
+            <g id="Group" transform="translate(25.000000, 32.000000)">
+                <rect id="Rectangle" stroke="#979797" stroke-width="0.25" fill="#FFFFFF" x="0" y="0" width="200" height="138"></rect>
+                <g id="Content" transform="translate(8.000000, 8.000000)">
+                    <g id="Blocked-Banner" transform="translate(137.000000, 0.000000)">
+                        <rect id="Banner" fill="#BBBBBB" fill-rule="evenodd" x="-1.42108547e-14" y="0" width="46.8421053" height="98.5769231"></rect>
+                        <text id="Ad" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold" fill="#FFFFFF">
+                            <tspan x="23.2168421" y="19.1651584">Ad</tspan>
+                        </text>
+                        <g id="Line" stroke-linecap="round">
+                            <use stroke="#FFFFFF" stroke-width="7" xlink:href="#path-1"></use>
+                            <use stroke="#D0021B" stroke-width="2.5" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                    <g id="Site-content-w/-pic-&amp;-short-text" fill="#D8D8D8">
+                        <g id="Text" stroke-width="1" transform="translate(-0.052632, 82.547511)">
+                            <rect id="Text-line-1" x="-1.13686838e-13" y="14.760181" width="126.842105" height="4.74434389"></rect>
+                            <rect id="Text-line-2" x="-1.13686838e-13" y="24.2488688" width="121.052632" height="4.74434389"></rect>
+                            <rect id="Text-line-3" x="-1.13686838e-13" y="33.7375566" width="124.210526" height="4.74434389"></rect>
+                            <rect id="Title" x="-1.13686838e-13" y="0" width="105.789474" height="8.43438914"></rect>
+                        </g>
+                        <rect id="Picture" x="-0.0526315789" y="-0.214932127" width="130.526316" height="73.800905"></rect>
+                    </g>
+                </g>
+                <text id="No-ads" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="219" y="18">No ads</tspan>
+                </text>
+            </g>
+            <text id="Site-contains-no-ads" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                <tspan x="25" y="228">Site contains no ads</tspan>
+            </text>
+            <text id="Category-A" font-family="PTSans-Bold, PT Sans" font-size="20" font-weight="bold" fill="#000000">
+                <tspan x="25" y="204">Category A</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

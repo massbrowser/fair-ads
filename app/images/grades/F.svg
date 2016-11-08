@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="534px" height="394px" viewBox="0 0 534 394" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch Beta 41 (35307) - http://www.bohemiancoding.com/sketch -->
+    <title>F</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="200" height="265"></rect>
+    </defs>
+    <g id="Content" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="F">
+            <g id="Group" transform="translate(25.000000, 32.000000)">
+                <g id="Content">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Rectangle" stroke="#979797" stroke-width="0.25" fill="#FFFFFF" xlink:href="#path-1"></use>
+                    <g id="Mass-Banner" mask="url(#mask-2)">
+                        <g transform="translate(8.000000, 138.000000)">
+                            <rect id="Banner" fill="#1B92F9" fill-rule="evenodd" x="0" y="0" width="46.8421053" height="98.5769231"></rect>
+                            <text id="Ad" fill="none" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold">
+                                <tspan x="5.26315789" y="19.3800905" fill="#FFFFFF">Ad</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <g id="Site-content-w/-pic-&amp;-short-text" mask="url(#mask-2)">
+                        <g transform="translate(8.000000, 8.000000)">
+                            <g id="Text" stroke-width="1" fill="none" transform="translate(-0.052632, 82.547511)">
+                                <rect id="Text-line-1" fill="#D8D8D8" x="-1.13686838e-13" y="14.760181" width="126.842105" height="4.74434389"></rect>
+                                <rect id="Text-line-2" fill="#D8D8D8" x="-1.13686838e-13" y="24.2488688" width="121.052632" height="4.74434389"></rect>
+                                <rect id="Text-line-3" fill="#D8D8D8" x="-1.13686838e-13" y="33.7375566" width="124.210526" height="4.74434389"></rect>
+                                <rect id="Title" fill="#D8D8D8" x="-1.13686838e-13" y="0" width="105.789474" height="8.43438914"></rect>
+                            </g>
+                            <rect id="Picture" fill="#D8D8D8" x="-0.0526315789" y="-0.214932127" width="130.526316" height="73.800905"></rect>
+                        </g>
+                    </g>
+                    <g id="Site-content-w/-small-pic-&amp;-short-text" mask="url(#mask-2)">
+                        <g transform="translate(8.000000, 172.000000)">
+                            <g id="Text" stroke-width="1" fill="none" transform="translate(-0.052632, 0.547511)">
+                                <rect id="Text-line-11" fill="#D8D8D8" x="-1.13686838e-13" y="79" width="126.842105" height="4.74434389"></rect>
+                                <rect id="Text-line-12" fill="#D8D8D8" x="-1.13686838e-13" y="88.5" width="121.052632" height="4.74434389"></rect>
+                                <rect id="Text-line-13" fill="#D8D8D8" x="-1.13686838e-13" y="98" width="124.210526" height="4.74434389"></rect>
+                                <rect id="Text-line-14" fill="#D8D8D8" x="-1.13686838e-13" y="107.5" width="126.842105" height="4.74434389"></rect>
+                                <rect id="Text-line-15" fill="#D8D8D8" x="-1.13686838e-13" y="117" width="121.052632" height="4.74434389"></rect>
+                                <rect id="Text-line-1" fill="#D8D8D8" x="-1.13686838e-13" y="0" width="79.3000031" height="4.74434389"></rect>
+                                <rect id="Text-line-2" fill="#D8D8D8" x="-1.13686838e-13" y="9.6" width="74.9599991" height="4.74434389"></rect>
+                                <rect id="Text-line-3" fill="#D8D8D8" x="-1.13686838e-13" y="19.2" width="71.7803255" height="4.74434389"></rect>
+                                <rect id="Text-line-4" fill="#D8D8D8" x="0.0526315789" y="28.8" width="79.3000031" height="4.74434389"></rect>
+                                <rect id="Text-line-5" fill="#D8D8D8" x="0.0526315789" y="38.4" width="81.9599991" height="4.74434389"></rect>
+                                <rect id="Text-line-6" fill="#D8D8D8" x="0.0526315789" y="48" width="51.7799988" height="4.74434389"></rect>
+                                <rect id="Title" fill="#D8D8D8" x="-1.13686838e-13" y="64" width="105.789474" height="8.43438914"></rect>
+                            </g>
+                            <rect id="Picture" fill="#D8D8D8" x="94" y="0" width="37" height="44"></rect>
+                        </g>
+                    </g>
+                    <g id="Group-4" mask="url(#mask-2)">
+                        <g transform="translate(145.000000, 138.000000)">
+                            <g id="Mass-Banner">
+                                <rect id="Banner" fill="#1B92F9" fill-rule="evenodd" x="0" y="0" width="46.8421053" height="98.5769231"></rect>
+                                <text id="Ad" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold" fill="#FFFFFF">
+                                    <tspan x="5.26315789" y="19.3800905">Ad</tspan>
+                                </text>
+                            </g>
+                            <g id="Play-symbol-(white)" transform="translate(7.000000, 25.000000)" fill-opacity="0.8" fill-rule="evenodd">
+                                <path d="M16,29 C23.1797017,29 29,23.1797017 29,16 C29,8.82029825 23.1797017,3 16,3 C8.82029825,3 3,8.82029825 3,16 C3,23.1797017 8.82029825,29 16,29 Z M24.53125,16 L10.71875,22.90625 L10.71875,9.09375 L24.53125,16 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                            </g>
+                        </g>
+                    </g>
+                    <g id="Group-5" mask="url(#mask-2)">
+                        <g transform="translate(145.000000, 8.000000)">
+                            <g id="Mass-Banner">
+                                <rect id="Banner" fill="#1B92F9" fill-rule="evenodd" x="0" y="0" width="46.8421053" height="98.5769231"></rect>
+                                <text id="Ad" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold" fill="#FFFFFF">
+                                    <tspan x="5.26315789" y="19.3800905">Ad</tspan>
+                                </text>
+                            </g>
+                            <g id="Play-symbol-(white)" transform="translate(7.000000, 26.000000)" fill-opacity="0.8" fill-rule="evenodd">
+                                <path d="M16,29 C23.1797017,29 29,23.1797017 29,16 C29,8.82029825 23.1797017,3 16,3 C8.82029825,3 3,8.82029825 3,16 C3,23.1797017 8.82029825,29 16,29 Z M24.53125,16 L10.71875,22.90625 L10.71875,9.09375 L24.53125,16 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                            </g>
+                        </g>
+                    </g>
+                    <g id="Group-6" mask="url(#mask-2)">
+                        <g transform="translate(20.000000, 16.000000)">
+                            <g id="Group-5-Copy" stroke-width="1" fill-rule="evenodd">
+                                <rect id="Rectangle-2" fill="#FFFFFF" x="0" y="0" width="161" height="111"></rect>
+                                <g id="Mass-Banner" transform="translate(0.000000, 1.000000)">
+                                    <rect id="Banner" fill="#1B92F9" fill-rule="evenodd" x="0" y="0" width="46.8421053" height="98.5769231"></rect>
+                                    <text id="Ad" font-family="PTSans-Bold, PT Sans" font-size="14.2105263" font-weight="bold" fill="#FFFFFF">
+                                        <tspan x="5.26315789" y="19.3800905">Ad</tspan>
+                                    </text>
+                                </g>
+                                <g id="Play-symbol-(white)" transform="translate(64.000000, 40.000000)" fill-opacity="0.8" fill="#FFFFFF">
+                                    <path d="M16,29 C23.1797017,29 29,23.1797017 29,16 C29,8.82029825 23.1797017,3 16,3 C8.82029825,3 3,8.82029825 3,16 C3,23.1797017 8.82029825,29 16,29 Z M24.53125,16 L10.71875,22.90625 L10.71875,9.09375 L24.53125,16 Z" id="Combined-Shape"></path>
+                                </g>
+                            </g>
+                            <g id="Group-7" stroke-width="1" fill-rule="evenodd" transform="translate(7.000000, 72.000000)">
+                                <path d="M0.0676886909,7.56541837 C0.0906886626,10.6582218 0.0676886909,13.0654184 0.0676886909,13.0654184 L5.56768869,13.0654184 L10.7353843,18.233114 L10.7353843,0 L5.39705606,5.33832826 L0,5.33832826 C0,5.33832826 0.0446887191,4.47261493 0.0676886909,7.56541837 Z" id="Path-2" stroke="#FFFFFF"></path>
+                                <path d="M16.5,4.125 C16.5,4.125 18.5625,5.5 18.5625,9.28125 C18.5625,13.0625 16.5,14.4375 16.5,14.4375" id="Path-3-Copy" stroke="#FFFFFF"></path>
+                                <path d="M19.1125,2.0625 C19.1125,2.0625 22,3.9875 22,9.28125 C22,14.575 19.1125,16.5 19.1125,16.5" id="Path-3-Copy-3" stroke="#FFFFFF"></path>
+                                <path d="M13.75,6.1875 C13.75,6.1875 14.9875,7.0125 14.9875,9.28125 C14.9875,11.55 13.75,12.375 13.75,12.375" id="Path-3-Copy-2" stroke="#FFFFFF"></path>
+                            </g>
+                            <text id="autoplay" font-family="PTSans-Regular, PT Sans" font-size="12" font-weight="normal">
+                                <tspan x="6" y="102" fill="#FFFFFF">autoplay</tspan>
+                            </text>
+                        </g>
+                    </g>
+                    <rect id="Rectangle-Copy" stroke="#000000" stroke-width="0.5" mask="url(#mask-2)" x="0" y="0" width="200" height="138"></rect>
+                </g>
+                <text id="Autoplay-animated-ad" font-family="PTSans-Regular, PT Sans" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="219" y="18">Autoplay animated ads </tspan>
+                    <tspan x="219" y="42">with sound</tspan>
+                    <tspan x="219" y="66">Floating fullscreen elements </tspan>
+                    <tspan x="219" y="90">obscuring webpage content</tspan>
+                    <tspan x="219" y="114">Popups</tspan>
+                    <tspan x="219" y="138">No space limit for ads</tspan>
+                </text>
+            </g>
+            <g id="Group-3" transform="translate(25.000000, 313.000000)" font-size="20" fill="#000000">
+                <text id="Very-high-amount-of" font-family="PTSans-Regular, PT Sans" font-weight="normal">
+                    <tspan x="0" y="42">Very high amount of extremely obtrusive ads</tspan>
+                </text>
+                <text id="Category-F" font-family="PTSans-Bold, PT Sans" font-weight="bold">
+                    <tspan x="0" y="18">Category F</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
