@@ -581,6 +581,12 @@ var checkTabStatus = function (popupData) {
   /******************************************************************************/
 
   var gotoURL = function(ev) {
+    if (this.hasAttribute('target')) {
+      if (this.target == '_blank') {
+        return true;
+      }
+    }
+
     if ( this.hasAttribute('href') === false) {
       return;
     }

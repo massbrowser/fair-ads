@@ -25,6 +25,10 @@ function extractDomain(url) {
 
 ub.adsClasses = [
   {
+    domain: 'mass.network',
+    class: 'a'
+  },
+  {
     domain: 'example.com',
     class: 'a'
   },

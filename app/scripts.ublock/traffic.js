@@ -161,10 +161,13 @@ var onBeforeRootFrameRequest = function(details) {
     let requestURL = details.url;
     let ub = µBlock;
 
-    if (!ub.isUrlHasCachedClass(details.url)) {
+    if (requestURL.indexOf('_/chrome/newtab') > -1) {
+        return;
+    }
+
+    if (!ub.isUrlHasCachedClass(requestURL)) {
         let getData = `?url=${encodeURIComponent(details.url)}`;
         let url = `${chrome.extension.getURL("redirect.html")}${getData}`;
-        console.log(url);
         return { redirectUrl: url }
     }
 
