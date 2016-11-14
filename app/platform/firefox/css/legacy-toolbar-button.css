@@ -4,7 +4,7 @@
 }
 #uBlock0-legacy-button.off {
     /*list-style-image: url('../img/browsericons/icon24-off.svg');*/
-    list-style-image: url('../img/browsericons/icon-24.png');
+    list-style-image: url('../img/browsericons/icon-24-off.png');
 }
 
 toolbar[iconsize="small"] #uBlock0-legacy-button {
@@ -13,7 +13,7 @@ toolbar[iconsize="small"] #uBlock0-legacy-button {
 }
 toolbar[iconsize="small"] #uBlock0-legacy-button.off {
     /*list-style-image: url('../img/browsericons/icon16-off.svg');*/
-    list-style-image: url('../img/browsericons/icon-16.png');
+    list-style-image: url('../img/browsericons/icon-16-off.png');
 }
 #uBlock0-legacy-button[badge]::before {
     background: #555;

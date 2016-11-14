@@ -3093,7 +3093,7 @@ vAPI.toolbarButton = {
             '#' + this.id + '.off {',
                 'list-style-image: url(',
                     // vAPI.getURL('images/browsericons/icon16-off.svg'),
-                    vAPI.getURL('images/browsericons/icon-16.png'),
+                    vAPI.getURL('images/browsericons/icon-16-off.png'),
                 ');',
             '}',
             '#' + this.id + ' {',
